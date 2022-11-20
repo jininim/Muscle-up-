@@ -12,7 +12,7 @@ import com.example.teamproject_hometrainingassistant_app.databinding.ActivityMai
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-//hi 지원이형
+//hi 지원이형 adsasdasdasdsa
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
