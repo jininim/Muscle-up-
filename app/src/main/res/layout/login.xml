@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <TextView
         android:id="@+id/loginText"
         android:layout_width="wrap_content"
@@ -43,4 +42,5 @@
         android:textColor="@color/black"
         android:layout_marginTop="20dp"/>
 
+<!--    들어가지나-->
 </LinearLayout>
