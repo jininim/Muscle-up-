@@ -3,8 +3,9 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="comunity">커뮤니티</string>
-    <string name="rootin">루틴</string>
-    <string name="alter">설정</string>
+    <string name="community">커뮤니티</string>
+    <string name="routine">루틴</string>
+    <string name="set">설정</string>
     <string name="calender">캘린더</string>
+    <string name="home">홈</string>
 </resources>

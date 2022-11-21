@@ -42,5 +42,4 @@
         android:textColor="@color/black"
         android:layout_marginTop="20dp"/>
 
-<!--    들어가지나-->
 </LinearLayout>
