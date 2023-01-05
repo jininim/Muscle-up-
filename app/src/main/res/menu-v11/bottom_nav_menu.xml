@@ -7,11 +7,6 @@
         android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/home"
         />
-    <item
-        android:id="@+id/navigation_routine"
-        android:icon="@android:drawable/ic_media_play"
-        android:title="@string/routine"
-        app:showAsAction="withText" />
 
     <item
         android:id="@+id/navigation_dashboard"
