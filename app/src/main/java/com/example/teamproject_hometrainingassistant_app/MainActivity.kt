@@ -12,7 +12,7 @@ import com.example.teamproject_hometrainingassistant_app.databinding.ActivityMai
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-//20230109
+//20230109 홈 프래그먼트 작성
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
