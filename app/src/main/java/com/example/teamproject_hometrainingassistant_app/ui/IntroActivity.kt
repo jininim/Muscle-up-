@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import com.example.teamproject_hometrainingassistant_app.LoginActivity
 import com.example.teamproject_hometrainingassistant_app.MainActivity
 import com.example.teamproject_hometrainingassistant_app.R
 
@@ -19,10 +20,10 @@ class IntroActivity : AppCompatActivity() {
 //      intro 화면
         val handler = Handler()
         handler.postDelayed(Runnable {
-            val intent = Intent(applicationContext, MainActivity::class.java)
+            val intent = Intent(applicationContext, LoginActivity::class.java)
             startActivity(intent) //인트로 실행 후 바로 MainActivity로 넘어감.
             finish()
-        }, 1000) //1초 후 인트로 실행
+        }, 500) //0.5초 후 인트로 실행
 
 
     }
