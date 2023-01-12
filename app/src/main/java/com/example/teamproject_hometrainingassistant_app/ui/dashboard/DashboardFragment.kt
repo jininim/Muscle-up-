@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.teamproject_hometrainingassistant_app.R
-import com.example.teamproject_hometrainingassistant_app.VerticalItemDecorator
+import com.example.teamproject_hometrainingassistant_app.ui.VerticalItemDecorator
 import com.example.teamproject_hometrainingassistant_app.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {

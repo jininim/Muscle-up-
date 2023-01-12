@@ -1,10 +1,10 @@
-package com.example.teamproject_hometrainingassistant_app
+package com.example.teamproject_hometrainingassistant_app.ui
 
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class VerticalItemDecorator(private val divHeight : Int) :
+class HorizontalItemDecorator(private val divHeight : Int):
 RecyclerView.ItemDecoration(){
     override fun getItemOffsets(
         outRect: Rect,
@@ -13,7 +13,7 @@ RecyclerView.ItemDecoration(){
         state: RecyclerView.State
     ) {
         super.getItemOffsets(outRect, view, parent, state)
-        outRect.top = divHeight
-        outRect.bottom = divHeight
+        outRect.left = divHeight
+        outRect.right = divHeight
     }
 }
