@@ -5,12 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.teamproject_hometrainingassistant_app.MainActivity
+
 import com.example.teamproject_hometrainingassistant_app.databinding.FragmentHomeBinding
-import com.example.teamproject_hometrainingassistant_app.ui.exerciseActivity
+import com.example.teamproject_hometrainingassistant_app.ui.exercise.ExerciseActivity
+
 
 class HomeFragment : Fragment() {
 
@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         //운동검색 버튼 클릭 시
         binding.Search.setOnClickListener {
-                val intent = Intent(context, exerciseActivity::class.java)
+                val intent = Intent(context, ExerciseActivity::class.java)
                 startActivity(intent) //인트로 실행 후 바로 exerciseActivity로 넘어감.
 
         }
