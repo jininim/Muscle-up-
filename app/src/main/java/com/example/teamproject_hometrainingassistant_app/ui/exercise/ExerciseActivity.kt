@@ -14,7 +14,4 @@ class ExerciseActivity : AppCompatActivity() {
         binding.searchView.isSubmitButtonEnabled = true
         setContentView(binding.root)
     }
-
-
-
 }
