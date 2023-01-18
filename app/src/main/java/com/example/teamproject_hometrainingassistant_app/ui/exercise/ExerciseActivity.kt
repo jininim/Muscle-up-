@@ -1,4 +1,4 @@
-package com.example.teamproject_hometrainingassistant_app.ui
+package com.example.teamproject_hometrainingassistant_app.ui.exercise
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
@@ -7,15 +7,11 @@ import com.example.teamproject_hometrainingassistant_app.databinding.ActivityExe
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityExerciseBinding
-class exerciseActivity : AppCompatActivity() {
+class ExerciseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityExerciseBinding.inflate(layoutInflater)
         binding.searchView.isSubmitButtonEnabled = true
         setContentView(binding.root)
-
     }
-
-
-
 }
