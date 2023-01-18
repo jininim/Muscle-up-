@@ -19,7 +19,7 @@ class IntroActivity : AppCompatActivity() {
         actionBar?.hide()
 //      intro 화면
         val handler = Handler()
-        handler.postDelayed(Runnable {
+        handler.postDelayed({
             val intent = Intent(applicationContext, LoginActivity::class.java)
             startActivity(intent) //인트로 실행 후 바로 MainActivity로 넘어감.
             finish()

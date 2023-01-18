@@ -1,4 +1,4 @@
-package com.example.teamproject_hometrainingassistant_app.ui
+package com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator
 
 import android.graphics.Rect
 import android.view.View

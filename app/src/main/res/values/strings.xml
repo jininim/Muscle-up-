@@ -10,4 +10,7 @@
     <string name="home">홈</string>
     <string name="intro_Image">IntroImage</string>
     <string name="intro_text">운동을 그대와 함께</string>
+    <string name="toolbar_mainText">머슬 없?</string>
+    <string name="search">운동검색</string>
+    <string name="share">공유하기</string>
 </resources>

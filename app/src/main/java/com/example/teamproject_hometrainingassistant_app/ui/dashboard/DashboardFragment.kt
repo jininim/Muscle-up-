@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.teamproject_hometrainingassistant_app.R
-import com.example.teamproject_hometrainingassistant_app.ui.VerticalItemDecorator
 import com.example.teamproject_hometrainingassistant_app.databinding.FragmentDashboardBinding
+import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.VerticalItemDecorator
 
 class DashboardFragment : Fragment() {
 
@@ -30,11 +30,9 @@ class DashboardFragment : Fragment() {
             ViewModelProvider(this).get(DashboardViewModel::class.java)
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
         initRecycler()
 
-        return root
+        return binding.root
     }
 
     override fun onDestroyView() {
@@ -52,7 +50,6 @@ class DashboardFragment : Fragment() {
             add(DashboardRoutineData(img = R.drawable.ic_photo, text = "루틴 1"))
             add(DashboardRoutineData(img = R.drawable.ic_photo, text = "루틴 2"))
             add(DashboardRoutineData(img = R.drawable.ic_photo, text = "루틴 3"))
-
             dashboardAdapter.datas = datas
             dashboardAdapter.notifyDataSetChanged()
         }
