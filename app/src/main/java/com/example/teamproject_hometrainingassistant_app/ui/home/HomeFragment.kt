@@ -1,5 +1,6 @@
 package com.example.teamproject_hometrainingassistant_app.ui.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,11 +10,17 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.teamproject_hometrainingassistant_app.MainActivity
+import com.example.teamproject_hometrainingassistant_app.R
 import com.example.teamproject_hometrainingassistant_app.databinding.FragmentHomeBinding
+import com.example.teamproject_hometrainingassistant_app.ui.community.CommunityAdapter
+import com.example.teamproject_hometrainingassistant_app.ui.community.CommunityData
+import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.VerticalItemDecorator
 import com.example.teamproject_hometrainingassistant_app.ui.exerciseActivity
 
 class HomeFragment : Fragment() {
 
+    lateinit var homeAdapter: HomeAdapter
+    val datas = mutableListOf<HomeData>()
     private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
@@ -44,11 +51,33 @@ class HomeFragment : Fragment() {
 //        homeViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
 //        }
+        initRecycler()
+
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun initRecycler(){
+        homeAdapter = HomeAdapter(this)
+        binding.recyclerView.adapter = homeAdapter
+        binding.recyclerView.addItemDecoration(VerticalItemDecorator(0))
+
+        datas.apply {
+            add(HomeData(img = R.drawable.ic_photo, text = "루틴1", img2 = R.drawable.ic_menu))
+            add(HomeData(img = R.drawable.ic_photo, text = "루틴2", img2 = R.drawable.ic_menu))
+            add(HomeData(img = R.drawable.ic_photo, text = "루틴3", img2 = R.drawable.ic_menu))
+            add(HomeData(img = R.drawable.ic_photo, text = "루틴4", img2 = R.drawable.ic_menu))
+            add(HomeData(img = R.drawable.ic_photo, text = "루틴5", img2 = R.drawable.ic_menu))
+            add(HomeData(img = R.drawable.ic_photo, text = "루틴6", img2 = R.drawable.ic_menu))
+            add(HomeData(img = R.drawable.ic_photo, text = "루틴7", img2 = R.drawable.ic_menu))
+
+            homeAdapter.datas = datas
+            homeAdapter.notifyDataSetChanged()
+        }
     }
 }
