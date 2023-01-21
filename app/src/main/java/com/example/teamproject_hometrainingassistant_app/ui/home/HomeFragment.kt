@@ -17,6 +17,7 @@ import com.example.teamproject_hometrainingassistant_app.ui.exercise.ExerciseAct
 import com.example.teamproject_hometrainingassistant_app.ui.community.CommunityAdapter
 import com.example.teamproject_hometrainingassistant_app.ui.community.CommunityData
 import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.VerticalItemDecorator
+import com.example.teamproject_hometrainingassistant_app.ui.recommend.RecommendActivity
 
 class HomeFragment : Fragment() {
 
@@ -39,14 +40,14 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         //운동검색 버튼 클릭 시
         binding.Search.setOnClickListener {
-                val intent = Intent(context, ExerciseActivity::class.java)
-                startActivity(intent) //인트로 실행 후 바로 exerciseActivity로 넘어감.
-
+            val intent = Intent(context, ExerciseActivity::class.java)
+            startActivity(intent) //인트로 실행 후 바로 exerciseActivity로 넘어감.
         }
 
         //운동 추천 버튼 클릭 시
         binding.recommend.setOnClickListener {
-
+            val intent = Intent(context, RecommendActivity::class.java)
+            startActivity(intent)
         }
 //        val textView: TextView = binding.textHome
 //        homeViewModel.text.observe(viewLifecycleOwner) {

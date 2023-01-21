@@ -1,8 +1,12 @@
 package com.example.teamproject_hometrainingassistant_app.ui.exercise
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
 import com.example.teamproject_hometrainingassistant_app.R
 import com.example.teamproject_hometrainingassistant_app.R.drawable.ic_photo
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityExerciseBinding
@@ -10,6 +14,7 @@ import com.example.teamproject_hometrainingassistant_app.ui.community.CommunityA
 import com.example.teamproject_hometrainingassistant_app.ui.community.CommunityData
 import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.HorizontalItemDecorator
 import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.VerticalItemDecorator
+import com.example.teamproject_hometrainingassistant_app.ui.home.HomeFragment
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityExerciseBinding
@@ -18,10 +23,10 @@ class ExerciseActivity : AppCompatActivity() {
     lateinit var exerciseOptionAdapter: ExerciseOptionAdapter
     lateinit var exerciseCategoryAdapter: ExerciseCategoryAdapter
     lateinit var exerciseSearchAdapter: ExerciseSearchAdapter
+
     val optionDatas = mutableListOf<ExerciseOptionData>()
     val categoryDatas = mutableListOf<ExerciseCategoryData>()
     val searchDatas = mutableListOf<ExerciseSearchData>()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,17 +83,17 @@ class ExerciseActivity : AppCompatActivity() {
         binding.exerciseSearchRecyclerView.addItemDecoration(VerticalItemDecorator(0))
 
         searchDatas.apply {
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "내가 쓴 글"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "댓글 단 글"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "즐겨찾기"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "핫 게시판"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "베스트 게시판"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "자유게시판"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "질문게시판"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "운동정보게시판"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "오운완게시판"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "꿀팁게시판"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "루틴추천게시판"))
+            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "줄넘기"))
+            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "점핑 잭"))
+            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "마운틴 클라이머"))
+            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "러시안 트위스트"))
+            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "시티드 니업"))
+            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "크런치"))
+            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "런지"))
+            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "플랭크"))
+            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "푸시업"))
+            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "스쿼트"))
+            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "턱걸이"))
             exerciseSearchAdapter.datas = searchDatas
             exerciseSearchAdapter.notifyDataSetChanged()
         }
