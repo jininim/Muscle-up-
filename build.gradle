@@ -8,3 +8,11 @@ plugins {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+// 카카오 로그인 api용
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/'}
+    }
+}
