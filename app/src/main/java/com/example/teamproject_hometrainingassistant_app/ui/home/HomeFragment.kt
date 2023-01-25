@@ -40,6 +40,12 @@ class HomeFragment : Fragment() {
             val intent = Intent(context, RecommendActivity::class.java)
             startActivity(intent)
         }
+        //어답터 연결
+        homeAdapter = HomeAdapter(this)
+        binding.recyclerView.adapter = homeAdapter
+        binding.recyclerView.addItemDecoration(VerticalItemDecorator(0))
+        //아이템 클리어
+        datas.clear()
         initRecycler()
 
         return binding.root
@@ -52,10 +58,6 @@ class HomeFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initRecycler(){
-        homeAdapter = HomeAdapter(this)
-        binding.recyclerView.adapter = homeAdapter
-        binding.recyclerView.addItemDecoration(VerticalItemDecorator(0))
-
         datas.apply {
             add(HomeData(img = R.drawable.ic_photo, text = "루틴1", img2 = R.drawable.ic_menu))
             add(HomeData(img = R.drawable.ic_photo, text = "루틴2", img2 = R.drawable.ic_menu))
