@@ -1,89 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<androidx.constraintlayout.widget.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
 
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50sp"
-        android:layout_marginEnd="50sp"
-        android:layout_marginTop="20sp"
-        android:layout_marginBottom="20sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text=" 머슬없? 로그인"
         android:textSize="28sp"
-        android:layout_gravity="center_horizontal"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:layout_width="160sp"
-        android:layout_height="180sp"
-        android:layout_marginTop="20sp"
-        android:layout_marginBottom="20sp"
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
         android:contentDescription="@string/intro_Image"
         android:src="@drawable/img"
-
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30sp"
-        android:layout_marginEnd="30sp"
-        android:layout_marginTop="20sp"
-        android:layout_marginBottom="20sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:text="로그인 방식을 선택하세요"
         android:textSize="20sp"
-        android:layout_gravity="center_horizontal"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Button
         android:id="@+id/googlelogin"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/btn_signin_google"
         android:text="구글로 로그인"
         android:textColor="@color/white"
-        android:layout_width="350sp"
-        android:layout_height="50sp"
-        android:layout_marginBottom="20sp"
-        android:layout_gravity="center"
-        android:background="@drawable/btn_signin_google"
-      />
+        app:layout_constraintBottom_toTopOf="@+id/facebooklogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/facebooklogin"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/btn_signin_facebook"
         android:text="페이스북으로 로그인"
         android:textColor="@color/white"
-        android:layout_width="350sp"
-        android:layout_height="50sp"
-        android:layout_marginBottom="20sp"
-        android:layout_gravity="center"
-        android:background="@drawable/btn_signin_facebook"
-        />
+        app:layout_constraintBottom_toTopOf="@+id/kakaologin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/kakaologin"
-        android:layout_width="350sp"
-        android:layout_height="50sp"
-        android:layout_marginBottom="84sp"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
         android:layout_gravity="center"
-        android:background="@drawable/kakao_login_medium_wide"
-      />
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/kakao_login_large_wide"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <!--    <Button-->
-<!--        android:id="@+id/kakaologin"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:text="카카오 로그인"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/button3" />기존 const-->
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

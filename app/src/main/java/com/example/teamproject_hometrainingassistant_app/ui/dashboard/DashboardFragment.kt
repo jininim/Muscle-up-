@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.teamproject_hometrainingassistant_app.R
 import com.example.teamproject_hometrainingassistant_app.databinding.FragmentDashboardBinding
 import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.VerticalItemDecorator
@@ -26,8 +25,6 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         initRecycler()
@@ -45,7 +42,6 @@ class DashboardFragment : Fragment() {
         dashboardAdapter = DashboardAdapter(this)
         binding.recyclerView.adapter = dashboardAdapter
         binding.recyclerView.addItemDecoration(VerticalItemDecorator(0))
-
         datas.apply {
             add(DashboardRoutineData(img = R.drawable.ic_photo, text = "루틴 1"))
             add(DashboardRoutineData(img = R.drawable.ic_photo, text = "루틴 2"))
@@ -55,4 +51,5 @@ class DashboardFragment : Fragment() {
         }
 
     }
+
 }
