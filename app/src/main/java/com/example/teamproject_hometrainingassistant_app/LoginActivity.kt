@@ -18,5 +18,10 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent) //인트로 실행 후 바로 MainActivity로 넘어감.
             finish()
         }
+        binding.facebooklogin.setOnClickListener {
+            val intent = Intent(applicationContext, DecibelActivity::class.java)
+            startActivity(intent) //인트로 실행 후 바로 MainActivity로 넘어감.
+            finish()
+        }
     }
 }

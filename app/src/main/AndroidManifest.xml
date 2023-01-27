@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.teamproject_hometrainingassistant_app">
+    <!--음성 및 인터넷 권한-->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,6 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Teamproject_HomeTrainingAssistant_APP"
         tools:targetApi="31">
+        <activity
+            android:name=".DecibelActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".ui.exercise.ExerciseActivity"
             android:exported="false">
@@ -46,7 +56,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.recommend.RecommendActivity"/>
+        <activity android:name=".ui.recommend.RecommendActivity" />
     </application>
 
 </manifest>
