@@ -70,7 +70,7 @@
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:ignore="MissingConstraints"
-            tools:listitem="@layout/exercise_option_item" />
+            tools:listitem="@layout/item_exercise_option" />
 
     </LinearLayout>
 
@@ -97,7 +97,7 @@
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:ignore="MissingConstraints"
-            tools:listitem="@layout/exercise_category_item" />
+            tools:listitem="@layout/item_exercise_category" />
 
     </LinearLayout>
 
@@ -120,7 +120,7 @@
         app:layout_constraintTop_toBottomOf="@+id/exerciseCategoryLinearLayout"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="MissingConstraints"
-        tools:listitem="@layout/exersice_search_item" />
+        tools:listitem="@layout/item_exersice_search" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"

@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.teamproject_hometrainingassistant_app.databinding.HomeItemBinding
-import com.example.teamproject_hometrainingassistant_app.databinding.RecommendItemBinding
+import com.example.teamproject_hometrainingassistant_app.databinding.ItemRecommendBinding
 
 class RecommendAdapter(private val context: Context) :
     RecyclerView.Adapter<RecommendAdapter.ViewHolder>() {
@@ -15,7 +14,7 @@ class RecommendAdapter(private val context: Context) :
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): ViewHolder {
-        val binding = RecommendItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = ItemRecommendBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding)
     }
 
@@ -25,7 +24,7 @@ class RecommendAdapter(private val context: Context) :
         holder.bind(datas[position])
     }
 
-    inner class ViewHolder(private val binding: RecommendItemBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(private val binding: ItemRecommendBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: RecommendData){
             Glide.with(itemView).load(item.img).into(binding.recommendImageView) // 이미지 연결에 용이한 Glide 라이브러리 사용

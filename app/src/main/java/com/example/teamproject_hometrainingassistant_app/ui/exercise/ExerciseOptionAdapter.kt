@@ -4,10 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.teamproject_hometrainingassistant_app.databinding.ExerciseOptionItemBinding
-import com.example.teamproject_hometrainingassistant_app.databinding.ExersiceSearchItemBinding
-import com.example.teamproject_hometrainingassistant_app.ui.community.CommunityFragment
+import com.example.teamproject_hometrainingassistant_app.databinding.ItemExerciseOptionBinding
 
 class ExerciseOptionAdapter(private val context: Context) :
     RecyclerView.Adapter<ExerciseOptionAdapter.ViewHolder>() {
@@ -16,7 +13,7 @@ class ExerciseOptionAdapter(private val context: Context) :
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): ViewHolder {
-        val binding = ExerciseOptionItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = ItemExerciseOptionBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding)
     }
 
@@ -26,7 +23,7 @@ class ExerciseOptionAdapter(private val context: Context) :
         holder.bind(datas[position])
     }
 
-    inner class ViewHolder(private val binding: ExerciseOptionItemBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(private val binding: ItemExerciseOptionBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: ExerciseOptionData){
             binding.exerciseOptionButton.text = item.text

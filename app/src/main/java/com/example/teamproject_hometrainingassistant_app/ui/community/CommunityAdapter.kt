@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.teamproject_hometrainingassistant_app.databinding.CommunityItemBinding
+import com.example.teamproject_hometrainingassistant_app.databinding.ItemCommunityBinding
 
 class CommunityAdapter(private val context: CommunityFragment) :
     RecyclerView.Adapter<CommunityAdapter.ViewHolder>() {
@@ -13,7 +13,7 @@ class CommunityAdapter(private val context: CommunityFragment) :
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): ViewHolder {
-        val binding = CommunityItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = ItemCommunityBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding)
     }
 
@@ -23,7 +23,7 @@ class CommunityAdapter(private val context: CommunityFragment) :
         holder.bind(datas[position])
     }
 
-    inner class ViewHolder(private val binding: CommunityItemBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(private val binding: ItemCommunityBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: CommunityData){
             Glide.with(itemView).load(item.img).into(binding.communityImageView) // 이미지 연결에 용이한 Glide 라이브러리 사용

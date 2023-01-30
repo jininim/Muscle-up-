@@ -37,6 +37,6 @@
         app:layout_constraintTop_toBottomOf="@+id/calendarDate"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical"
-        tools:listitem="@layout/dashboard_item"
+        tools:listitem="@layout/item_dashboard"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

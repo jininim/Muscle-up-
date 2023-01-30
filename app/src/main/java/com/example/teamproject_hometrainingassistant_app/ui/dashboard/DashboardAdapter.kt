@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.teamproject_hometrainingassistant_app.databinding.DashboardItemBinding
+import com.example.teamproject_hometrainingassistant_app.databinding.ItemDashboardBinding
 
 class DashboardAdapter(private val context: DashboardFragment) :
     RecyclerView.Adapter<DashboardAdapter.ViewHolder>() {
@@ -13,7 +13,7 @@ class DashboardAdapter(private val context: DashboardFragment) :
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): ViewHolder {
-        val binding = DashboardItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = ItemDashboardBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding)
     }
 
@@ -23,7 +23,7 @@ class DashboardAdapter(private val context: DashboardFragment) :
         holder.bind(datas[position])
     }
 
-    inner class ViewHolder(private val binding: DashboardItemBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(private val binding: ItemDashboardBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: DashboardRoutineData){
             Glide.with(itemView).load(item.img).into(binding.routineImageView) // 이미지 연결에 용이한 Glide 라이브러리 사용
