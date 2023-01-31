@@ -136,10 +136,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/routineTotalDate"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/routineTotalDate"
                 android:layout_marginTop="40dp"
-                android:layout_marginEnd="100dp"
-                android:text="운동 일차"
+                android:text="총 세트"
                 android:textSize="20dp"/>
             <TextView
                 android:id="@+id/routineTotalSet"
@@ -147,7 +146,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@id/routineTotalSetText"
                 app:layout_constraintTop_toBottomOf="@id/routineTotalSetText"
-                android:text="25일차"
+                android:text="6세트"
                 android:textSize="30dp"
                 android:textColor="#cccc00"
                 android:layout_marginTop="10dp"/>
