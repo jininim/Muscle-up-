@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/exerciseEndToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <ImageButton
+            android:id="@+id/exerciseBackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:src="@drawable/ic_arrow_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2023년 1월 11일"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/exerciseEndToolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/routineName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="루틴1"
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="30dp"/>
+            <TextView
+                android:id="@+id/routineEndTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="오후 00:00 ~ 00:00"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/routineTotalTimeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/routineName"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="30dp"
+                android:text="총 시간"
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/routineTotalTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1:00:00"
+                android:textSize="30dp"
+                android:textColor="#0000ff"
+                app:layout_constraintTop_toBottomOf="@id/routineTotalTimeText"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/routineTotalDateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/routineName"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="100dp"
+                android:text="운동 일차"
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/routineTotalDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/routineTotalDateText"
+                app:layout_constraintTop_toBottomOf="@id/routineTotalDateText"
+                android:text="25일차"
+                android:textSize="30dp"
+                android:textColor="#00ff00"
+                android:layout_marginTop="10dp"/>
+
+
+            <TextView
+                android:id="@+id/calorieText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/routineTotalTime"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="40dp"
+                android:text="칼로리"
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/calorie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/calorieText"
+                app:layout_constraintStart_toStartOf="@id/calorieText"
+                android:layout_marginTop="10dp"
+                android:text="211kcal"
+                android:textSize="30dp"
+                android:textColor="#ff0000"/>
+
+            <TextView
+                android:id="@+id/routineTotalSetText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/routineTotalDate"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="100dp"
+                android:text="운동 일차"
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/routineTotalSet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/routineTotalSetText"
+                app:layout_constraintTop_toBottomOf="@id/routineTotalSetText"
+                android:text="25일차"
+                android:textSize="30dp"
+                android:textColor="#cccc00"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/routineRecyclerViewText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/calorie"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="40dp"
+                android:text="수행 루틴"
+                android:textSize="25dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/routineEndRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                app:layout_constraintTop_toBottomOf="@+id/routineRecyclerViewText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_exercise_end"/>
+
+            <Button
+                android:id="@+id/routineEndShareButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/routineEndSaveButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/routineEndSaveButton"
+                android:text="공유"
+                android:background="@color/primaryColor"/>
+            <Button
+                android:id="@+id/routineEndSaveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/routineEndRecyclerView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/routineEndShareButton"
+                android:layout_marginTop="10dp"
+                android:text="저장"
+                android:background="@color/primaryColor"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

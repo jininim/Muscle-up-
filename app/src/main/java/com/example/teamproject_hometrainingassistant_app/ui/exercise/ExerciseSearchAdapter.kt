@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.teamproject_hometrainingassistant_app.databinding.ExersiceSearchItemBinding
+import com.example.teamproject_hometrainingassistant_app.databinding.ItemExersiceSearchBinding
 import com.example.teamproject_hometrainingassistant_app.ui.community.CommunityFragment
 
 class ExerciseSearchAdapter(private val context: Context) :
@@ -15,7 +15,7 @@ class ExerciseSearchAdapter(private val context: Context) :
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): ViewHolder {
-        val binding = ExersiceSearchItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = ItemExersiceSearchBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding)
     }
 
@@ -25,7 +25,7 @@ class ExerciseSearchAdapter(private val context: Context) :
         holder.bind(datas[position])
     }
 
-    inner class ViewHolder(private val binding: ExersiceSearchItemBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(private val binding: ItemExersiceSearchBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: ExerciseSearchData){
             Glide.with(itemView).load(item.img).into(binding.exerciseImageView) // 이미지 연결에 용이한 Glide 라이브러리 사용
