@@ -1,5 +1,6 @@
 package com.example.teamproject_hometrainingassistant_app.ui.home
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -24,11 +25,17 @@ class HomeAdapter(private val context: HomeFragment) :
     }
 
     inner class ViewHolder(private val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root){
+        private val context = binding.root.context
 
         fun bind(item: HomeData){
             Glide.with(itemView).load(item.img).into(binding.homeRoutineImageView) // 이미지 연결에 용이한 Glide 라이브러리 사용
             binding.homeRoutineButton.text = item.text
             Glide.with(itemView).load(item.img2).into(binding.homeRoutineImageView2)
+
+            binding.homeRoutineButton.setOnClickListener {
+                val intent = Intent(context, MyRoutineDetailActivity::class.java)
+                intent.run { context.startActivity(this) }
+            }
         }
     }
 }
