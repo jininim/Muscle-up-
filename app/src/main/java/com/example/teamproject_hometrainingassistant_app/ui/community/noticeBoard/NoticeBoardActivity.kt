@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teamproject_hometrainingassistant_app.DBKey.Companion.DB_NOTICE_BOARD
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityNoticeBoardBinding
 import com.example.teamproject_hometrainingassistant_app.ui.community.noticeBoard.NoticeBoardDetail.NoticeBoardDetailActivity
@@ -60,6 +61,10 @@ class NoticeBoardActivity : AppCompatActivity() {
             intent.run { startActivity(this) }
         }
 
+        binding.titleRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.titleRecyclerView.adapter = noticeBoardAdapter
+
+        noticeBoardDB.addChildEventListener(listener)
     }
 
     @SuppressLint("NotifyDataSetChanged")

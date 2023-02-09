@@ -52,9 +52,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_notice_board"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
