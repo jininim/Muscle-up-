@@ -27,7 +27,5 @@ class IntroActivity : AppCompatActivity() {
             startActivity(intent) //인트로 실행 후 바로 MainActivity로 넘어감.
             finish()
         }, 500) //0.5초 후 인트로 실행
-
-
     }
 }
