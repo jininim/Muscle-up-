@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.teamproject_hometrainingassistant_app.databinding.ItemNoticeBoardBinding
 import com.example.teamproject_hometrainingassistant_app.ui.community.noticeBoard.NoticeBoardDetail.NoticeBoardDetailActivity
 
 class NoticeBoardAdapter(val onItemClicked: (NoticeBoardData) -> Unit) :
     ListAdapter<NoticeBoardData, NoticeBoardAdapter.ViewHolder>(DiffUtil) {
 
-    var datas = mutableListOf<NoticeBoardData>()
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): ViewHolder {
@@ -21,16 +21,20 @@ class NoticeBoardAdapter(val onItemClicked: (NoticeBoardData) -> Unit) :
         return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = datas.size
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(datas[position])
+        holder.bind(currentList[position])
     }
 
     inner class ViewHolder(private val binding: ItemNoticeBoardBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: NoticeBoardData){
             binding.title.text = item.text
+
+            if(item.uri.isNotEmpty()){
+                Glide.with(binding.image)
+                    .load(item.uri)
+                    .into(binding.image)
+            }
 
             binding.root.setOnClickListener {
                 onItemClicked(item)

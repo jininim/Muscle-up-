@@ -3,6 +3,7 @@ package com.example.teamproject_hometrainingassistant_app.ui.community.noticeBoa
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teamproject_hometrainingassistant_app.DBKey.Companion.DB_CHAT
 import com.example.teamproject_hometrainingassistant_app.DBKey.Companion.DB_NOTICE_BOARD
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityNoticeBoardDetailBinding
@@ -24,7 +25,6 @@ class NoticeBoardDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityNoticeBoardDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -52,6 +52,9 @@ class NoticeBoardDetailActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {}
 
         })
+
+        binding.chatRecyclerview.layoutManager = LinearLayoutManager(this)
+        binding.chatRecyclerview.adapter = adapter
 
         binding.sendButton.setOnClickListener {
             val chatItem = NoticeBoardDetailData(

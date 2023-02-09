@@ -19,7 +19,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        KakaoSdk.init(this, "")
+        KakaoSdk.init(this, "fd2851e7e0374f6711c0157273790e81")
 
         //카카오 로그인버튼 클릭시 메인화면 전환
         binding.kakaologin.setOnClickListener {
