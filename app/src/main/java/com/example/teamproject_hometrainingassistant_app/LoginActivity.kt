@@ -14,12 +14,14 @@ import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 
 class LoginActivity : AppCompatActivity() {
+
+
     lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        KakaoSdk.init(this, "fd2851e7e0374f6711c0157273790e81")
+        KakaoSdk.init(this, "ef4cb117e81f2446c42e26f897b523c9")
 
         //카카오 로그인버튼 클릭시 메인화면 전환
         binding.kakaologin.setOnClickListener {
@@ -76,7 +78,6 @@ class LoginActivity : AppCompatActivity() {
                                 "\n회원번호: ${user.id}" +
                                 "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
                                 "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
-
                     }
                     val intent = Intent(applicationContext, MainActivity::class.java)
                     startActivity(intent) //인트로 실행 후 바로 MainActivity로 넘어감.
