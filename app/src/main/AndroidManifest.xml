@@ -5,6 +5,7 @@
     <!--음성 및 인터넷 권한-->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -23,6 +24,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".ui.exercise.ExerciseActivity"
             android:exported="false">
@@ -41,6 +43,19 @@
                 android:value="" />
         </activity>
         <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
+                <data android:host="oauth"
+                    android:scheme="kakao${NATIVE_APP_KEY}" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="false">
             <meta-data
@@ -57,6 +72,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.recommend.RecommendActivity" />
+        <activity android:name=".ui.home.MyRoutineDetailActivity"/>
+        <activity android:name=".ui.dashboard.CalendarRoutineActivity"/>
+        <activity android:name=".ui.exercise.ExerciseInformation"/>
+        <activity android:name=".ui.community.noticeBoard.NoticeBoardDetail.NoticeBoardDetailActivity"/>
+        <activity android:name=".ui.community.noticeBoard.NoticeBoardActivity"/>
+        <activity android:name=".ui.recommend.RoutineDetailActivity"/>
+        <activity android:name=".ui.community.noticeBoard.CreateNoticeBoardActivity"/>
     </application>
 
 </manifest>

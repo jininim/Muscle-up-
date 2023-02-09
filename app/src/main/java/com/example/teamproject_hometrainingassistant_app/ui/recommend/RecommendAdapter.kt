@@ -1,6 +1,7 @@
 package com.example.teamproject_hometrainingassistant_app.ui.recommend
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +30,11 @@ class RecommendAdapter(private val context: Context) :
         fun bind(item: RecommendData){
             Glide.with(itemView).load(item.img).into(binding.recommendImageView) // 이미지 연결에 용이한 Glide 라이브러리 사용
             binding.recommendButton.text = item.text
+
+            binding.recommendButton.setOnClickListener {
+                val intent = Intent(context, RoutineDetailActivity::class.java)
+                intent.run { context.startActivity(this) }
+            }
         }
     }
 }

@@ -10,11 +10,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.teamproject_hometrainingassistant_app.R
 import com.example.teamproject_hometrainingassistant_app.databinding.FragmentCommunityBinding
 import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.VerticalItemDecorator
+import com.google.firebase.database.DatabaseReference
 
 class CommunityFragment : Fragment() {
 
+    private lateinit var articleDB: DatabaseReference
     lateinit var communityAdapter: CommunityAdapter
-    val datas = mutableListOf<CommunityData>()
+    private val datas = mutableListOf<CommunityData>()
     private var _binding: FragmentCommunityBinding? = null
 
     // This property is only valid between onCreateView and

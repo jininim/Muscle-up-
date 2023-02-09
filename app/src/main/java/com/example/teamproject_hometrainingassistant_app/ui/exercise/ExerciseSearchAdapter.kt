@@ -1,12 +1,12 @@
 package com.example.teamproject_hometrainingassistant_app.ui.exercise
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.teamproject_hometrainingassistant_app.databinding.ItemExersiceSearchBinding
-import com.example.teamproject_hometrainingassistant_app.ui.community.CommunityFragment
 
 class ExerciseSearchAdapter(private val context: Context) :
     RecyclerView.Adapter<ExerciseSearchAdapter.ViewHolder>() {
@@ -30,6 +30,11 @@ class ExerciseSearchAdapter(private val context: Context) :
         fun bind(item: ExerciseSearchData){
             Glide.with(itemView).load(item.img).into(binding.exerciseImageView) // 이미지 연결에 용이한 Glide 라이브러리 사용
             binding.exerciseButton.text = item.text
+
+            binding.exerciseButton.setOnClickListener {
+                val intent = Intent(context, ExerciseInformation::class.java)
+                intent.run { context.startActivity(this) }
+            }
         }
     }
 }
