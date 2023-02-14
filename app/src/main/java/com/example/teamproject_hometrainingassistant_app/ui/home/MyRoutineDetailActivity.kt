@@ -14,5 +14,8 @@ class MyRoutineDetailActivity : AppCompatActivity() {
         binding = ActivityMyRoutineDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.exerciseBackButton.setOnClickListener {
+            finish()
+        }
     }
 }

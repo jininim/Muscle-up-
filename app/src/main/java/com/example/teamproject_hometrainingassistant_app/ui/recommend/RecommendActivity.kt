@@ -1,8 +1,10 @@
 package com.example.teamproject_hometrainingassistant_app.ui.recommend
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.teamproject_hometrainingassistant_app.MainActivity
 import com.example.teamproject_hometrainingassistant_app.R
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityExerciseBinding
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityRecommendBinding
@@ -27,6 +29,10 @@ class RecommendActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initRecycler()
+
+        binding.exerciseBackButton.setOnClickListener {
+            finish()
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")

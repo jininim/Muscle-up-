@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
+import com.example.teamproject_hometrainingassistant_app.MainActivity
 import com.example.teamproject_hometrainingassistant_app.R
 import com.example.teamproject_hometrainingassistant_app.R.drawable.ic_photo
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityExerciseBinding
@@ -37,6 +38,10 @@ class ExerciseActivity : AppCompatActivity() {
         OptionRecycler()
         CategoryRecycler()
         SearchRecycler()
+
+        binding.exerciseBackButton.setOnClickListener {
+            finish()
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
