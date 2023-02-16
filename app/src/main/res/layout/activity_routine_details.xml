@@ -62,7 +62,7 @@
                 android:src="@drawable/ic_person"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_margin="30dp"/>
+                android:layout_margin="10dp"/>
 
             <TextView
                 android:layout_width="200dp"
@@ -70,7 +70,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/userImage"
                 app:layout_constraintBottom_toBottomOf="@+id/userImage"
-                android:layout_marginEnd="55dp"
+                android:layout_marginEnd="35dp"
                 android:gravity="center"
                 android:text="최지원의 복근 조지기 루틴"
                 android:background="@drawable/round_shape"

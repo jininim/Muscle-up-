@@ -1,10 +1,11 @@
-package com.example.teamproject_hometrainingassistant_app.ui.exercise
+package com.example.teamproject_hometrainingassistant_app.ui.exercise.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teamproject_hometrainingassistant_app.databinding.ItemExerciseOptionBinding
+import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseOptionData
 
 class ExerciseOptionAdapter(private val context: Context) :
     RecyclerView.Adapter<ExerciseOptionAdapter.ViewHolder>() {
