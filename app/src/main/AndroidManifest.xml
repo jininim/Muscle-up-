@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:allowBackup="true"
@@ -42,7 +44,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
+        <!--<activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter>
@@ -50,26 +52,27 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
+                &lt;!&ndash; Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" &ndash;&gt;
                 <data android:host="oauth"
                     android:scheme="kakaofd2851e7e0374f6711c0157273790e81" />
             </intent-filter>
-        </activity>
+        </activity>-->
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.IntroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.IntroActivity"
+            android:exported="false">
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
         </activity>
         <activity android:name=".ui.recommend.RecommendActivity" />
         <activity android:name=".ui.home.MyRoutineDetailActivity"/>

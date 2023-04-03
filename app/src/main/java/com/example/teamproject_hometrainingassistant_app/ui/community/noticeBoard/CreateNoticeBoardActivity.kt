@@ -1,6 +1,5 @@
 package com.example.teamproject_hometrainingassistant_app.ui.community.noticeBoard
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
@@ -8,7 +7,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -45,15 +43,18 @@ class CreateNoticeBoardActivity : AppCompatActivity() {
                 ContextCompat.checkSelfPermission( // 사진 갤러리 사용 권한 체크
                     this,
                     android.Manifest.permission.READ_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
+                    this,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
                 ) == PackageManager.PERMISSION_GRANTED -> {
                     startContentProvider()
                 }
-                shouldShowRequestPermissionRationale(android.Manifest.permission.READ_EXTERNAL_STORAGE) -> {
+                shouldShowRequestPermissionRationale(android.Manifest.permission.READ_EXTERNAL_STORAGE) -> { // 권한을 거부했을 경우
                     showPermissionContextPopup()
                 }
                 else -> {
                     requestPermissions(
-                        arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
+                        arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
                         1010
                     )
                 }
@@ -111,7 +112,7 @@ class CreateNoticeBoardActivity : AppCompatActivity() {
         content: String,
         imageUri: String,
         key: Long
-    ) { // 물품 업로드
+    ) { // 게시글 업로드
         val model = NoticeBoardData(title, content, imageUri, key)
         articleDB.push().setValue(model)
 
@@ -128,10 +129,12 @@ class CreateNoticeBoardActivity : AppCompatActivity() {
 
         when (requestCode) {
             1010 ->
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    startContentProvider()
-                } else {
-                    Toast.makeText(this, "권한을 거부하셨습니다.", Toast.LENGTH_SHORT).show()
+                for(i in 0..1){
+                    if (grantResults.isNotEmpty()) {
+                        startContentProvider()
+                    } else {
+                        Toast.makeText(this, "권한을 거부하셨습니다.", Toast.LENGTH_SHORT).show()
+                    }
                 }
         }
     }

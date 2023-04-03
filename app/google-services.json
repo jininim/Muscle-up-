@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "448536249522",
-    "firebase_url": "https://muscleup-37978-default-rtdb.firebaseio.com",
-    "project_id": "muscleup-37978",
-    "storage_bucket": "muscleup-37978.appspot.com"
+    "project_number": "353308916326",
+    "firebase_url": "https://muscle-13209-default-rtdb.firebaseio.com",
+    "project_id": "muscle-13209",
+    "storage_bucket": "muscle-13209.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:448536249522:android:994a393dd661775bf3f5ab",
+        "mobilesdk_app_id": "1:353308916326:android:9ac64e7eb59263b6e80ba7",
         "android_client_info": {
           "package_name": "com.example.teamproject_hometrainingassistant_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "448536249522-ps2fligk5kftnmt42fd3ejds5a8p4ebt.apps.googleusercontent.com",
+          "client_id": "353308916326-n7urisknm4sgjhdlse4vlsbfovp5uk33.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCyAGxQpU6wpSZfBDvOEblzDo4_kpPCRhw"
+          "current_key": "AIzaSyBXNx2pbeMrAgxW2G1-0f28ndx8rQulujk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "448536249522-ps2fligk5kftnmt42fd3ejds5a8p4ebt.apps.googleusercontent.com",
+              "client_id": "353308916326-n7urisknm4sgjhdlse4vlsbfovp5uk33.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
