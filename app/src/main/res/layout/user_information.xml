@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/user_information_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사용자 정보 입력"
+        android:textSize="35sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
+
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black"/>
+
+    <TextView
+        android:id="@+id/nickname_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="닉네임을 입력해주세요"
+        android:textSize="25sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp" />
+    <EditText
+        android:id="@+id/nickname_edit"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:hint="닉네임"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"/>
+
+
+    <TextView
+        android:id="@+id/gender_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="성별을 선택해주세요"
+        android:textSize="25dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp">
+        <Button
+            android:id="@+id/man_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="남자"
+            android:layout_marginLeft="80dp"/>
+        <Button
+            android:id="@+id/woman_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="여자"
+            android:layout_marginLeft="60dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/age_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="나이를 입력해주세요"
+        android:textSize="25dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"/>
+    <EditText
+        android:id="@+id/age_edit"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:hint="나이"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/high_weight_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="키와 몸무게를 입력해주세요"
+        android:textSize="25dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp">
+        <EditText
+            android:id="@+id/high_edit"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="키"
+            android:layout_marginLeft="75dp"
+            android:gravity="center"/>
+        <EditText
+            android:id="@+id/weight_edit"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="무게"
+            android:layout_marginLeft="50dp"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/career_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="운동 경력을 입력해주세요"
+        android:textSize="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"/>
+    <SeekBar
+        android:id="@+id/career_seek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"/>
+    <TextView
+        android:id="@+id/career_month_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0개월"
+        android:textSize="25dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="제출"/>
+
+</LinearLayout>

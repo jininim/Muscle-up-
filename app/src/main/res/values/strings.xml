@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Teamproject_Home Training Assistant_APP</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="community">커뮤니티</string>
+    <string name="routine">루틴</string>
+    <string name="set">설정</string>
+    <string name="calender">캘린더</string>
+    <string name="home">홈</string>
+    <string name="intro_Image">IntroImage</string>
+    <string name="intro_text">운동을 그대와 함께</string>
+    <string name="toolbar_mainText">머슬 없?</string>
+    <string name="search">운동검색</string>
+    <string name="share">공유하기</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
