@@ -1,20 +1,27 @@
 package com.example.teamproject_hometrainingassistant_app.ui.exercise
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.commit
+import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teamproject_hometrainingassistant_app.R
-import com.example.teamproject_hometrainingassistant_app.R.drawable.ic_photo
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityExerciseBinding
-import com.example.teamproject_hometrainingassistant_app.ui.community.CommunityAdapter
-import com.example.teamproject_hometrainingassistant_app.ui.community.CommunityData
 import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.HorizontalItemDecorator
 import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.VerticalItemDecorator
-import com.example.teamproject_hometrainingassistant_app.ui.home.HomeFragment
+import com.example.teamproject_hometrainingassistant_app.ui.exercise.DTO.ExerciseDTO
+import com.example.teamproject_hometrainingassistant_app.ui.exercise.Service.ExerciseService
+import com.example.teamproject_hometrainingassistant_app.ui.exercise.adapter.ExerciseCategoryAdapter
+import com.example.teamproject_hometrainingassistant_app.ui.exercise.adapter.ExerciseOptionAdapter
+import com.example.teamproject_hometrainingassistant_app.ui.exercise.adapter.ExerciseSearchAdapter
+import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseCategoryData
+import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseOptionData
+import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseSearchData
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityExerciseBinding
@@ -22,7 +29,7 @@ class ExerciseActivity : AppCompatActivity() {
 
     lateinit var exerciseOptionAdapter: ExerciseOptionAdapter
     lateinit var exerciseCategoryAdapter: ExerciseCategoryAdapter
-    lateinit var exerciseSearchAdapter: ExerciseSearchAdapter
+    private lateinit var exerciseSearchAdapter: ExerciseSearchAdapter
 
     val optionDatas = mutableListOf<ExerciseOptionData>()
     val categoryDatas = mutableListOf<ExerciseCategoryData>()
@@ -36,7 +43,18 @@ class ExerciseActivity : AppCompatActivity() {
 
         OptionRecycler()
         CategoryRecycler()
-        SearchRecycler()
+
+        exerciseSearchAdapter = ExerciseSearchAdapter(this)
+        binding.exerciseSearchRecyclerView.apply {
+            adapter = exerciseSearchAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
+
+        getExerciseList()
+
+        binding.exerciseBackButton.setOnClickListener {
+            finish()
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -76,26 +94,34 @@ class ExerciseActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    private fun SearchRecycler(){
-        exerciseSearchAdapter = ExerciseSearchAdapter(this)
-        binding.exerciseSearchRecyclerView.adapter = exerciseSearchAdapter
-        binding.exerciseSearchRecyclerView.addItemDecoration(VerticalItemDecorator(0))
+    private fun getExerciseList(){
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://run.mocky.io")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
-        searchDatas.apply {
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "줄넘기"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "점핑 잭"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "마운틴 클라이머"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "러시안 트위스트"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "시티드 니업"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "크런치"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "런지"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "플랭크"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "푸시업"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "스쿼트"))
-            add(ExerciseSearchData(img = R.drawable.ic_photo, text = "턱걸이"))
-            exerciseSearchAdapter.datas = searchDatas
-            exerciseSearchAdapter.notifyDataSetChanged()
+        retrofit.create(ExerciseService::class.java).also {
+            it.listExercises()
+                .enqueue(object : Callback<ExerciseDTO>{
+                    override fun onResponse(
+                        call: Call<ExerciseDTO>,
+                        response: Response<ExerciseDTO>
+                    ) {
+                        if(response.isSuccessful.not()){
+                            Log.d("ExerciseActivity", "response fail")
+                            return
+                        }
+
+                        Log.d("성공", "${response.body()}")
+                        response.body()?.let{ exerciseDTO ->
+                            exerciseSearchAdapter.submitList(exerciseDTO.exercise)
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ExerciseDTO>, t: Throwable) {
+
+                    }
+                })
         }
     }
 }

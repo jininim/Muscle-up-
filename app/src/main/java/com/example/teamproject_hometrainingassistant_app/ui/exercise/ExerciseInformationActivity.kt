@@ -14,6 +14,9 @@ class ExerciseInformation : AppCompatActivity(){
         binding = ActivityExerciseInformationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.exerciseBackButton.setOnClickListener {
+            finish()
+        }
     }
 
 }

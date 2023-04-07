@@ -63,5 +63,9 @@ class NoticeBoardDetailActivity : AppCompatActivity() {
 
             chatDB?.push()?.setValue(chatItem)
         }
+
+        binding.exerciseBackButton.setOnClickListener {
+            finish()
+        }
     }
 }

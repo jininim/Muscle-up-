@@ -14,5 +14,8 @@ class CalendarRoutineActivity : AppCompatActivity() {
         binding = ActivityCalendarRoutineBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.exerciseBackButton.setOnClickListener {
+            finish()
+        }
     }
 }

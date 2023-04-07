@@ -65,6 +65,10 @@ class NoticeBoardActivity : AppCompatActivity() {
         binding.titleRecyclerView.adapter = noticeBoardAdapter
 
         noticeBoardDB.addChildEventListener(listener)
+
+        binding.exerciseBackButton.setOnClickListener {
+            finish()
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")

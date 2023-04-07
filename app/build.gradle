@@ -41,7 +41,7 @@ android {
 dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
@@ -50,7 +50,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     implementation "com.kakao.sdk:v2-all:2.12.1" // 카카오 전체 모듈 설치
 
-    implementation platform('com.google.firebase:firebase-bom:31.2.0') // firebase
+    implementation platform('com.google.firebase:firebase-bom:31.3.0') // firebase
     implementation 'com.google.firebase:firebase-database-ktx:20.1.0' // realtime database
     implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
     implementation 'com.google.firebase:firebase-common-ktx:20.3.0'// storage

@@ -33,10 +33,6 @@ class CommunityFragment : Fragment() {
 
         _binding = FragmentCommunityBinding.inflate(inflater, container, false)
 
-//        val textView: TextView = binding.textNotifications
-//        notificationsViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
         initRecycler()
 
         return binding.root
