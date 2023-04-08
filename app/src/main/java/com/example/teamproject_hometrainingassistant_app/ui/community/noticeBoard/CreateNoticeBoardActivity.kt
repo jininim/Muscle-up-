@@ -129,13 +129,11 @@ class CreateNoticeBoardActivity : AppCompatActivity() {
 
         when (requestCode) {
             1010 ->
-                for(i in 0..1){
                     if (grantResults.isNotEmpty()) {
                         startContentProvider()
                     } else {
                         Toast.makeText(this, "권한을 거부하셨습니다.", Toast.LENGTH_SHORT).show()
                     }
-                }
         }
     }
 

@@ -72,19 +72,29 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@id/userProfile"
                 app:layout_constraintStart_toEndOf="@id/userProfile"
-                app:layout_constraintBottom_toTopOf="@id/postTime"
+                app:layout_constraintBottom_toTopOf="@id/postTimeDate"
                 android:layout_marginStart="15dp"
                 android:text="최지원"
                 android:textSize="20dp"/>
             <TextView
-                android:id="@+id/postTime"
+                android:id="@+id/postTimeDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@id/userProfile"
                 app:layout_constraintStart_toEndOf="@id/userProfile"
                 app:layout_constraintTop_toBottomOf="@id/userNickname"
                 android:layout_marginStart="15dp"
-                android:text="01/11 12:00"/>
+                android:text="01/11"/>
+
+            <TextView
+                android:id="@+id/postTimeDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/postTimeDate"
+                app:layout_constraintBottom_toBottomOf="@id/postTimeDate"
+                app:layout_constraintStart_toEndOf="@id/postTimeDate"
+                android:layout_marginStart="5dp"
+                android:text="17:03"/>
 
             <TextView
                 android:id="@+id/noticeBoardTitle"
