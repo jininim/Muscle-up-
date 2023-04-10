@@ -82,6 +82,10 @@ class CreateNoticeBoardActivity : AppCompatActivity() {
                 uploadNoticeBoard(title, content, "", key)
             }
         }
+
+        binding.exerciseBackButton.setOnClickListener {
+            finish()
+        }
     }
 
     private fun uploadPhoto(

@@ -83,6 +83,7 @@
         <activity android:name=".ui.community.noticeBoard.NoticeBoardActivity"/>
         <activity android:name=".ui.recommend.RoutineDetailActivity"/>
         <activity android:name=".ui.community.noticeBoard.CreateNoticeBoardActivity"/>
+        <activity android:name=".ui.home.exercisestart.ExerciseStartActivity"/>
     </application>
 
 </manifest>
