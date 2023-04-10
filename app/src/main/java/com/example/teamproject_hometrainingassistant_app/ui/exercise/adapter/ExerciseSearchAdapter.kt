@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.teamproject_hometrainingassistant_app.databinding.ItemExersiceSearchBinding
+import com.example.teamproject_hometrainingassistant_app.ui.community.noticeBoard.NoticeBoardData
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseModel
 
-class ExerciseSearchAdapter(private val context: Context) : ListAdapter<ExerciseModel, ExerciseSearchAdapter.ViewHolder>(diffUtil) {
+class ExerciseSearchAdapter(val onItemClicked: (ExerciseModel) -> Unit) :
+    ListAdapter<ExerciseModel, ExerciseSearchAdapter.ViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
@@ -29,6 +31,10 @@ class ExerciseSearchAdapter(private val context: Context) : ListAdapter<Exercise
         fun bind(item: ExerciseModel){
             Glide.with(itemView).load(item.exerciseUrl).into(binding.exerciseImageView) // 이미지 연결에 용이한 Glide 라이브러리 사용
             binding.exerciseButton.text = item.name
+
+            binding.root.setOnClickListener {
+                onItemClicked(item)
+            }
         }
     }
 

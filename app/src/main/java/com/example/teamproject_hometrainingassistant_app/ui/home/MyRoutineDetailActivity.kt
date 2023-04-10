@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.teamproject_hometrainingassistant_app.DecibelActivity
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityMyRoutineDetailBinding
 import com.example.teamproject_hometrainingassistant_app.ui.community.noticeBoard.CreateNoticeBoardActivity
+import com.example.teamproject_hometrainingassistant_app.ui.home.exercisestart.ExerciseStartActivity
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityMyRoutineDetailBinding
@@ -20,6 +21,11 @@ class MyRoutineDetailActivity : AppCompatActivity() {
         binding.decibelStartButton.setOnClickListener {
             val intent = Intent(this, DecibelActivity::class.java)
             intent.run { startActivity(this) }
+        }
+
+        binding.myRoutineStartButton.setOnClickListener {
+            val intent = Intent(this,ExerciseStartActivity::class.java)
+            intent.run { startActivity(intent) }
         }
 
         binding.exerciseBackButton.setOnClickListener {

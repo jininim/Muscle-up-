@@ -1,6 +1,7 @@
 package com.example.teamproject_hometrainingassistant_app.ui.exercise
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -44,7 +45,15 @@ class ExerciseActivity : AppCompatActivity() {
         OptionRecycler()
         CategoryRecycler()
 
-        exerciseSearchAdapter = ExerciseSearchAdapter(this)
+        exerciseSearchAdapter = ExerciseSearchAdapter(onItemClicked = {exerciseModel ->
+            val intent = Intent(this, ExerciseInformation::class.java)
+            intent.putExtra("name", exerciseModel.name)
+            intent.putExtra("exerciseUrl", exerciseModel.exerciseUrl)
+            intent.putExtra("guide", exerciseModel.guide)
+            intent.putExtra("youtubeUrl", exerciseModel.youtubeUrl)
+            intent.putExtra("type", exerciseModel.type)
+            intent.run { startActivity(intent) }
+        })
         binding.exerciseSearchRecyclerView.apply {
             adapter = exerciseSearchAdapter
             layoutManager = LinearLayoutManager(context)

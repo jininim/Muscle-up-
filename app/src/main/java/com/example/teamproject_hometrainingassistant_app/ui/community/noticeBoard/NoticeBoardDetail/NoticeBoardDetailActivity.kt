@@ -73,6 +73,7 @@ class NoticeBoardDetailActivity : AppCompatActivity() {
             val chatItem = NoticeBoardDetailData(
                 message = binding.chatEditText.text.toString()
             )
+            binding.chatEditText.text = null
 
             chatDB?.push()?.setValue(chatItem)
         }
