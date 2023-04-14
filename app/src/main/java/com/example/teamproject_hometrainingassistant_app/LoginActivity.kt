@@ -1,6 +1,7 @@
 package com.example.teamproject_hometrainingassistant_app
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,7 +17,6 @@ import com.kakao.sdk.user.UserApiClient
 
 class LoginActivity : AppCompatActivity() {
 
-
     lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,20 +24,49 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         KakaoSdk.init(this, "ef4cb117e81f2446c42e26f897b523c9")
 
+        // 1. 카카오 로그인 API를 사용하여 로그인 토큰을 받습니다.
+        val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+            if (error != null) {
+                Log.e(TAG, "카카오계정으로 로그인 실패", error)
+            } else if (token != null) {
+                Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
+
+                // 2. SharedPreferences를 사용하여 로그인 토큰을 저장합니다.
+                val sharedPrefs = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+                with (sharedPrefs.edit()) {
+                    putString("kakao_token", token.accessToken)
+                    commit()
+                }
+                // 3. 앱을 실행할 때마다 SharedPreferences에서 로그인 토큰을 가져와서 유효한 토큰인지 확인합니다.
+                val savedToken = sharedPrefs.getString("kakao_token", null)
+                if (savedToken != null) {
+                    UserApiClient.instance.me { user, error ->
+                        if (error != null) {
+                            Log.e(TAG, "사용자 정보 요청 실패", error)
+                        }
+                        else if (user != null) {
+                            Log.i(TAG, "사용자 정보 요청 성공" +
+                                    "\n회원번호: ${user.id}" +
+                                    "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
+                                    "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+                            val username = user.kakaoAccount?.profile?.nickname
+                            val userImage = user.kakaoAccount?.profile?.thumbnailImageUrl
+                            val intent = Intent(applicationContext, MainActivity::class.java).apply {
+                                putExtra("USER_NAME",username)
+                                putExtra("USER_IMAGE",userImage)
+                            }
+                            startActivity(intent) //인트로 실행 후 바로 MainActivity로 넘어감.
+                            finish()
+                        }
+                    }
+                }
+
+            }
+        }
         //카카오 로그인버튼 클릭시 메인화면 전환
         binding.kakaologin.setOnClickListener {
             // 카카오계정으로 로그인 공통 callback 구성
             // 카카오톡으로 로그인 할 수 없어 카카오계정으로 로그인할 경우 사용됨
-            val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
-                if (error != null) {
-                    Log.e(TAG, "카카오계정으로 로그인 실패", error)
-                } else if (token != null) {
-                    Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
-                    val intent = Intent(applicationContext, MainActivity::class.java)
-                    startActivity(intent) //인트로 실행 후 바로 MainActivity로 넘어감.
-                    finish()
-                }
-            }
 
 // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
             if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
@@ -100,8 +129,6 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
-
-
 
 
         //로그아웃
