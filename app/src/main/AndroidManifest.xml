@@ -44,7 +44,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <!--<activity
+        <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter>
@@ -52,24 +52,25 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                &lt;!&ndash; Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" &ndash;&gt;
+                <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
                 <data android:host="oauth"
                     android:scheme="kakaoa322f5aee3f2ac776dda320d566903ae" />
 
             </intent-filter>
-        </activity>-->
+        </activity>
         <activity
             android:name=".MainActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".ui.IntroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.IntroActivity"
-            android:exported="false">
 
             <meta-data
                 android:name="android.app.lib_name"
@@ -83,6 +84,7 @@
         <activity android:name=".ui.community.noticeBoard.NoticeBoardActivity"/>
         <activity android:name=".ui.recommend.RoutineDetailActivity"/>
         <activity android:name=".ui.community.noticeBoard.CreateNoticeBoardActivity"/>
+        <activity android:name=".ui.home.exercisestart.ExerciseStartActivity"/>
     </application>
 
 </manifest>

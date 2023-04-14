@@ -10,7 +10,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/userimage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
@@ -20,13 +20,13 @@
         app:srcCompat="@drawable/ic_home_black_24dp" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="사용자 이름"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintStart_toEndOf="@+id/imageView" />
+        app:layout_constraintBottom_toBottomOf="@+id/userimage"
+        app:layout_constraintStart_toEndOf="@+id/userimage" />
 
     <Button
         android:id="@+id/Search"
@@ -37,7 +37,7 @@
         android:backgroundTint="@color/primaryColor"
         android:text="@string/search"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/userimage" />
 
     <Button
         android:id="@+id/recommend"
@@ -48,7 +48,7 @@
         android:backgroundTint="@color/primaryColor"
         android:text="루틴 추천"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/userimage" />
 
     <TextView
         android:id="@+id/textView2"

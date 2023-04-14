@@ -3,10 +3,12 @@ package com.example.teamproject_hometrainingassistant_app.ui.home
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.teamproject_hometrainingassistant_app.R
 import com.example.teamproject_hometrainingassistant_app.databinding.FragmentHomeBinding
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.ExerciseActivity
@@ -14,16 +16,18 @@ import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.
 import com.example.teamproject_hometrainingassistant_app.ui.recommend.RecommendActivity
 
 
+
 class HomeFragment : Fragment() {
 
     lateinit var homeAdapter: HomeAdapter
     val datas = mutableListOf<HomeData>()
     private var _binding: FragmentHomeBinding? = null
+    private var username: String? = null
+    private var userimage: String? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,6 +35,13 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         //운동검색 버튼 클릭 시
+        //카카오 로그인한 사용자 정보 받아오기
+        username = arguments?.getString("USER_NAME")
+        userimage = arguments?.getString("USER_IMAGE")
+        binding.username.text = username
+        Glide.with(this).load(userimage).into(binding.userimage)
+
+
         binding.Search.setOnClickListener {
             val intent = Intent(context, ExerciseActivity::class.java)
             startActivity(intent) //인트로 실행 후 바로 exerciseActivity로 넘어감.

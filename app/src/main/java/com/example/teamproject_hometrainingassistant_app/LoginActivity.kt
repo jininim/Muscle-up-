@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityLoginBinding
+import com.example.teamproject_hometrainingassistant_app.ui.home.HomeFragment
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
@@ -26,12 +27,15 @@ class LoginActivity : AppCompatActivity() {
         //카카오 로그인버튼 클릭시 메인화면 전환
         binding.kakaologin.setOnClickListener {
             // 카카오계정으로 로그인 공통 callback 구성
-// 카카오톡으로 로그인 할 수 없어 카카오계정으로 로그인할 경우 사용됨
+            // 카카오톡으로 로그인 할 수 없어 카카오계정으로 로그인할 경우 사용됨
             val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
                 if (error != null) {
                     Log.e(TAG, "카카오계정으로 로그인 실패", error)
                 } else if (token != null) {
                     Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
+                    val intent = Intent(applicationContext, MainActivity::class.java)
+                    startActivity(intent) //인트로 실행 후 바로 MainActivity로 넘어감.
+                    finish()
                 }
             }
 
@@ -46,9 +50,10 @@ class LoginActivity : AppCompatActivity() {
                         if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
                             return@loginWithKakaoTalk
                         }
+//
+//                        // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
+//                        UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
 
-                        // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
-                        UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
                     } else if (token != null) {
                         Log.i(TAG, "카카오톡으로 로그인 성공 ${token.accessToken}")
                         UserApiClient.instance.me { user, error ->
@@ -60,7 +65,12 @@ class LoginActivity : AppCompatActivity() {
                                         "\n회원번호: ${user.id}" +
                                         "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
                                         "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
-                                val intent = Intent(applicationContext, MainActivity::class.java)
+                                val username = user.kakaoAccount?.profile?.nickname
+                                val userImage = user.kakaoAccount?.profile?.thumbnailImageUrl
+                                val intent = Intent(applicationContext, MainActivity::class.java).apply {
+                                    putExtra("USER_NAME",username)
+                                    putExtra("USER_IMAGE",userImage)
+                                }
                                 startActivity(intent) //인트로 실행 후 바로 MainActivity로 넘어감.
                                 finish()
                             }
@@ -77,26 +87,23 @@ class LoginActivity : AppCompatActivity() {
                         Log.i(TAG, "사용자 정보 요청 성공" +
                                 "\n회원번호: ${user.id}" +
                                 "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
-                                "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+                                "\n프로필사진11: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+                        val username = user.kakaoAccount?.profile?.nickname
+                        val userImage = user.kakaoAccount?.profile?.thumbnailImageUrl
+                        val intent = Intent(applicationContext, MainActivity::class.java).apply {
+                            putExtra("USER_NAME",username)
+                            putExtra("USER_IMAGE",userImage)
+                        }
+                        startActivity(intent) //인트로 실행 후 바로 MainActivity로 넘어감.
                     }
-                    val intent = Intent(applicationContext, MainActivity::class.java)
-                    startActivity(intent) //인트로 실행 후 바로 MainActivity로 넘어감.
-                    finish()
+
                 }
             }
         }
-        //페이스북 로그인 버튼 클릭시
-        binding.facebooklogin.setOnClickListener {
-            val intent = Intent(applicationContext, DecibelActivity::class.java)
-            startActivity(intent) //인트로 실행 후 바로 MainActivity로 넘어감.
-            finish()
-        }
-        //구글 로그인화면 클릭시
-        binding.googlelogin.setOnClickListener {
-//        val intent = Intent(applicationContext, MainActivity::class.java)
-//            startActivity(intent) //인트로 실행 후 바로 MainActivity로 넘어감.
-//            finish()
-        }
+
+
+
+
         //로그아웃
         binding.logout.setOnClickListener {
             UserApiClient.instance.unlink { error ->

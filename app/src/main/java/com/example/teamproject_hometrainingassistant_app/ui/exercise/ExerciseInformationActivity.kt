@@ -3,6 +3,7 @@ package com.example.teamproject_hometrainingassistant_app.ui.exercise
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityExerciseInformationBinding
 
 @SuppressLint("StaticFieldLeak")
@@ -13,6 +14,21 @@ class ExerciseInformation : AppCompatActivity(){
 
         binding = ActivityExerciseInformationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val name = intent.getStringExtra("name")
+        val exerciseUrl = intent.getStringExtra("exerciseUrl")
+        val guide = intent.getStringExtra("guide")
+        val youtubeUrl = intent.getStringExtra("youtubeUrl")
+        val type = intent.getStringExtra("type")
+
+        binding.name.text = name
+        binding.url.apply {
+            Glide.with(binding.url)
+                .load(exerciseUrl)
+                .into(binding.url)
+        }
+        binding.guide.text = guide
+        binding.youtube.text = youtubeUrl
 
         binding.exerciseBackButton.setOnClickListener {
             finish()

@@ -47,39 +47,14 @@ android:orientation="vertical">
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-    <Button
-        android:id="@+id/googlelogin"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/btn_signin_google"
-        android:text="구글로 로그인"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/facebooklogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/facebooklogin"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/btn_signin_facebook"
-        android:text="페이스북으로 로그인"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/kakaologin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
+    <ImageButton
         android:id="@+id/kakaologin"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
+        android:scaleType="centerCrop"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/kakao_login_large_wide"
+        android:src="@drawable/kakao_login_large_wide"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -88,10 +63,11 @@ android:orientation="vertical">
         android:id="@+id/logout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="31dp"
         android:text="카카오로그아웃"
-        app:layout_constraintBottom_toTopOf="@+id/googlelogin"
+        app:layout_constraintBottom_toTopOf="@+id/kakaologin"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
