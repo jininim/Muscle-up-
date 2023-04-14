@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/userimage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginStart="24dp"
         android:contentDescription="이미지예시"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,8 +25,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="사용자 이름"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/userimage"
-        app:layout_constraintStart_toEndOf="@+id/userimage" />
+        app:layout_constraintStart_toEndOf="@+id/userimage"
+        app:layout_constraintTop_toTopOf="@+id/userimage" />
 
     <Button
         android:id="@+id/Search"
