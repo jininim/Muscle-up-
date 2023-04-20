@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -19,6 +20,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Teamproject_HomeTrainingAssistant_APP"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key"
+            />
+
         <activity
             android:name=".DecibelActivity"
             android:exported="false">
@@ -44,6 +51,8 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
@@ -54,7 +63,7 @@
 
                 <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
                 <data android:host="oauth"
-                    android:scheme="kakaofd2851e7e0374f6711c0157273790e81" />
+                    android:scheme="kakaoef4cb117e81f2446c42e26f897b523c9" />
             </intent-filter>
         </activity>
         <activity
@@ -65,6 +74,7 @@
         <activity
             android:name=".ui.IntroActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -80,7 +90,6 @@
         <activity android:name=".ui.dashboard.CalendarRoutineActivity"/>
         <activity android:name=".ui.exercise.ExerciseInformation"/>
         <activity android:name=".ui.community.noticeBoard.NoticeBoardDetail.NoticeBoardDetailActivity"/>
-        <activity android:name=".ui.community.noticeBoard.NoticeBoardActivity"/>
         <activity android:name=".ui.recommend.RoutineDetailActivity"/>
         <activity android:name=".ui.community.noticeBoard.CreateNoticeBoardActivity"/>
         <activity android:name=".ui.home.exercisestart.ExerciseStartActivity"/>
