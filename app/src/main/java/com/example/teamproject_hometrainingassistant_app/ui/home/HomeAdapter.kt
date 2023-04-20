@@ -1,16 +1,18 @@
 package com.example.teamproject_hometrainingassistant_app.ui.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.teamproject_hometrainingassistant_app.databinding.ItemHomeBinding
+import com.example.teamproject_hometrainingassistant_app.ui.home.db.Routine
 
-class HomeAdapter(private val context: HomeFragment) :
+class HomeAdapter() :
     RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
-    var datas = mutableListOf<HomeData>()
+    private var itemList = emptyList<Routine>()
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): ViewHolder {
@@ -18,24 +20,22 @@ class HomeAdapter(private val context: HomeFragment) :
         return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = datas.size
+    override fun getItemCount(): Int = itemList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(datas[position])
+        holder.bind(itemList[position])
     }
 
     inner class ViewHolder(private val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root){
         private val context = binding.root.context
-
-        fun bind(item: HomeData){
-            Glide.with(itemView).load(item.img).into(binding.homeRoutineImageView) // 이미지 연결에 용이한 Glide 라이브러리 사용
-            binding.homeRoutineButton.text = item.text
-            Glide.with(itemView).load(item.img2).into(binding.homeRoutineImageView2)
-
-            binding.homeRoutineButton.setOnClickListener {
-                val intent = Intent(context, MyRoutineDetailActivity::class.java)
-                intent.run { context.startActivity(this) }
-            }
+        fun bind(item: Routine){
+            binding.textView.text = item.routine
+            binding.checkBox.isChecked = item.check
         }
+    }
+    @SuppressLint("NotifyDataSetChanged")
+    fun setData(routine: List<Routine>) {
+        this.itemList = routine
+        notifyDataSetChanged()
     }
 }

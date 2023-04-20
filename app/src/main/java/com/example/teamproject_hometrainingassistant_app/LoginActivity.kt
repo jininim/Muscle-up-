@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityLoginBinding
 import com.example.teamproject_hometrainingassistant_app.ui.home.HomeFragment
+import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
@@ -31,38 +32,9 @@ class LoginActivity : AppCompatActivity() {
             } else if (token != null) {
                 Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
 
-                // 2. SharedPreferences를 사용하여 로그인 토큰을 저장합니다.
-                val sharedPrefs = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-                with (sharedPrefs.edit()) {
-                    putString("kakao_token", token.accessToken)
-                    commit()
-                }
-                // 3. 앱을 실행할 때마다 SharedPreferences에서 로그인 토큰을 가져와서 유효한 토큰인지 확인합니다.
-                val savedToken = sharedPrefs.getString("kakao_token", null)
-                if (savedToken != null) {
-                    UserApiClient.instance.me { user, error ->
-                        if (error != null) {
-                            Log.e(TAG, "사용자 정보 요청 실패", error)
-                        }
-                        else if (user != null) {
-                            Log.i(TAG, "사용자 정보 요청 성공" +
-                                    "\n회원번호: ${user.id}" +
-                                    "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
-                                    "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
-                            val username = user.kakaoAccount?.profile?.nickname
-                            val userImage = user.kakaoAccount?.profile?.thumbnailImageUrl
-                            val intent = Intent(applicationContext, MainActivity::class.java).apply {
-                                putExtra("USER_NAME",username)
-                                putExtra("USER_IMAGE",userImage)
-                            }
-                            startActivity(intent) //인트로 실행 후 바로 MainActivity로 넘어감.
-                            finish()
-                        }
-                    }
-                }
-
             }
         }
+
         //카카오 로그인버튼 클릭시 메인화면 전환
         binding.kakaologin.setOnClickListener {
             // 카카오계정으로 로그인 공통 callback 구성
