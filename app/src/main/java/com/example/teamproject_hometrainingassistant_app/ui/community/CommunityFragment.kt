@@ -29,20 +29,21 @@ import com.google.firebase.ktx.Firebase
 
 class CommunityFragment : Fragment() {
 
-    private lateinit var noticeBoardAdapter: NoticeBoardAdapter
-    private lateinit var noticeBoardDB: DatabaseReference
+    private lateinit var noticeBoardAdapter: NoticeBoardAdapter // 리사이클러뷰 어댑터
+    private lateinit var noticeBoardDB: DatabaseReference       // firebase realTimeDB
     private var _binding: FragmentNoticeBoardBinding? = null
 
-    private val noticeBoardList = mutableListOf<NoticeBoardData>()
+    private val noticeBoardList = mutableListOf<NoticeBoardData>() // firebase에서 가져온 값들을 저장하는 리스트
 
     private val binding get() = _binding!!
 
-    private val listener = object : ChildEventListener { // 데이터베이스의 특정한 노드에 대한 변경을 수신 대기
-        override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) { // 리스트의 아이템을 검색하거나 추가가 있을 때 수신합니다.
-            val noticeBoardModel = snapshot.getValue(NoticeBoardData::class.java)
+    private val listener = object : ChildEventListener {    // listener = firebase에서 저장된 게시글 값들을 가져와서 여기에 저장.
+                                                            // 데이터베이스의 특정한 노드에 대한 변경을 수신 대기
+        override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) { // 리스트의 아이템을 검색하거나 추가가 있을 때 수신.
+            val noticeBoardModel = snapshot.getValue(NoticeBoardData::class.java) // 주어진 게시글 형식으로 이루어진 데이터들을 snapshot으로 가져와서 저장.
             noticeBoardModel ?: return
 
-            noticeBoardList.add(noticeBoardModel)
+            noticeBoardList.add(noticeBoardModel) // noticeBoardModel에 저장된 값을 리스트에 추가.
             noticeBoardAdapter.submitList(noticeBoardList) // 아이템 업데이트
 
         }
@@ -67,24 +68,24 @@ class CommunityFragment : Fragment() {
         val view = binding.root
 
         noticeBoardList.clear()
-        noticeBoardDB = Firebase.database.reference.child(DBKey.DB_NOTICE_BOARD)
-        noticeBoardAdapter = NoticeBoardAdapter(onItemClicked = { noticeBoardData -> // 게시글 클릭 시 이벤트
-            val intent = Intent(context, NoticeBoardDetailActivity::class.java)
-            intent.putExtra("chatKey", noticeBoardData.key)
+        noticeBoardDB = Firebase.database.reference.child(DBKey.DB_NOTICE_BOARD) // firebase에 저장되는 경로.
+        noticeBoardAdapter = NoticeBoardAdapter(onItemClicked = { noticeBoardData -> // noticeBoardData = 게시글 데이터 형식.
+            val intent = Intent(context, NoticeBoardDetailActivity::class.java)      // 아이템 클릭 시 아이템에 해당하는 데이터들을
+            intent.putExtra("chatKey", noticeBoardData.key)                    // 게시글 화면으로 전달.
             intent.putExtra("title", noticeBoardData.text)
             intent.putExtra("content", noticeBoardData.content)
             startActivity(intent)
         })
 
-        binding.createNoticeBoardButton.setOnClickListener {
+        binding.createNoticeBoardButton.setOnClickListener { // 게시글 만들기 버튼
             val intent = Intent(context, CreateNoticeBoardActivity::class.java)
             intent.run { startActivity(this) }
         }
 
-        binding.titleRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.titleRecyclerView.layoutManager = LinearLayoutManager(context) // 리사이클러뷰 어댑터 연결
         binding.titleRecyclerView.adapter = noticeBoardAdapter
 
-        noticeBoardDB.addChildEventListener(listener)
+        noticeBoardDB.addChildEventListener(listener) // 실시간으로 변경 사항을 감지
 
         return view
     }
@@ -92,7 +93,7 @@ class CommunityFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
 
-        noticeBoardDB.removeEventListener(listener)
+        noticeBoardDB.removeEventListener(listener) // 화면 나가면 초기화
     }
 
     @SuppressLint("NotifyDataSetChanged")

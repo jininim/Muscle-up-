@@ -10,11 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.teamproject_hometrainingassistant_app.databinding.ItemExersiceSearchBinding
 import com.example.teamproject_hometrainingassistant_app.ui.community.noticeBoard.NoticeBoardData
+import com.example.teamproject_hometrainingassistant_app.ui.community.noticeBoard.NoticeBoardDetail.NoticeBoardDetailAdapter.Companion.diffUtil
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseModel
 
-class ExerciseSearchAdapter(val onItemClicked: (ExerciseModel) -> Unit) :
+class ExerciseSearchAdapter(val onItemClicked: (ExerciseModel) -> Unit,val oncheckBoxClick: (ArrayList<String>) -> Unit) :
     ListAdapter<ExerciseModel, ExerciseSearchAdapter.ViewHolder>(diffUtil) {
-
+    val nameList : ArrayList<String> = ArrayList()
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): ViewHolder {
@@ -29,12 +30,24 @@ class ExerciseSearchAdapter(val onItemClicked: (ExerciseModel) -> Unit) :
     inner class ViewHolder(private val binding: ItemExersiceSearchBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: ExerciseModel){
+
             Glide.with(itemView).load(item.exerciseUrl).into(binding.exerciseImageView) // 이미지 연결에 용이한 Glide 라이브러리 사용
             binding.exerciseButton.text = item.name
+
 
             binding.root.setOnClickListener {
                 onItemClicked(item)
             }
+
+            //체크박스 클릭 시
+            binding.exerciseCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked){
+                    //체크된 항목의 item.name을 nameList에 저장
+                    nameList.add(item.name)
+                    oncheckBoxClick(nameList)
+                }
+            }
+
         }
     }
 

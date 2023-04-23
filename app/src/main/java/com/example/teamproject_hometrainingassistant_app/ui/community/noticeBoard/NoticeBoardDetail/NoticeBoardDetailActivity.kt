@@ -16,11 +16,11 @@ import java.text.SimpleDateFormat
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityNoticeBoardDetailBinding
-class NoticeBoardDetailActivity : AppCompatActivity() {
+class NoticeBoardDetailActivity : AppCompatActivity() { // 게시글 내부 액티비티
 
-    private val chatList = mutableListOf<NoticeBoardDetailData>()
-    private val adapter = NoticeBoardDetailAdapter()
-    private var chatDB: DatabaseReference? = null
+    private val chatList = mutableListOf<NoticeBoardDetailData>() // 채팅들을 저장하는 리스트
+    private val adapter = NoticeBoardDetailAdapter() // 리사이클러뷰 어댑터
+    private var chatDB: DatabaseReference? = null    // firebase에 채팅을 저장하는 경로
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,21 +37,21 @@ class NoticeBoardDetailActivity : AppCompatActivity() {
         val postDate = SimpleDateFormat("MM-dd") // 게시 날짜
         val postTime = SimpleDateFormat("hh:mm") // 게시 시간
 
-        binding.noticeBoardTitle.text = title.toString()
+        binding.noticeBoardTitle.text = title.toString()    // 받아온 값들로 게시글 화면 텍스트 수정.
         binding.content.text = content.toString()
 
         binding.postTimeDate.text = postDate.format(time)
         binding.postTimeDetail.text = postTime.format(time)
 
-        chatDB = Firebase.database.reference.child(DB_CHAT).child("$chatKey")
+        chatDB = Firebase.database.reference.child(DB_CHAT).child("$chatKey") // firebase에 채팅을 저장하는 경로
 
-        chatDB?.addChildEventListener(object : ChildEventListener{
+        chatDB?.addChildEventListener(object : ChildEventListener{ // 채팅들 firebase에서 가져오기
             @SuppressLint("NotifyDataSetChanged")
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val chatItem = snapshot.getValue(NoticeBoardDetailData::class.java)
                 chatItem ?: return
 
-                chatList.add(chatItem)
+                chatList.add(chatItem) // 가져온 채팅들을 리스트(chatList)에 저장.
                 adapter.submitList(chatList)
                 adapter.notifyDataSetChanged()
             }
@@ -66,19 +66,19 @@ class NoticeBoardDetailActivity : AppCompatActivity() {
 
         })
 
-        binding.chatRecyclerview.layoutManager = LinearLayoutManager(this)
+        binding.chatRecyclerview.layoutManager = LinearLayoutManager(this) // 리사이클러뷰 어댑터 연결
         binding.chatRecyclerview.adapter = adapter
 
-        binding.sendButton.setOnClickListener {
+        binding.sendButton.setOnClickListener { // 채팅 보내기 버튼 클릭 시
             val chatItem = NoticeBoardDetailData(
-                message = binding.chatEditText.text.toString()
+                message = binding.chatEditText.text.toString() // 작성한 문장을 chatItem에 삽입
             )
-            binding.chatEditText.text = null
+            binding.chatEditText.text = null // 작성한 에딧텍스트는 초기화
 
-            chatDB?.push()?.setValue(chatItem)
+            chatDB?.push()?.setValue(chatItem) // firebase에 작성한 텍스트 저장
         }
 
-        binding.exerciseBackButton.setOnClickListener {
+        binding.exerciseBackButton.setOnClickListener { // 뒤로가기 버튼
             finish()
         }
     }

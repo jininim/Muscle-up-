@@ -30,6 +30,7 @@ class ExerciseInformation : AppCompatActivity(){
         binding.guide.text = guide
         binding.youtube.text = youtubeUrl
 
+        //뒤로가기 버튼 클릭 시
         binding.exerciseBackButton.setOnClickListener {
             finish()
         }

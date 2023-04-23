@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.teamproject_hometrainingassistant_app.MainActivity
 import com.example.teamproject_hometrainingassistant_app.R
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityExerciseBinding
 import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.HorizontalItemDecorator
@@ -18,6 +19,7 @@ import com.example.teamproject_hometrainingassistant_app.ui.exercise.adapter.Exe
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseCategoryData
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseOptionData
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseSearchData
+import com.example.teamproject_hometrainingassistant_app.ui.home.HomeFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,6 +47,7 @@ class ExerciseActivity : AppCompatActivity() {
         OptionRecycler()
         CategoryRecycler()
 
+        //리사이클러뷰 어답터 운동리스트
         exerciseSearchAdapter = ExerciseSearchAdapter(onItemClicked = {exerciseModel ->
             val intent = Intent(this, ExerciseInformation::class.java)
             intent.putExtra("name", exerciseModel.name)
@@ -53,19 +56,35 @@ class ExerciseActivity : AppCompatActivity() {
             intent.putExtra("youtubeUrl", exerciseModel.youtubeUrl)
             intent.putExtra("type", exerciseModel.type)
             intent.run { startActivity(intent) }
+        }, oncheckBoxClick = {
+            val nameList: ArrayList<String> = it
+            binding.fabadd.setOnClickListener {
+                val intent = Intent(this,MainActivity::class.java)
+                intent.putExtra("NAME_LIST",nameList)
+                startActivity(intent)
+            }
+
         })
         binding.exerciseSearchRecyclerView.apply {
             adapter = exerciseSearchAdapter
             layoutManager = LinearLayoutManager(context)
         }
-
         getExerciseList()
 
+        //fab버튼 클릭 시
+//        binding.fabadd.setOnClickListener {
+//            val intent = Intent(this,MainActivity::class.java)
+//            startActivity(intent)
+//
+//        }
+
+        //뒤로가기 버튼 클릭 시
         binding.exerciseBackButton.setOnClickListener {
             finish()
         }
     }
 
+    //옵션
     @SuppressLint("NotifyDataSetChanged")
     private fun OptionRecycler(){
         exerciseOptionAdapter = ExerciseOptionAdapter(this)
@@ -82,6 +101,7 @@ class ExerciseActivity : AppCompatActivity() {
         }
     }
 
+    //카테고리
     @SuppressLint("NotifyDataSetChanged")
     private fun CategoryRecycler(){
         exerciseCategoryAdapter = ExerciseCategoryAdapter(this)

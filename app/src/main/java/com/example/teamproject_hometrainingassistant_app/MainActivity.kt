@@ -21,22 +21,23 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        //카카오 로그인정보 받아오기
 
+        //카카오 로그인정보 받아오기
         val username = intent.getStringExtra("USER_NAME")
         val userimage = intent.getStringExtra("USER_IMAGE")
-        val bundle = Bundle().apply {
+
+//        선택한 운동 정보 가져오기
+        val nameList = intent.getStringArrayListExtra("NAME_LIST")
+        val fragment = HomeFragment()
+        var bundle = Bundle().apply {
             putString("USER_NAME", username)
             putString("USER_IMAGE", userimage)
+            putStringArrayList("NAME_LIST", nameList)
         }
-        val fragment = HomeFragment()
         fragment.arguments = bundle
         supportFragmentManager.beginTransaction()
             .replace(R.id.nav_host_fragment_activity_main, fragment)
             .commit()
-
-
-
 
 
         // 앱 바
@@ -49,6 +50,12 @@ class MainActivity : AppCompatActivity() {
         navView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
+                    bundle = Bundle().apply {
+                        putString("USER_NAME", username)
+                        putString("USER_IMAGE", userimage)
+                        putStringArrayList("NAME_LIST", nameList)
+                    }
+                    fragment.arguments = bundle
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.nav_host_fragment_activity_main, fragment)
                         .commit()

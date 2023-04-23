@@ -4,7 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryVariant">@color/primaryColor</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">#000000</item>
         <item name="android:textColor">@color/primaryTextColor</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">#CE93D8</item>
