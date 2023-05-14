@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teamproject_hometrainingassistant_app.MainActivity
 import com.example.teamproject_hometrainingassistant_app.R
@@ -17,6 +18,7 @@ import com.example.teamproject_hometrainingassistant_app.ui.exercise.adapter.Exe
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.adapter.ExerciseOptionAdapter
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.adapter.ExerciseSearchAdapter
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseCategoryData
+import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseModel
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseOptionData
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseSearchData
 import com.example.teamproject_hometrainingassistant_app.ui.home.HomeFragment
@@ -37,6 +39,7 @@ class ExerciseActivity : AppCompatActivity() {
     val optionDatas = mutableListOf<ExerciseOptionData>()
     val categoryDatas = mutableListOf<ExerciseCategoryData>()
     val searchDatas = mutableListOf<ExerciseSearchData>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

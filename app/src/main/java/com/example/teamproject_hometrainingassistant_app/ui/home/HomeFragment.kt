@@ -7,9 +7,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.example.teamproject_hometrainingassistant_app.R
 import com.example.teamproject_hometrainingassistant_app.databinding.FragmentHomeBinding
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.ExerciseActivity
 import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.VerticalItemDecorator
@@ -60,6 +62,25 @@ class HomeFragment : Fragment() {
         )
         binding.recyclerView.adapter = adapter
         binding.recyclerView.addItemDecoration(VerticalItemDecorator(0))
+        binding.recyclerView.addOnItemTouchListener(
+            RecyclerItemClickListener(
+                requireContext(),
+                binding.recyclerView,
+                object : RecyclerItemClickListener.OnItemClickListener{
+                    override fun onItemClick(view: View, position: Int) {
+                        val textView = view.findViewById<TextView>(R.id.routine)
+                        val intent = Intent(context, MyRoutineDetailActivity::class.java)
+                        intent.putExtra("textViewText", textView.text.toString())
+                        startActivity(intent)
+                    }
+
+                    override fun onLongItemClick(view: View?, position: Int) {
+
+                    }
+
+                }
+            )
+        )
 
         //운동정보가 추가되면 adapter에 아이템을 새로운 아이템으로 변경.
         routineViewModel.readAllData.observe(
