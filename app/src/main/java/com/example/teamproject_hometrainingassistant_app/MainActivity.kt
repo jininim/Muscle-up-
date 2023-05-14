@@ -18,10 +18,10 @@ import com.kakao.sdk.common.util.Utility
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-
         //카카오 로그인정보 받아오기
         val username = intent.getStringExtra("USER_NAME")
         val userimage = intent.getStringExtra("USER_IMAGE")
@@ -38,8 +38,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.nav_host_fragment_activity_main, fragment)
             .commit()
-
-
         // 앱 바
         setSupportActionBar(binding.toolbar2)
         //toolbar에 표시되는 제목의 표시 유무 False로 해야 툴바의 이름 화면에 표시

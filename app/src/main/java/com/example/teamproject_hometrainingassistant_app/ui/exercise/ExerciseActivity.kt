@@ -62,6 +62,8 @@ class ExerciseActivity : AppCompatActivity() {
                 val intent = Intent(this,MainActivity::class.java)
                 intent.putExtra("NAME_LIST",nameList)
                 startActivity(intent)
+                finish()
+
             }
 
         })
@@ -70,13 +72,6 @@ class ExerciseActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(context)
         }
         getExerciseList()
-
-        //fab버튼 클릭 시
-//        binding.fabadd.setOnClickListener {
-//            val intent = Intent(this,MainActivity::class.java)
-//            startActivity(intent)
-//
-//        }
 
         //뒤로가기 버튼 클릭 시
         binding.exerciseBackButton.setOnClickListener {

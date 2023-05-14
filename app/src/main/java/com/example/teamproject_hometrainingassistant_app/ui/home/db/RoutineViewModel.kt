@@ -28,13 +28,9 @@ class RoutineViewModel(application: Application) : AndroidViewModel(application)
 
     fun deleteProduct(routine: Routine){
         viewModelScope.launch(Dispatchers.IO) {
-            if(routine.check){
                 repository.deleteProduct(routine)
-            }
         }
     }
-
-
 
     fun updateProduct(routine: Routine){
         viewModelScope.launch(Dispatchers.IO){

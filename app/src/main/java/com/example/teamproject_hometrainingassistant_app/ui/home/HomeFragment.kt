@@ -1,17 +1,15 @@
 package com.example.teamproject_hometrainingassistant_app.ui.home
 
-import android.annotation.SuppressLint
+
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.example.teamproject_hometrainingassistant_app.R
 import com.example.teamproject_hometrainingassistant_app.databinding.FragmentHomeBinding
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.ExerciseActivity
 import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.VerticalItemDecorator
@@ -20,14 +18,11 @@ import com.example.teamproject_hometrainingassistant_app.ui.home.db.RoutineViewM
 import com.example.teamproject_hometrainingassistant_app.ui.recommend.RecommendActivity
 
 
-
 class HomeFragment : Fragment() {
 
-    lateinit var homeAdapter: HomeAdapter
     private var _binding: FragmentHomeBinding? = null
     private var username: String? = null
     private var userimage: String? = null
-
 
 
     // This property is only valid between onCreateView and
@@ -51,30 +46,44 @@ class HomeFragment : Fragment() {
         Glide.with(this).load(userimage).into(binding.userimage)
 
 
-
         //사용자가 선택한 운동정보 가져오기
-        val nameList : java.util.ArrayList<String>? = bundle?.getStringArrayList("NAME_LIST")
+        val nameList: java.util.ArrayList<String>? = bundle?.getStringArrayList("NAME_LIST")
         //nameList가 null이 아닌경우에만 운동 정보를 저장.
-        if(nameList != null){
-            routineViewModel.addProduct(Routine(0,nameList.toString(),false))
+        if (nameList != null) {
+            routineViewModel.addProduct(Routine(0, nameList.toString(), false))
         }
-
-
         //어답터 연결
-        val adapter = HomeAdapter()
-        homeAdapter = adapter
-        binding.recyclerView.adapter = homeAdapter
+        val adapter = HomeAdapter(
+            onClickUpdate = {
+                routineViewModel.updateProduct(it)
+            }
+        )
+        binding.recyclerView.adapter = adapter
         binding.recyclerView.addItemDecoration(VerticalItemDecorator(0))
 
         //운동정보가 추가되면 adapter에 아이템을 새로운 아이템으로 변경.
-        routineViewModel.readAllData.observe(viewLifecycleOwner, Observer {
-            adapter.setData(it)
-        })
+        routineViewModel.readAllData.observe(
+            viewLifecycleOwner,
+        ) {data->
+            adapter.setData(data)
+            //fabdel 버튼 클릭시
+            binding.fabdel.setOnClickListener {
+                for (i in data) {
+                    if (i.check) {
+                        routineViewModel.deleteProduct(i)
+                    }
+                }
+            }
+        }
+
+
+
 
         //운동 검색 버튼 클릭 시
         binding.Search.setOnClickListener {
             val intent = Intent(context, ExerciseActivity::class.java)
             startActivity(intent) //인트로 실행 후 바로 exerciseActivity로 넘어감.
+
         }
 
         //운동 추천 버튼 클릭 시
@@ -84,7 +93,7 @@ class HomeFragment : Fragment() {
         }
         //fab버튼 클릭 시
         binding.fabadd.setOnClickListener {
-            val intent = Intent(context,ExerciseActivity::class.java)
+            val intent = Intent(context, ExerciseActivity::class.java)
             startActivity(intent)
         }
 
@@ -95,6 +104,8 @@ class HomeFragment : Fragment() {
 
         return binding.root
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
