@@ -32,8 +32,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 private lateinit var binding: ActivityExerciseBinding
 class ExerciseActivity : AppCompatActivity() {
 
-    lateinit var exerciseOptionAdapter: ExerciseOptionAdapter
-    lateinit var exerciseCategoryAdapter: ExerciseCategoryAdapter
+    private lateinit var exerciseOptionAdapter: ExerciseOptionAdapter
+    private lateinit var exerciseCategoryAdapter: ExerciseCategoryAdapter
     private lateinit var exerciseSearchAdapter: ExerciseSearchAdapter
 
     val optionDatas = mutableListOf<ExerciseOptionData>()

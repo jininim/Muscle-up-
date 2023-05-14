@@ -1,4 +1,4 @@
-package com.example.teamproject_hometrainingassistant_app.ui.home
+package com.example.teamproject_hometrainingassistant_app.ui.home.myroutine
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.teamproject_hometrainingassistant_app.DecibelActivity
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityMyRoutineDetailBinding
 import com.example.teamproject_hometrainingassistant_app.ui.home.exercisestart.ExerciseStartActivity
-import com.example.teamproject_hometrainingassistant_app.ui.home.myroutine.MyRoutineAdapter
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityMyRoutineDetailBinding
