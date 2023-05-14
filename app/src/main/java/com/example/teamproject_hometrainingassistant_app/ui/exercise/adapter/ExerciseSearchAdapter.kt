@@ -47,7 +47,6 @@ class ExerciseSearchAdapter(val onItemClicked: (ExerciseModel) -> Unit,val onche
                     nameList.add(item.name)
                     timeList.add(item.times)
                     oncheckBoxClick(nameList)
-                    oncheckBoxClick(timeList)
                 }
             }
 
