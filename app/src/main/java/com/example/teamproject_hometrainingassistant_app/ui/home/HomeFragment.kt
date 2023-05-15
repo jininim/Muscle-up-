@@ -88,11 +88,12 @@ class HomeFragment : Fragment() {
 //                }
 //            )
 //        )
-
+            //데이터베이스 항목 변경 감지
             routineViewModel.readAllData.observe(
                 viewLifecycleOwner
             ) { data ->
                 adapter.setData(data)
+                //fabdel버튼 클릭 시
                 binding.fabdel.setOnClickListener {
                     for (i in data) {
                         if (i.check) {
@@ -112,7 +113,8 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
             }
 
-            binding.fabadd.setOnClickListener {
+        //fabadd버튼 클릭 시
+          binding.fabadd.setOnClickListener {
                 val intent = Intent(context, ExerciseActivity::class.java)
                 startActivity(intent)
             }

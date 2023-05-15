@@ -40,6 +40,8 @@ class HomeAdapter(val onClickUpdate: (routine: Routine) -> Unit) :
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         val current = itemList[position]
         holder.routineList.text = current.routine
+
+        //체크박스 클릭시 이벤트
         holder.checkBox.setOnClickListener {
             if (!current.check) {
                 current.check = true
