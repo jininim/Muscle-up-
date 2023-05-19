@@ -16,6 +16,7 @@ import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.Exerc
 class ExerciseSearchAdapter(val onItemClicked: (ExerciseModel) -> Unit,val oncheckBoxClick: (ArrayList<String>) -> Unit) :
     ListAdapter<ExerciseModel, ExerciseSearchAdapter.ViewHolder>(diffUtil) {
     val nameList : ArrayList<String> = ArrayList()
+    val timeList : ArrayList<String> = ArrayList()
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): ViewHolder {
@@ -44,6 +45,7 @@ class ExerciseSearchAdapter(val onItemClicked: (ExerciseModel) -> Unit,val onche
                 if (isChecked){
                     //체크된 항목의 item.name을 nameList에 저장
                     nameList.add(item.name)
+                    timeList.add(item.times)
                     oncheckBoxClick(nameList)
                 }
             }

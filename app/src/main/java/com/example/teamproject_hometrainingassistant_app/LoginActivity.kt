@@ -96,6 +96,7 @@ class LoginActivity : AppCompatActivity() {
                             putExtra("USER_IMAGE",userImage)
                         }
                         startActivity(intent) //인트로 실행 후 바로 MainActivity로 넘어감.
+                        finish()
                     }
 
                 }

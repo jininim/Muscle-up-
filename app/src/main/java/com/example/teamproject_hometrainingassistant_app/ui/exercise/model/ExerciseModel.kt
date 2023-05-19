@@ -5,5 +5,6 @@ data class ExerciseModel(
     val exerciseUrl: String,
     val guide: String,
     val youtubeUrl: String,
-    val type: String
+    val type: String,
+    val times: String
 )

@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teamproject_hometrainingassistant_app.MainActivity
 import com.example.teamproject_hometrainingassistant_app.R
@@ -17,6 +18,7 @@ import com.example.teamproject_hometrainingassistant_app.ui.exercise.adapter.Exe
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.adapter.ExerciseOptionAdapter
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.adapter.ExerciseSearchAdapter
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseCategoryData
+import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseModel
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseOptionData
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseSearchData
 import com.example.teamproject_hometrainingassistant_app.ui.home.HomeFragment
@@ -30,13 +32,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 private lateinit var binding: ActivityExerciseBinding
 class ExerciseActivity : AppCompatActivity() {
 
-    lateinit var exerciseOptionAdapter: ExerciseOptionAdapter
-    lateinit var exerciseCategoryAdapter: ExerciseCategoryAdapter
+    private lateinit var exerciseOptionAdapter: ExerciseOptionAdapter
+    private lateinit var exerciseCategoryAdapter: ExerciseCategoryAdapter
     private lateinit var exerciseSearchAdapter: ExerciseSearchAdapter
 
     val optionDatas = mutableListOf<ExerciseOptionData>()
     val categoryDatas = mutableListOf<ExerciseCategoryData>()
     val searchDatas = mutableListOf<ExerciseSearchData>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +65,8 @@ class ExerciseActivity : AppCompatActivity() {
                 val intent = Intent(this,MainActivity::class.java)
                 intent.putExtra("NAME_LIST",nameList)
                 startActivity(intent)
+                finish()
+
             }
 
         })
@@ -70,13 +75,6 @@ class ExerciseActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(context)
         }
         getExerciseList()
-
-        //fab버튼 클릭 시
-//        binding.fabadd.setOnClickListener {
-//            val intent = Intent(this,MainActivity::class.java)
-//            startActivity(intent)
-//
-//        }
 
         //뒤로가기 버튼 클릭 시
         binding.exerciseBackButton.setOnClickListener {

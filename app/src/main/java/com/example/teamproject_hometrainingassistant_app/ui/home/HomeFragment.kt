@@ -1,14 +1,14 @@
 package com.example.teamproject_hometrainingassistant_app.ui.home
 
-import android.annotation.SuppressLint
+
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.teamproject_hometrainingassistant_app.R
@@ -17,89 +17,130 @@ import com.example.teamproject_hometrainingassistant_app.ui.exercise.ExerciseAct
 import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.VerticalItemDecorator
 import com.example.teamproject_hometrainingassistant_app.ui.home.db.Routine
 import com.example.teamproject_hometrainingassistant_app.ui.home.db.RoutineViewModel
+import com.example.teamproject_hometrainingassistant_app.ui.home.myroutine.MyRoutineDetailActivity
 import com.example.teamproject_hometrainingassistant_app.ui.recommend.RecommendActivity
-
 
 
 class HomeFragment : Fragment() {
 
-    lateinit var homeAdapter: HomeAdapter
     private var _binding: FragmentHomeBinding? = null
-    private var username: String? = null
-    private var userimage: String? = null
-
-
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var username: String
+    private lateinit var userimage: String
+    private lateinit var adapter: HomeAdapter
+    private val routineViewModel by lazy {
+        ViewModelProvider(this)[RoutineViewModel::class.java]
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val routineViewModel =
-            ViewModelProvider(this)[RoutineViewModel::class.java]
-
-
-        //카카오 로그인한 사용자 정보 받아오기
-        val bundle = arguments
-        username = bundle?.getString("USER_NAME")
-        userimage = bundle?.getString("USER_IMAGE")
-        binding.username.text = username
-        Glide.with(this).load(userimage).into(binding.userimage)
-
-
-
-        //사용자가 선택한 운동정보 가져오기
-        val nameList : java.util.ArrayList<String>? = bundle?.getStringArrayList("NAME_LIST")
-        //nameList가 null이 아닌경우에만 운동 정보를 저장.
-        if(nameList != null){
-            routineViewModel.addProduct(Routine(0,nameList.toString(),false))
-        }
-
-
-        //어답터 연결
-        val adapter = HomeAdapter()
-        homeAdapter = adapter
-        binding.recyclerView.adapter = homeAdapter
-        binding.recyclerView.addItemDecoration(VerticalItemDecorator(0))
-
-        //운동정보가 추가되면 adapter에 아이템을 새로운 아이템으로 변경.
-        routineViewModel.readAllData.observe(viewLifecycleOwner, Observer {
-            adapter.setData(it)
-        })
-
-        //운동 검색 버튼 클릭 시
-        binding.Search.setOnClickListener {
-            val intent = Intent(context, ExerciseActivity::class.java)
-            startActivity(intent) //인트로 실행 후 바로 exerciseActivity로 넘어감.
-        }
-
-        //운동 추천 버튼 클릭 시
-        binding.recommend.setOnClickListener {
-            val intent = Intent(context, RecommendActivity::class.java)
-            startActivity(intent)
-        }
-        //fab버튼 클릭 시
-        binding.fabadd.setOnClickListener {
-            val intent = Intent(context,ExerciseActivity::class.java)
-            startActivity(intent)
-        }
-
-
-
-
-
-
         return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (savedInstanceState != null) {
+            val username = savedInstanceState.getString("username")
+            val userimage = savedInstanceState.getString("userimage")
+            binding.username.text = username
+            Glide.with(this).load(userimage).into(binding.userimage)
+        }
+        val bundle = arguments
+        username = bundle?.getString("USER_NAME").orEmpty()
+        userimage = bundle?.getString("USER_IMAGE").orEmpty()
+        binding.username.text = username
+        Glide.with(this).load(userimage).into(binding.userimage)
+
+        //사용자가 선택한 운동정보 가져오기
+        val nameList: java.util.ArrayList<String>? = bundle?.getStringArrayList("NAME_LIST")
+//nameList가 null이 아닌경우에만 운동 정보를 저장.
+        if (nameList != null) {
+            routineViewModel.addProduct(Routine(0, nameList.toString(), false))
+        }
+
+            adapter = HomeAdapter(
+                onClickUpdate = {
+                    routineViewModel.updateProduct(it)
+                }
+            )
+            binding.recyclerView.adapter = adapter
+            binding.recyclerView.addItemDecoration(VerticalItemDecorator(0))
+//        binding.recyclerView.addOnItemTouchListener(
+//            RecyclerItemClickListener(
+//                requireContext(),
+//                binding.recyclerView,
+//                object : RecyclerItemClickListener.OnItemClickListener{
+//                    override fun onItemClick(view: View, position: Int) {
+//                        val textView = view.findViewById<TextView>(R.id.routine)
+//                        val intent = Intent(context, MyRoutineDetailActivity::class.java)
+//                        intent.putExtra("textViewText", textView.text.toString())
+//                        startActivity(intent)
+//                    }
+//
+//                    override fun onLongItemClick(view: View?, position: Int) {
+//
+//                    }
+//
+//                }
+//            )
+//        )
+            //데이터베이스 항목 변경 감지
+            routineViewModel.readAllData.observe(
+                viewLifecycleOwner
+            ) { data ->
+                adapter.setData(data)
+                //fabdel버튼 클릭 시
+                binding.fabdel.setOnClickListener {
+                    for (i in data) {
+                        if (i.check) {
+                            routineViewModel.deleteProduct(i)
+                        }
+                    }
+                }
+            }
+
+            binding.Search.setOnClickListener {
+                val intent = Intent(context, ExerciseActivity::class.java)
+                startActivity(intent)
+            }
+
+            binding.recommend.setOnClickListener {
+                val intent = Intent(context, RecommendActivity::class.java)
+                startActivity(intent)
+            }
+
+        //fabadd버튼 클릭 시
+          binding.fabadd.setOnClickListener {
+                val intent = Intent(context, ExerciseActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+        override fun onDestroyView() {
+            super.onDestroyView()
+            _binding = null
+        }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("username", username)
+        outState.putString("userimage", userimage)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (savedInstanceState != null) {
+            val username = savedInstanceState.getString("username")
+            val userimage = savedInstanceState.getString("userimage")
+            binding.username.text = username
+            Glide.with(this).load(userimage).into(binding.userimage)
+        }
     }
 
 
-}
+    }
+
