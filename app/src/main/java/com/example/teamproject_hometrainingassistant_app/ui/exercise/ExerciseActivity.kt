@@ -78,6 +78,8 @@ class ExerciseActivity : AppCompatActivity() {
 
         //뒤로가기 버튼 클릭 시
         binding.exerciseBackButton.setOnClickListener {
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
             finish()
         }
     }

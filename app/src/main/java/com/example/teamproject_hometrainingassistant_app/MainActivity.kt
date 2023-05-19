@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.nav_host_fragment_activity_main, fragment)
                         .commit()
+                    nameList = null
                 }
                 R.id.navigation_dashboard -> {
                     val dashboardFragment = DashboardFragment()
