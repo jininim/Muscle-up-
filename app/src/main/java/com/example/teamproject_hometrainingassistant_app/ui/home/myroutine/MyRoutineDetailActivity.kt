@@ -20,8 +20,9 @@ class MyRoutineDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // 이전 액티비티에서 가져온 데이터
-        val data = intent.getStringExtra("textViewText")
-        val itemList = data!!.replace("[", "").replace("]", "").split(", ") as ArrayList<String>
+        val data = intent.getStringExtra("text")
+        val trimmedString = data!!.replace("[", "").replace("]", "")
+        val itemList: ArrayList<String> = ArrayList(trimmedString.split(", "))
 
         // RecyclerView 설정
         val recyclerView: RecyclerView = binding.routineDetailRecyclerView
@@ -38,6 +39,7 @@ class MyRoutineDetailActivity : AppCompatActivity() {
 
         binding.myRoutineStartButton.setOnClickListener {
             val intent = Intent(this,ExerciseStartActivity::class.java)
+            intent.putExtra("itemList", itemList)
             intent.run { startActivity(intent) }
         }
 

@@ -11,8 +11,6 @@ import com.example.teamproject_hometrainingassistant_app.databinding.ItemExercis
 class MyRoutineAdapter(private val itemList: ArrayList<String>):
     RecyclerView.Adapter<MyRoutineAdapter.ViewHolder>() {
 
-    private lateinit var binding: ItemExerciseEndBinding
-
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textView: TextView = itemView.findViewById(R.id.exerciseText)
     }
