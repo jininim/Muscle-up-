@@ -55,15 +55,36 @@
                 android:textSize="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="30dp"/>
+
             <TextView
-                android:id="@+id/routineEndTime"
+                android:id="@+id/startTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오후 10:00"
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/endTime"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="~"
+                app:layout_constraintTop_toTopOf="@id/startTime"
+                app:layout_constraintBottom_toBottomOf="@id/startTime"
+                app:layout_constraintStart_toEndOf="@id/startTime"
+                app:layout_constraintEnd_toStartOf="@id/endTime"/>
+
+            <TextView
+                android:id="@+id/endTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="오후 00:00 ~ 00:00"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="15dp"
+                android:text="오후 10:00"
                 android:textSize="20dp"/>
 
             <TextView
@@ -175,24 +196,15 @@
                 tools:listitem="@layout/item_exercise_end"/>
 
             <Button
-                android:id="@+id/routineEndShareButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/routineEndSaveButton"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/routineEndSaveButton"
-                android:text="공유"
-                android:background="@color/primaryColor"/>
-            <Button
                 android:id="@+id/routineEndSaveButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/routineEndRecyclerView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/routineEndShareButton"
                 android:layout_marginTop="10dp"
-                android:text="저장"
-                android:background="@color/primaryColor"/>
+                android:background="@color/primaryColor"
+                android:text="저장하러 가기"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/routineEndRecyclerView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

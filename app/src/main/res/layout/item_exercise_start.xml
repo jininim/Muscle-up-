@@ -5,28 +5,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:id="@+id/exerciseTime"
+        android:id="@+id/order"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="20dp"
-        android:text="10회 5세트"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="15dp"
+        android:text="1세트"
         android:textSize="20dp"
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/exerciseName"
+        android:id="@+id/exerciseTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/check"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/exerciseTime"
-        android:text="런지"
+        android:layout_marginStart="40dp"
+        android:text="10회"
         android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_marginLeft="35dp"/>
+        android:textStyle="bold"/>
 
     <CheckBox
         android:id="@+id/check"

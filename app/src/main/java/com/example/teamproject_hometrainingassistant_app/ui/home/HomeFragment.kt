@@ -3,6 +3,7 @@ package com.example.teamproject_hometrainingassistant_app.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
@@ -57,6 +58,8 @@ class HomeFragment : Fragment() {
 
         //사용자가 선택한 운동정보 가져오기
         val nameList: java.util.ArrayList<String>? = bundle?.getStringArrayList("NAME_LIST")
+        val timeList = arguments?.getStringArrayList("time")
+        Log.d("times", timeList.toString())
 //nameList가 null이 아닌경우에만 운동 정보를 저장.
         if (nameList != null) {
             routineViewModel.addProduct(Routine(0, nameList.toString(), false))
@@ -68,25 +71,7 @@ class HomeFragment : Fragment() {
             )
             binding.recyclerView.adapter = adapter
             binding.recyclerView.addItemDecoration(VerticalItemDecorator(0))
-//        binding.recyclerView.addOnItemTouchListener(
-//            RecyclerItemClickListener(
-//                requireContext(),
-//                binding.recyclerView,
-//                object : RecyclerItemClickListener.OnItemClickListener{
-//                    override fun onItemClick(view: View, position: Int) {
-//                        val textView = view.findViewById<TextView>(R.id.routine)
-//                        val intent = Intent(context, MyRoutineDetailActivity::class.java)
-//                        intent.putExtra("textViewText", textView.text.toString())
-//                        startActivity(intent)
-//                    }
-//
-//                    override fun onLongItemClick(view: View?, position: Int) {
-//
-//                    }
-//
-//                }
-//            )
-//        )
+
             //데이터베이스 항목 변경 감지
             routineViewModel.readAllData.observe(
                 viewLifecycleOwner

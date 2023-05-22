@@ -59,8 +59,17 @@ class ExerciseActivity : AppCompatActivity() {
             intent.putExtra("youtubeUrl", exerciseModel.youtubeUrl)
             intent.putExtra("type", exerciseModel.type)
             intent.run { startActivity(intent) }
-        }, oncheckBoxClick = {
-            val nameList: ArrayList<String> = it
+        }, oncheckBoxClick = { name, time ->
+            val nameList: ArrayList<String> = name
+            val timeList: ArrayList<String> = time
+
+            val bundle = Bundle()
+            bundle.putStringArrayList("time", timeList)
+
+            val homeFragment = HomeFragment()
+            homeFragment.arguments = bundle
+
+            Log.d("time", timeList.toString())
             binding.fabadd.setOnClickListener {
                 val intent = Intent(this,MainActivity::class.java)
                 intent.putExtra("NAME_LIST",nameList)
