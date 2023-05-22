@@ -61,7 +61,6 @@ class HomeFragment : Fragment() {
         if (nameList != null) {
             routineViewModel.addProduct(Routine(0, nameList.toString(), false))
         }
-
             adapter = HomeAdapter(
                 onClickUpdate = {
                     routineViewModel.updateProduct(it)
@@ -106,6 +105,8 @@ class HomeFragment : Fragment() {
             binding.Search.setOnClickListener {
                 val intent = Intent(context, ExerciseActivity::class.java)
                 startActivity(intent)
+                activity?.finish()
+
             }
 
             binding.recommend.setOnClickListener {
