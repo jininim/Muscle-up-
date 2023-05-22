@@ -33,148 +33,146 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.appcompat.widget.AppCompatSeekBar
-        android:id="@+id/exerciseSeekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/exerciseStartToolbar"
-        android:layout_margin="20dp"/>
-
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/exerciseSeekBar"
-        android:layout_marginTop="20dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/exerciseStartToolbar"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/exerciseTime"
+                android:id="@+id/timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"
+                android:textStyle="bold"
                 android:text="00:00"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="40dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/exerciseImage"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:id="@+id/exerciseStartImageView"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
                 android:src="@drawable/push_up"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/timer" />
 
             <TextView
-                android:id="@+id/setNumber"
+                android:id="@+id/exerciseStartName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/exerciseImage"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="40dp"
-                android:text="세트 수"
-                android:textSize="20dp"/>
-            <TextView
-                android:id="@+id/clearCheck"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="푸쉬업"
+                android:textSize="25dp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/exerciseImage"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="40dp"
-                android:text="수행여부"
-                android:textSize="20dp"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/exerciseStartImageView" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/exerciseStartName" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/exerciseStartRecyclerView"
-                android:layout_width="0dp"
-                android:layout_height="300dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/clearCheck"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_exersice_search"/>
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_constraintTop_toBottomOf="@id/exerciseStartName" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/exerciseStartRecyclerView" />
 
             <Button
                 android:id="@+id/setAddButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="세트 추가"
+                app:layout_constraintEnd_toStartOf="@id/setSubButton"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/setDeleteButton"
-                app:layout_constraintTop_toBottomOf="@id/exerciseStartRecyclerView"
-                app:layout_constraintVertical_chainStyle="packed"
-                android:text="세트추가"
-                android:background="@color/primaryColor"
-                android:layout_marginTop="10dp"/>
-            <Button
-                android:id="@+id/setDeleteButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/exerciseStartRecyclerView"
-                app:layout_constraintStart_toEndOf="@id/setAddButton"
-                app:layout_constraintEnd_toStartOf="@id/exerciseExitButton"
-                android:text="세트삭제"
-                android:background="@color/primaryColor"
-                android:layout_marginTop="10dp"/>
-            <Button
-                android:id="@+id/exerciseExitButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/exerciseStartRecyclerView"
-                app:layout_constraintStart_toEndOf="@id/setDeleteButton"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:text="운동완료"
-                android:background="@color/primaryColor"
-                android:layout_marginTop="10dp"/>
+                app:layout_constraintTop_toBottomOf="@id/exerciseStartRecyclerView" />
 
             <Button
-                android:id="@+id/onOffButton"
+                android:id="@+id/setSubButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/setDeleteButton"
+                android:text="세트 삭제"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/setAddButton"
+                app:layout_constraintTop_toTopOf="@id/setAddButton" />
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/back_arrow"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/exerciseEndButton"
+                app:layout_constraintBottom_toBottomOf="@id/exerciseEndButton"
+                app:layout_constraintTop_toTopOf="@id/exerciseEndButton"/>
+
+            <Button
+                android:id="@+id/exerciseEndButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/setAddButton"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:background="@color/primaryColor"
-                android:layout_marginTop="20dp"
-                android:text="자동 개수 세기 on/off"/>
+                android:layout_marginTop="15dp"
+                android:text="운동 종료"/>
+
+            <ImageButton
+                android:id="@+id/forwardButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/arrow_forward"
+                android:background="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/exerciseEndButton"
+                app:layout_constraintTop_toTopOf="@id/exerciseEndButton"
+                app:layout_constraintBottom_toBottomOf="@id/exerciseEndButton"/>
+
+            <Button
+                android:id="@+id/decibelOnOffButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/exerciseEndButton"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="데시벨 on/off"
+                android:layout_marginStart="60dp"/>
 
             <TextView
-                android:id="@+id/countText"
+                android:id="@+id/countTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="카운트"
-                app:layout_constraintTop_toBottomOf="@id/onOffButton"
-                app:layout_constraintStart_toStartOf="parent"
+                android:text="카운트 : "
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/decibelOnOffButton"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:textSize="30dp"
-                android:layout_marginTop="10dp"/>
-            
-            <ProgressBar
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                style="?android:attr/progressBarStyleHorizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/countText"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="10dp"
-                android:progressBackgroundTint="@color/black"
-                android:progressTint="@color/primaryColor"/>
+                android:layout_marginEnd="100dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

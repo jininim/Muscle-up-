@@ -82,10 +82,10 @@
         <activity android:name=".ui.dashboard.CalendarRoutineActivity"/>
         <activity android:name=".ui.exercise.ExerciseInformation"/>
         <activity android:name=".ui.community.noticeBoard.NoticeBoardDetail.NoticeBoardDetailActivity"/>
-        <activity android:name=".ui.community.noticeBoard.NoticeBoardActivity"/>
         <activity android:name=".ui.recommend.RoutineDetailActivity"/>
         <activity android:name=".ui.community.noticeBoard.CreateNoticeBoardActivity"/>
         <activity android:name=".ui.home.exercisestart.ExerciseStartActivity"/>
+        <activity android:name=".ui.home.exerciseend.ExerciseEndActivity"/>
     </application>
 
 </manifest>
