@@ -1,8 +1,10 @@
 package com.example.teamproject_hometrainingassistant_app.ui.home.exercisestart
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -32,6 +34,7 @@ class ExerciseStartActivity: AppCompatActivity() {
     val minute = currentTime.get(Calendar.MINUTE)
     val period = if (hour >= 12) "오후" else "오전"
     private val formattedTime = String.format("%s %d:%02d", period, hour % 12, minute)
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -40,25 +43,46 @@ class ExerciseStartActivity: AppCompatActivity() {
 
         exerciseList.addAll(intent.getStringArrayListExtra("itemList")!!)
 
-        setRecyclerView()
+        val setCount = 3
+        val items : MutableList<String> = mutableListOf()
+        for(i in 1 .. setCount){
+            items.add("$i 세트")
+        }
+        val recyclerView = binding.exerciseStartRecyclerView
+        val layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = layoutManager
+        val adapter = ExerciseStartAdapter(items as ArrayList<String>, binding)
+        recyclerView.adapter = adapter
+
+        binding.addbutton.setOnClickListener {
+            val lastSetNumber = items.last().split(" ")[0].toInt()
+            val newItem = "${lastSetNumber + 1} 세트"
+            items.add(newItem)
+            adapter.notifyDataSetChanged()
+        }
+
+        binding.setSubButton.setOnClickListener {
+            adapter.removeLastItem()
+        }
 
         binding.exerciseBackButton.setOnClickListener {
             finish()
         }
 
         setExerciseName(exerciseList[currentExerciseIndex])
+
         binding.forwardButton.setOnClickListener {
             moveToNextExercise()
         }
+
         binding.backButton.setOnClickListener {
             moveToPreviousExercise()
         }
+
         binding.exerciseEndButton.setOnClickListener {
             finishExercise()
         }
-        binding.setAddButton.setOnClickListener {
 
-        }
     }
 
     private fun startTimer(){ // 타이머 작동 함수
@@ -119,33 +143,9 @@ class ExerciseStartActivity: AppCompatActivity() {
         binding.forwardButton.isEnabled = currentExerciseIndex != exerciseList.size - 1
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun setRecyclerView(){ // 시간을 못가져와서 임시로 넣어 놓은 리사이클러뷰..
-        val setCount = 3
 
-        val items = ArrayList<String>()
-        for(i in 1 .. setCount){
-            items.add("$i 세트")
-        }
-        val recyclerView = binding.exerciseStartRecyclerView
-        val layoutManager = LinearLayoutManager(this)
-        recyclerView.layoutManager = layoutManager
-        val adapter = ExerciseStartAdapter(items, binding)
-        recyclerView.adapter = adapter
-
-        binding.setAddButton.setOnClickListener {
-            val newItem = if(items.isEmpty()){
-                "1세트"
-            } else {
-                val lastSetNumber = items.last().split(" ")[0].toInt()
-                "${lastSetNumber + 1} 세트"
-            }
-
-            items.add(newItem)
-            adapter.notifyDataSetChanged()
-        }
-        binding.setSubButton.setOnClickListener {
-            adapter.removeLastItem()
-        }
     }
 
     override fun onStart() {

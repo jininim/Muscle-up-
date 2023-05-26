@@ -3,8 +3,10 @@ package com.example.teamproject_hometrainingassistant_app.ui.home.exerciseend
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import kotlin.math.ceil
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +18,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import kotlin.math.roundToInt
 
 class ExerciseEndActivity: AppCompatActivity() {
 
@@ -38,7 +41,9 @@ class ExerciseEndActivity: AppCompatActivity() {
         val itemList = intent.getStringArrayListExtra("exerciseNames") // 운동 이름 리스트
         val currentTimer = intent.getStringExtra("currentTimer") // 운동한 총 시간
         val startTime = intent.getStringExtra("startTime") // 운동 시작 시간
-
+        val timeM = currentTimer?.split(":")?.get(0)?.toDouble()
+        val timeS =  currentTimer?.split(":")?.get(1)?.toDouble()
+        val calorie : Double? = (timeM?.times(60)?.times(0.14))?.plus((timeS?.times(0.14)!!))
         val currentTime = Calendar.getInstance()
         val hour = currentTime.get(Calendar.HOUR_OF_DAY)
         val minute = currentTime.get(Calendar.MINUTE)
@@ -56,6 +61,9 @@ class ExerciseEndActivity: AppCompatActivity() {
         }
 
         // 일 수를 화면에 표시
+        if (calorie != null) {
+            binding.calorie.text = ceil(calorie).toString()
+        }
         binding.routineTotalDate.text = "${dayCount}일차"
         binding.routineTotalTime.text = "${currentTimer}"
         binding.startTime.text = "${startTime}"

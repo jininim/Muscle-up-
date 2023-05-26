@@ -100,10 +100,10 @@
                 app:layout_constraintTop_toBottomOf="@id/exerciseStartRecyclerView" />
 
             <Button
-                android:id="@+id/setAddButton"
+                android:id="@+id/addbutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="8dp"
                 android:text="세트 추가"
                 app:layout_constraintEnd_toStartOf="@id/setSubButton"
                 app:layout_constraintStart_toStartOf="parent"
@@ -115,8 +115,8 @@
                 android:layout_height="wrap_content"
                 android:text="세트 삭제"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/setAddButton"
-                app:layout_constraintTop_toTopOf="@id/setAddButton" />
+                app:layout_constraintStart_toEndOf="@id/addbutton"
+                app:layout_constraintTop_toTopOf="@id/addbutton" />
 
             <ImageButton
                 android:id="@+id/backButton"
@@ -133,7 +133,7 @@
                 android:id="@+id/exerciseEndButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/setAddButton"
+                app:layout_constraintTop_toBottomOf="@id/addbutton"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="15dp"
