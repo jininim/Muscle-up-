@@ -37,14 +37,15 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/calendarDate">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="운동을 마친 시간을 기록합니다 !"
             android:inputType="time"
             android:textAlignment="center"
-            android:textSize="20sp"
-            android:hint="운동 수행 시간을 자동으로 입력합니다!"/>
+            android:textSize="20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -57,26 +58,16 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/textInputlayout">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="수행한 운동 루틴이 입력됩니다 !"
             android:textAlignment="center"
-            android:textSize="20sp"
-            android:hint="수행한 운동루틴을 입력해주세요!"/>
+            android:textSize="20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="save"
-        app:layout_constraintTop_toBottomOf="@+id/textInputlayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

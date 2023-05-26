@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var username: String
     private lateinit var userimage: String
+    private var itemList : ArrayList<String>? = null
     private var nameList: ArrayList<String>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +34,20 @@ class MainActivity : AppCompatActivity() {
 
         // 선택한 운동 정보 가져오기
         nameList = intent.getStringArrayListExtra("NAME_LIST")
+
+        //운동 종료시 사용할 운동 정보 리스트
+        itemList = intent.getStringArrayListExtra("ITEM_LIST")
+
+        if (itemList !=null){
+            val dashboardFragment = DashboardFragment()
+            val bundle = Bundle().apply {
+                putStringArrayList("ITEM_LIST", itemList)
+            }
+            dashboardFragment.arguments = bundle
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment_activity_main, dashboardFragment)
+                .commit()
+        }
 
         // 앱 바
         setSupportActionBar(binding.toolbar2)
@@ -57,6 +72,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.navigation_dashboard -> {
                     val dashboardFragment = DashboardFragment()
+                    val bundle = Bundle().apply {
+                        putStringArrayList("ITEM_LIST", itemList)
+                    }
+                    dashboardFragment.arguments = bundle
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.nav_host_fragment_activity_main, dashboardFragment)
                         .commit()

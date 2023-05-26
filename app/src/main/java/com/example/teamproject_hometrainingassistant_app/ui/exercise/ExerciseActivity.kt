@@ -60,7 +60,7 @@ class ExerciseActivity : AppCompatActivity() {
             intent.putExtra("type", exerciseModel.type)
             intent.run { startActivity(intent) }
         }, oncheckBoxClick = { name, time ->
-            val nameList: ArrayList<String> = name
+            var nameList: ArrayList<String> = name
             val timeList: ArrayList<String> = time
 
             val bundle = Bundle()

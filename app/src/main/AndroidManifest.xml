@@ -68,10 +68,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+
         </activity>
         <activity
             android:name=".ui.IntroActivity"
             android:exported="true">
+
 
 
             <meta-data

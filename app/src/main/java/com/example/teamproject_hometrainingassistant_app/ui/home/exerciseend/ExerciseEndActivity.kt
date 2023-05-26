@@ -67,8 +67,11 @@ class ExerciseEndActivity: AppCompatActivity() {
         val adapter = ExerciseEndAdapter(itemList!!)
         recyclerView.adapter = adapter
 
+
+        //운동 종료 버튼 클릭 시
         binding.routineEndSaveButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("ITEM_LIST",itemList)
             startActivity(intent)
         }
 

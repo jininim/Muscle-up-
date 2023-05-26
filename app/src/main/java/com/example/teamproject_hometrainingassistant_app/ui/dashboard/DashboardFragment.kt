@@ -46,6 +46,37 @@ class DashboardFragment : Fragment() {
         val time = getCurrentKoreaTime()
         binding.editTime.setText(time)
 
+        //입력못하게
+        binding.editName.isEnabled=false
+        binding.editTime.isEnabled=false
+
+
+
+        //수행한 운동정보 가져오기
+        val bundle = arguments
+        val itemList: ArrayList<String>? = bundle?.getStringArrayList("ITEM_LIST")
+        if (itemList != null){
+            binding.editName.setText(itemList.joinToString(","))
+            //현재 시간 가져오기
+            val time = getCurrentKoreaTime()
+            binding.editTime.setText(time)
+            // SharedPreferences 객체 생성
+            val sharedPreferences =
+                requireContext().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+            // 에디터 객체 생성
+            val editor = sharedPreferences.edit()
+            //작성한 내용 저장
+            val memo = binding.editName.text.toString()
+            val memoTime = binding.editTime.text.toString()
+            // 선택된 날짜를 키로 사용하여 데이터 저장
+            editor.putString("${month + 1}${day}", memo)
+            editor.putString("${month}${day}", memoTime)
+
+            // 변경 사항 적용
+            editor.apply()
+        }
+
+
 
         //현재 날짜 표기
         binding.calendarDate.text = "${month + 1}월 ${day}일"
@@ -63,28 +94,10 @@ class DashboardFragment : Fragment() {
             binding.editName.setText(data)
             binding.editTime.setText(timeData)
 
-            binding.saveButton.setOnClickListener {
-                //현재 시간 가져오기
-                val time = getCurrentKoreaTime()
-                binding.editTime.setText(time)
-                // SharedPreferences 객체 생성
-                val sharedPreferences =
-                    requireContext().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-                // 에디터 객체 생성
-                val editor = sharedPreferences.edit()
-                //작성한 내용 저장
-                val memo = binding.editName.text.toString()
-                val memoTime = binding.editTime.text.toString()
-                // 선택된 날짜를 키로 사용하여 데이터 저장
-                editor.putString(selectedDate, memo)
-                editor.putString(selectedDate2, memoTime)
 
-                // 변경 사항 적용
-                editor.apply()
-            }
         }
     }
-    fun getCurrentKoreaTime(): String {
+    private fun getCurrentKoreaTime(): String {
         val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"))
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val minute = calendar.get(Calendar.MINUTE)
