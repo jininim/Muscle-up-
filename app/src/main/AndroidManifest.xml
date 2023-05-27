@@ -69,10 +69,12 @@
             </intent-filter>
 
 
+
         </activity>
         <activity
             android:name=".ui.IntroActivity"
             android:exported="true">
+
 
 
 

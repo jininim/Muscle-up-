@@ -22,11 +22,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var userimage: String
     private var itemList : ArrayList<String>? = null
     private var nameList: ArrayList<String>? = null
+    override fun onRestart() {
+        super.onRestart()
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val navView: BottomNavigationView = binding.navView
 
         // 카카오 로그인정보 받아오기
         username = intent.getStringExtra("USER_NAME") ?: ""
@@ -38,23 +44,14 @@ class MainActivity : AppCompatActivity() {
         //운동 종료시 사용할 운동 정보 리스트
         itemList = intent.getStringArrayListExtra("ITEM_LIST")
 
-        if (itemList !=null){
-            val dashboardFragment = DashboardFragment()
-            val bundle = Bundle().apply {
-                putStringArrayList("ITEM_LIST", itemList)
-            }
-            dashboardFragment.arguments = bundle
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment_activity_main, dashboardFragment)
-                .commit()
-        }
+
 
         // 앱 바
         setSupportActionBar(binding.toolbar2)
         // toolbar에 표시되는 제목의 표시 유무 False로 해야 툴바의 이름 화면에 표시
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        val navView: BottomNavigationView = binding.navView
+
         navView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
@@ -89,6 +86,18 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+//        if (itemList !=null){
+//            val dashboardFragment = DashboardFragment()
+//            val bundle = Bundle().apply {
+//                putStringArrayList("ITEM_LIST", itemList)
+//            }
+//            dashboardFragment.arguments = bundle
+//            supportFragmentManager.beginTransaction()
+//                .replace(R.id.nav_host_fragment_activity_main, dashboardFragment)
+//                .commit()
+//            navView.selectedItemId = R.id.navigation_dashboard
+//        }
+
 
         if (savedInstanceState == null) {
             // 앱을 처음 실행하는 경우 HomeFragment를 보여준다.

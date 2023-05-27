@@ -46,10 +46,6 @@ class DashboardFragment : Fragment() {
         val time = getCurrentKoreaTime()
         binding.editTime.setText(time)
 
-        //입력못하게
-        binding.editName.isEnabled=false
-        binding.editTime.isEnabled=false
-
 
 
         //수행한 운동정보 가져오기

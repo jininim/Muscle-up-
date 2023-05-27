@@ -62,7 +62,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
-                android:background="@color/primaryColor"
                 android:text="사용자 소음 측정"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -73,31 +72,24 @@
                 android:id="@+id/myRoutineStartButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/decibelStartButton"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:text="시작하기"
-                android:background="@color/primaryColor"/>
-            <Button
-                android:id="@+id/exerciseAddButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/decibelStartButton"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginTop="20dp"
-                android:text="+운동추가"
-                android:background="@color/primaryColor"/>
+                android:text="시작하기"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/decibelStartButton" />
 
             <TextView
+                android:id="@+id/dbText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/decibelStartButton"
-                app:layout_constraintStart_toEndOf="@id/myRoutineStartButton"
-                app:layout_constraintEnd_toStartOf="@id/exerciseAddButton"
                 android:layout_marginTop="20dp"
-                tools:text="db 0"/>
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="@+id/myRoutineStartButton"
+                app:layout_constraintEnd_toEndOf="@+id/decibelStartButton"
+                app:layout_constraintStart_toStartOf="@+id/decibelStartButton"
+                app:layout_constraintTop_toBottomOf="@id/decibelStartButton"
+                tools:text="db 0"
+                tools:textStyle="bold" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
