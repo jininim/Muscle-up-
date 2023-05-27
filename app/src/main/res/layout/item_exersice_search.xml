@@ -20,7 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
-        android:background="#00ff0000"
         android:gravity="start|center"
         android:text="루트"
         android:textSize="20sp"
