@@ -30,7 +30,6 @@ class HomeAdapter(val onClickUpdate: (routine: Routine) -> Unit) :
             routineList.setOnClickListener {
                 val text = routineList.text.toString()
                 Log.d("text", text)
-
                 val intent = Intent(itemView.context, MyRoutineDetailActivity::class.java)
                 intent.putExtra("text", text)
                 itemView.context.startActivity(intent)

@@ -60,10 +60,11 @@ class ExerciseEndActivity: AppCompatActivity() {
                 .apply()
         }
 
-        // 일 수를 화면에 표시
+        //칼로리 표기
         if (calorie != null) {
             binding.calorie.text = ceil(calorie).toString()
         }
+        // 일 수를 화면에 표시
         binding.routineTotalDate.text = "${dayCount}일차"
         binding.routineTotalTime.text = "${currentTimer}"
         binding.startTime.text = "${startTime}"
