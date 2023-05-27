@@ -86,7 +86,6 @@
                 android:layout_marginTop="50dp"
                 android:text="1"
                 android:textSize="30dp"
-                android:textColor="@color/primaryDarkColor"
                 android:gravity="center"
                 android:background="@drawable/circle_shape"/>
 
@@ -100,7 +99,6 @@
                 android:layout_marginTop="50dp"
                 android:text="2"
                 android:textSize="30dp"
-                android:textColor="@color/primaryDarkColor"
                 android:gravity="center"
                 android:background="@drawable/circle_shape"/>
 
@@ -114,7 +112,6 @@
                 android:layout_marginTop="50dp"
                 android:text="3"
                 android:textSize="30dp"
-                android:textColor="@color/primaryDarkColor"
                 android:gravity="center"
                 android:background="@drawable/circle_shape"/>
 
@@ -238,7 +235,6 @@
                 app:layout_constraintEnd_toStartOf="@id/routineAddButton"
                 android:layout_marginTop="20dp"
                 android:text="루틴 시작하기"
-                android:background="@color/primaryColor"
                 />
             <Button
                 android:id="@+id/routineAddButton"
@@ -248,7 +244,6 @@
                 app:layout_constraintTop_toTopOf="@id/routineStartButton"
                 app:layout_constraintStart_toEndOf="@id/routineStartButton"
                 android:text="+ 루틴에 추가"
-                android:background="@color/primaryColor"
                 />
 
             <View

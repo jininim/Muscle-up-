@@ -36,7 +36,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
-        android:backgroundTint="@color/primaryColor"
         android:text="@string/search"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userimage" />
@@ -47,7 +46,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="20dp"
-        android:backgroundTint="@color/primaryColor"
         android:text="루틴 추천"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userimage" />
@@ -88,7 +86,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="5dp"
-        android:backgroundTint="@color/primaryColor"
         android:clickable="true"
         android:contentDescription="TODO"
         android:focusable="true"
@@ -103,8 +100,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="5dp"
         android:clickable="true"
-        android:src="@android:drawable/ic_menu_delete"
-        app:backgroundTint="@color/primaryColor"
+        android:src="@drawable/baseline_delete_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
