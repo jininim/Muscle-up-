@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.PackageManagerCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityMyRoutineDetailBinding
@@ -21,11 +22,12 @@ import java.io.IOException
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityMyRoutineDetailBinding
 private const val REQUEST_RECORD_AUDIO_PERMISSION = 200
+
 class MyRoutineDetailActivity : AppCompatActivity() {
 
     private var fileName: String = ""
 
-    private  var recorder: MediaRecorder? = null
+    private var recorder: MediaRecorder? = null
     private var isRecording = false
     private var job: Job? = null
 
@@ -60,19 +62,22 @@ class MyRoutineDetailActivity : AppCompatActivity() {
             } catch (e: IOException) {
                 Log.e(PackageManagerCompat.LOG_TAG, "prepare() failed") // 실패시
             }
-            Toast.makeText(this@MyRoutineDetailActivity,"5초간 사용자의 주변 소음을 측정합니다", Toast.LENGTH_LONG).show()
+            Toast.makeText(this@MyRoutineDetailActivity, "사용자의 주변 소음을 측정합니다", Toast.LENGTH_LONG)
+                .show()
             start() // 녹음 시작
         }
     }
+
     private fun stopRecording() {
         isRecording = false
+        Toast.makeText(this, "측정 중지", Toast.LENGTH_SHORT).show()
         job?.cancel()
         recorder?.apply {
             stop() //녹음 중지
             release()
         }
-        Toast.makeText(this,"측정 중지", Toast.LENGTH_LONG).show()
         recorder = null
+        binding.myRoutineStartButton.isClickable = true
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,11 +87,11 @@ class MyRoutineDetailActivity : AppCompatActivity() {
 
         fileName = "${externalCacheDir?.absolutePath}/audiorecordtest.3gp"
 
-        ActivityCompat.requestPermissions(this, permissions,
+        ActivityCompat.requestPermissions(
+            this, permissions,
             REQUEST_RECORD_AUDIO_PERMISSION
         )
         setContentView(binding.root)
-
 
 
         // 이전 액티비티에서 가져온 데이터
@@ -101,14 +106,25 @@ class MyRoutineDetailActivity : AppCompatActivity() {
         val adapter = MyRoutineAdapter(itemList)
         recyclerView.adapter = adapter
 
+        var check = false
         //사용자 소음 측정 버튼 클릭 시
         binding.decibelStartButton.setOnClickListener {
-            startRecording() // 녹음 시작
-            getDb() //데시벨 측정
+            check = !check
+            if (check) {
+                binding.myRoutineStartButton.isClickable = false
+                binding.decibelStartButton.text = "사용자 소음 측정 중지"
+                startRecording() // 녹음 시작
+                getDb() //데시벨 측정
+            } else {
+                stopRecording()
+                binding.myRoutineStartButton.isClickable = true
+                binding.decibelStartButton.text = "사용자 소음 측정"
+            }
+
         }
 
         binding.myRoutineStartButton.setOnClickListener {
-            val intent = Intent(this,ExerciseStartActivity::class.java)
+            val intent = Intent(this, ExerciseStartActivity::class.java)
             intent.putExtra("itemList", itemList)
             intent.putExtra("decibel", binding.dbText.text)
             intent.run { startActivity(intent) }
@@ -118,14 +134,16 @@ class MyRoutineDetailActivity : AppCompatActivity() {
             finish()
         }
     }
+
     override fun onStop() {
         super.onStop()
         recorder?.release()
         recorder = null
     }
+
     //데시벨 측정 함수
     @SuppressLint("SetTextI18n")
-    private fun getDb(){
+    private fun getDb() {
         recorder?.let {
             isRecording = true
             // 녹음이 중지될 때까지 작업 실행, 5초 후 종료
@@ -134,11 +152,11 @@ class MyRoutineDetailActivity : AppCompatActivity() {
                     while (isRecording) {
                         delay(200L) // 0.2초마다 데시벨 측정
                         val amplitude = it.maxAmplitude
-                        binding.dbText.text = (20 * kotlin.math.log10(amplitude.toDouble())).toInt().toString()
+                        binding.dbText.text =
+                            (20 * kotlin.math.log10(amplitude.toDouble())).toInt().toString()
                     }
                 }
-                stopRecording()
-                job?.cancel()
+
             }
         }
 
