@@ -1,6 +1,7 @@
 package com.example.teamproject_hometrainingassistant_app
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 
@@ -50,6 +51,12 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar2)
         // toolbar에 표시되는 제목의 표시 유무 False로 해야 툴바의 이름 화면에 표시
         supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        binding.MainBackButton.setOnClickListener {
+            val intent = Intent(this,LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 
         navView.setOnItemSelectedListener {
