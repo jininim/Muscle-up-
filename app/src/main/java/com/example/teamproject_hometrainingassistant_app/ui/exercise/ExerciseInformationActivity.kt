@@ -2,6 +2,7 @@ package com.example.teamproject_hometrainingassistant_app.ui.exercise
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityExerciseInformationBinding
@@ -20,6 +21,7 @@ class ExerciseInformation : AppCompatActivity(){
         val guide = intent.getStringExtra("guide")
         val youtubeUrl = intent.getStringExtra("youtubeUrl")
         val type = intent.getStringExtra("type")
+
 
         binding.name.text = name
         binding.url.apply {

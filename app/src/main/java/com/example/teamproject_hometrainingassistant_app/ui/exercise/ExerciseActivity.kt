@@ -31,8 +31,6 @@ class ExerciseActivity : AppCompatActivity() {
     private lateinit var exerciseSearchAdapter: ExerciseSearchAdapter
 
     val searchDatas = mutableListOf<ExerciseSearchData>()
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityExerciseBinding.inflate(layoutInflater)
@@ -42,7 +40,7 @@ class ExerciseActivity : AppCompatActivity() {
         exerciseSearchAdapter = ExerciseSearchAdapter(onItemClicked = {exerciseModel ->
             val intent = Intent(this, ExerciseInformation::class.java)
             intent.putExtra("name", exerciseModel.name)
-            intent.putExtra("exerciseUrl", exerciseModel.exerciseUrl)
+            intent.putExtra("exerciseUrl", exerciseModel.exersiceUrl)
             intent.putExtra("guide", exerciseModel.guide)
             intent.putExtra("youtubeUrl", exerciseModel.youtubeUrl)
             intent.putExtra("type", exerciseModel.type)
