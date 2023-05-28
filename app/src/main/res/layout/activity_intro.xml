@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:contentDescription="@string/intro_Image"
-        android:src="@drawable/img" />
+        android:src="@drawable/intro" />
 
     <TextView
         android:layout_width="match_parent"
