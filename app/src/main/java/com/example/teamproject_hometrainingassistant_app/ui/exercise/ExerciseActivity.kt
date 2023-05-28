@@ -15,9 +15,7 @@ import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.DTO.ExerciseDTO
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.Service.ExerciseService
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.adapter.ExerciseSearchAdapter
-import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseCategoryData
-import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseModel
-import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseOptionData
+
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseSearchData
 import com.example.teamproject_hometrainingassistant_app.ui.home.HomeFragment
 import retrofit2.Call
@@ -32,8 +30,6 @@ class ExerciseActivity : AppCompatActivity() {
 
     private lateinit var exerciseSearchAdapter: ExerciseSearchAdapter
 
-    val optionDatas = mutableListOf<ExerciseOptionData>()
-    val categoryDatas = mutableListOf<ExerciseCategoryData>()
     val searchDatas = mutableListOf<ExerciseSearchData>()
 
 
