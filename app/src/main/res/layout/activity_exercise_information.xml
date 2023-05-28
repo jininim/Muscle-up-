@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:text="운동 가이드"
                 android:textSize="20dp"
-                android:textColor="#ff0000"
+                android:textColor="?attr/colorPrimary"
                 android:layout_marginTop="30dp"
                 android:layout_marginStart="30dp"/>
 
@@ -78,12 +78,12 @@
                 android:layout_height="wrap_content"
                 android:text="관련 동영상"
                 android:textSize="20dp"
-                android:textColor="#0000ff"
+                android:textColor="#FF0055D3"
                 android:layout_margin="30dp"/>
 
             <Button
                 android:id="@+id/youtube"
-                android:layout_width="300dp"
+                android:layout_width="380dp"
                 android:layout_height="wrap_content"
                 android:text="https://youtu.be/gyvah3e8KTE"
                 android:layout_gravity="center"
