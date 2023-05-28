@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
-        android:gravity="start|center"
+        android:gravity="center"
         android:text="루트"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/exerciseCheckBox"

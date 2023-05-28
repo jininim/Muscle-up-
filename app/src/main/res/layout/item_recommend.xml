@@ -26,7 +26,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:layout_marginTop="30dp"
-        tools:text="최지원의 복근 조지기 루틴"
+        android:text="루틴"
         android:background="@drawable/round_shape"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -69,6 +69,7 @@ class ExerciseEndActivity: AppCompatActivity() {
         binding.routineTotalTime.text = "${currentTimer}"
         binding.startTime.text = "${startTime}"
         binding.endTime.text = "${formattedTime}"
+        binding.dateTextView.text = "${currentDate}"
 
         val recyclerView: RecyclerView = binding.routineEndRecyclerView
         val layoutManager = LinearLayoutManager(this)

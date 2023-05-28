@@ -3,38 +3,45 @@ package com.example.teamproject_hometrainingassistant_app.ui.recommend
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.teamproject_hometrainingassistant_app.R
 import com.example.teamproject_hometrainingassistant_app.databinding.ItemRecommendBinding
+import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseModel
 
-class RecommendAdapter(private val context: Context) :
+class RecommendAdapter(private val context: Context, private val videoList: ArrayList<String>, private val videoTitleList: ArrayList<String>) :
     RecyclerView.Adapter<RecommendAdapter.ViewHolder>() {
 
     var datas = mutableListOf<RecommendData>()
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): ViewHolder {
-        val binding = ItemRecommendBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return ViewHolder(binding)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_recommend, parent, false)
+        return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = datas.size
+    override fun getItemCount(): Int = videoList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(datas[position])
+        val videoUrl = videoList[position]
+        val videoTitle = videoTitleList[position]
+        holder.bind(videoTitle)
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, RoutineDetailActivity::class.java)
+            intent.putExtra("videoUrl", videoUrl)
+            intent.putExtra("videoTitle", videoTitle)
+            context.startActivity(intent)
+        }
     }
 
-    inner class ViewHolder(private val binding: ItemRecommendBinding) : RecyclerView.ViewHolder(binding.root){
-
-        fun bind(item: RecommendData){
-            Glide.with(itemView).load(item.img).into(binding.recommendImageView) // 이미지 연결에 용이한 Glide 라이브러리 사용
-            binding.recommendButton.text = item.text
-
-            binding.recommendButton.setOnClickListener {
-                val intent = Intent(context, RoutineDetailActivity::class.java)
-                intent.run { context.startActivity(this) }
-            }
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+        private val videoTitleText: TextView = itemView.findViewById(R.id.recommendButton)
+        fun bind(videoTitle : String){
+            videoTitleText.text = videoTitle
         }
     }
 }

@@ -3,7 +3,7 @@ package com.example.teamproject_hometrainingassistant_app.ui.recommend
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.teamproject_hometrainingassistant_app.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityRecommendBinding
 import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.VerticalItemDecorator
 
@@ -14,11 +14,19 @@ class RecommendActivity : AppCompatActivity() {
     lateinit var recommendAdapter: RecommendAdapter
     val recommendDatas = mutableListOf<RecommendData>()
 
+    private val videoList : ArrayList<String> = ArrayList()
+    private val videoTitleList : ArrayList<String> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityRecommendBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        videoTitleList.add("3개월 맨몸 운동 홈트레이닝")
+        videoTitleList.add("기발한 세트법으로 만들어진 최고의 맨몸운동 루틴")
+        videoTitleList.add("맨몸 전신운동 홈트레이닝 7가지")
+        videoTitleList.add("15분 체지방 100% 녹여버리는 루틴")
 
         initRecycler()
 
@@ -29,18 +37,9 @@ class RecommendActivity : AppCompatActivity() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initRecycler(){
-        recommendAdapter = RecommendAdapter(this)
+        recommendAdapter = RecommendAdapter(this, videoList, videoTitleList)
         binding.recommendRecyclerView.adapter = recommendAdapter
+        binding.recommendRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.recommendRecyclerView.addItemDecoration(VerticalItemDecorator(0))
-
-        recommendDatas.apply {
-            add(RecommendData(img = R.drawable.user, text = "최지원의 복근 조지기 루틴"))
-            add(RecommendData(img = R.drawable.user, text = "유튜버 A의 3분할 맨몸 루틴"))
-            add(RecommendData(img = R.drawable.user, text = "유튜버 B의 유산소 루틴"))
-            add(RecommendData(img = R.drawable.user, text = "유튜버 C의 스트레칭"))
-
-            recommendAdapter.datas = recommendDatas
-            recommendAdapter.notifyDataSetChanged()
-        }
     }
 }
