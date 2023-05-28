@@ -14,8 +14,6 @@ import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.
 import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.VerticalItemDecorator
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.DTO.ExerciseDTO
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.Service.ExerciseService
-import com.example.teamproject_hometrainingassistant_app.ui.exercise.adapter.ExerciseCategoryAdapter
-import com.example.teamproject_hometrainingassistant_app.ui.exercise.adapter.ExerciseOptionAdapter
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.adapter.ExerciseSearchAdapter
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseCategoryData
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseModel
@@ -32,8 +30,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 private lateinit var binding: ActivityExerciseBinding
 class ExerciseActivity : AppCompatActivity() {
 
-    private lateinit var exerciseOptionAdapter: ExerciseOptionAdapter
-    private lateinit var exerciseCategoryAdapter: ExerciseCategoryAdapter
     private lateinit var exerciseSearchAdapter: ExerciseSearchAdapter
 
     val optionDatas = mutableListOf<ExerciseOptionData>()
@@ -44,7 +40,6 @@ class ExerciseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityExerciseBinding.inflate(layoutInflater)
-        binding.searchView.isSubmitButtonEnabled = true
         setContentView(binding.root)
 
         //리사이클러뷰 어답터 운동리스트
