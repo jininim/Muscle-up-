@@ -26,6 +26,7 @@
         android:layout_marginStart="10dp"
         android:text="사용자 이름"
         android:textSize="24sp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/userimage"
         app:layout_constraintStart_toEndOf="@+id/userimage"
         app:layout_constraintTop_toTopOf="@+id/userimage" />
@@ -59,6 +60,7 @@
         android:layout_marginEnd="268dp"
         android:text="저장된 루틴"
         android:textSize="24sp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

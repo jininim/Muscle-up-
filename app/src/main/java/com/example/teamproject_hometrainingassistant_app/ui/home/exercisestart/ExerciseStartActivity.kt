@@ -236,7 +236,7 @@ class ExerciseStartActivity : AppCompatActivity() {
             } catch (e: IOException) {
                 Log.e(PackageManagerCompat.LOG_TAG, "prepare() failed") // 실패시
             }
-            Toast.makeText(this@ExerciseStartActivity, "5초간 사용자의 주변 소음을 측정합니다", Toast.LENGTH_LONG)
+            Toast.makeText(this@ExerciseStartActivity, "자동 세기 기능 시작", Toast.LENGTH_LONG)
                 .show()
             start() // 녹음 시작
         }
@@ -249,7 +249,7 @@ class ExerciseStartActivity : AppCompatActivity() {
             stop() //녹음 중지
             release()
         }
-        Toast.makeText(this, "측정 중지", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "자동 세기 기능 중지", Toast.LENGTH_LONG).show()
         recorder = null
     }
     @SuppressLint("SetTextI18n")

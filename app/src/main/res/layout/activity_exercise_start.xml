@@ -27,6 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="루틴1 수행중"
+            android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_gravity="center"/>
@@ -75,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="푸쉬업"
+                android:textColor="@color/black"
                 android:textSize="25dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"

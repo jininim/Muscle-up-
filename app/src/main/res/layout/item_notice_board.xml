@@ -22,6 +22,7 @@
         app:layout_constraintStart_toEndOf="@id/image"
         android:layout_marginStart="15dp"
         android:background="#00ff0000"
+        android:textColor="@color/black"
         android:text="글 제목"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

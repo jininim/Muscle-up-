@@ -20,6 +20,7 @@
         android:layout_marginTop="6dp"
         android:layout_marginStart="10dp"
         android:gravity="center_vertical"
+        android:textColor="@color/black"
         android:text="루트"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/routineImageView"
