@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:text="@string/toolbar_mainText"
             android:textSize="22sp"
+            android:textColor="#ffffff"
             android:textStyle="bold"
             android:layout_gravity="center"/>
 
