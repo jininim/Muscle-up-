@@ -45,65 +45,10 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
-        android:id="@+id/exerciseOptionLinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:ignore="NotSibling">
-
-        <Button
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:background="#00ff0000"
-            android:text="전체"
-            android:textColor="#ff0000" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/exerciseOptionRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:ignore="MissingConstraints"
-            tools:listitem="@layout/item_exercise_option" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/exerciseCategoryLinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/exerciseOptionLinearLayout">
-
-        <Button
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:background="#00ff0000"
-            android:text="전체"
-            android:textColor="#00ff00" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/exerciseCategoryRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:ignore="MissingConstraints"
-            tools:listitem="@layout/item_exercise_category" />
-
-    </LinearLayout>
-
     <View
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/exerciseCategoryLinearLayout"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#000000"/>
@@ -117,7 +62,7 @@
         app:layout_constraintBottom_toTopOf="@+id/fabadd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/exerciseCategoryLinearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:ignore="MissingConstraints"
         tools:listitem="@layout/item_exersice_search" />
 

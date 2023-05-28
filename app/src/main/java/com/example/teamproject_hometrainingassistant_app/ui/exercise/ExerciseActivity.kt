@@ -47,9 +47,6 @@ class ExerciseActivity : AppCompatActivity() {
         binding.searchView.isSubmitButtonEnabled = true
         setContentView(binding.root)
 
-        OptionRecycler()
-        CategoryRecycler()
-
         //리사이클러뷰 어답터 운동리스트
         exerciseSearchAdapter = ExerciseSearchAdapter(onItemClicked = {exerciseModel ->
             val intent = Intent(this, ExerciseInformation::class.java)
@@ -90,45 +87,6 @@ class ExerciseActivity : AppCompatActivity() {
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
             finish()
-        }
-    }
-
-    //옵션
-    @SuppressLint("NotifyDataSetChanged")
-    private fun OptionRecycler(){
-        exerciseOptionAdapter = ExerciseOptionAdapter(this)
-        binding.exerciseOptionRecyclerView.adapter = exerciseOptionAdapter
-        binding.exerciseOptionRecyclerView.addItemDecoration(HorizontalItemDecorator(0))
-
-        optionDatas.apply {
-            add(ExerciseOptionData(text = "즐겨찾기"))
-            add(ExerciseOptionData(text = "자주하는"))
-            add(ExerciseOptionData(text = "최근"))
-            add(ExerciseOptionData(text = "커스텀"))
-            exerciseOptionAdapter.datas = optionDatas
-            exerciseOptionAdapter.notifyDataSetChanged()
-        }
-    }
-
-    //카테고리
-    @SuppressLint("NotifyDataSetChanged")
-    private fun CategoryRecycler(){
-        exerciseCategoryAdapter = ExerciseCategoryAdapter(this)
-        binding.exerciseCategoryRecyclerView.adapter = exerciseCategoryAdapter
-        binding.exerciseCategoryRecyclerView.addItemDecoration(HorizontalItemDecorator(0))
-
-        categoryDatas.apply {
-            add(ExerciseCategoryData(text = "가슴"))
-            add(ExerciseCategoryData(text = "등"))
-            add(ExerciseCategoryData(text = "어깨"))
-            add(ExerciseCategoryData(text = "복근"))
-            add(ExerciseCategoryData(text = "둔근"))
-            add(ExerciseCategoryData(text = "하체"))
-            add(ExerciseCategoryData(text = "이두"))
-            add(ExerciseCategoryData(text = "삼두"))
-
-            exerciseCategoryAdapter.datas = categoryDatas
-            exerciseCategoryAdapter.notifyDataSetChanged()
         }
     }
 

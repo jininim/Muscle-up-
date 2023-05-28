@@ -236,7 +236,7 @@
                 app:layout_constraintTop_toBottomOf="@id/text2"
                 app:layout_constraintEnd_toStartOf="@id/routineAddButton"
                 android:layout_marginTop="20dp"
-                android:text="루틴 시작하기"
+                android:text="루틴 시작"
                 />
             <Button
                 android:id="@+id/routineAddButton"
@@ -245,7 +245,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/routineStartButton"
                 app:layout_constraintStart_toEndOf="@id/routineStartButton"
-                android:text="+ 루틴에 추가"
+                android:text="+ 루틴 추가"
                 />
 
             <View
