@@ -27,6 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="줄넘기"
+            android:textColor="#ffffff"
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_gravity="center"/>
@@ -67,6 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1. 몸에 힘을 빼고 시선은 정면을 향한다."
+                android:textColor="@android:color/black"
                 android:layout_marginTop="30dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"/>
