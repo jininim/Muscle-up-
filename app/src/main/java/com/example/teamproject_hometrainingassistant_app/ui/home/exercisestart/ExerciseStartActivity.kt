@@ -52,7 +52,7 @@ class ExerciseStartActivity : AppCompatActivity() {
     private var time = 0 // 타이머 시간 초기화
     private var timeTask: Timer? = null // 타이머 초기화
 
-    val currentTime = Calendar.getInstance()
+    private val currentTime = Calendar.getInstance()
     val hour = currentTime.get(Calendar.HOUR_OF_DAY)
     val minute = currentTime.get(Calendar.MINUTE)
     val period = if (hour >= 12) "오후" else "오전"
