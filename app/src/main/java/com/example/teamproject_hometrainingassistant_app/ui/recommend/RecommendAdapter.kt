@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -12,10 +13,9 @@ import com.example.teamproject_hometrainingassistant_app.R
 import com.example.teamproject_hometrainingassistant_app.databinding.ItemRecommendBinding
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseModel
 
-class RecommendAdapter(private val context: Context, private val videoList: ArrayList<String>, private val videoTitleList: ArrayList<String>) :
+class RecommendAdapter(private val context: Context, private val videoTitleList: ArrayList<String>) :
     RecyclerView.Adapter<RecommendAdapter.ViewHolder>() {
 
-    var datas = mutableListOf<RecommendData>()
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): ViewHolder {
@@ -23,16 +23,14 @@ class RecommendAdapter(private val context: Context, private val videoList: Arra
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = videoList.size
+    override fun getItemCount(): Int = videoTitleList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val videoUrl = videoList[position]
         val videoTitle = videoTitleList[position]
         holder.bind(videoTitle)
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, RoutineDetailActivity::class.java)
-            intent.putExtra("videoUrl", videoUrl)
             intent.putExtra("videoTitle", videoTitle)
             context.startActivity(intent)
         }

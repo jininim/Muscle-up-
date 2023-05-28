@@ -32,14 +32,11 @@ class ExerciseSearchAdapter(val onItemClicked: (ExerciseModel) -> Unit,val onche
     inner class ViewHolder(private val binding: ItemExersiceSearchBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: ExerciseModel){
-
-            Glide.with(itemView).load(item.exerciseUrl).into(binding.exerciseImageView) // 이미지 연결에 용이한 Glide 라이브러리 사용
-            binding.exerciseButton.text = item.name
-
-
-            binding.root.setOnClickListener {
+            binding.exerciseButton.setOnClickListener {
                 onItemClicked(item)
             }
+
+            binding.exerciseButton.text = item.name
 
             //체크박스 클릭 시
             binding.exerciseCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -50,7 +47,6 @@ class ExerciseSearchAdapter(val onItemClicked: (ExerciseModel) -> Unit,val onche
                     oncheckBoxClick(nameList, timeList)
                 }
             }
-
         }
     }
 

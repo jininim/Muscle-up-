@@ -37,7 +37,7 @@ class RecommendActivity : AppCompatActivity() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initRecycler(){
-        recommendAdapter = RecommendAdapter(this, videoList, videoTitleList)
+        recommendAdapter = RecommendAdapter(this, videoTitleList)
         binding.recommendRecyclerView.adapter = recommendAdapter
         binding.recommendRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.recommendRecyclerView.addItemDecoration(VerticalItemDecorator(0))
