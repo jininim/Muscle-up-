@@ -11,6 +11,7 @@
                 android:id="@+id/calendarView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -22,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="mm:dd"
+        android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,6 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="운동을 마친 시간을 기록합니다 !"
+            android:textColor="@color/black"
             android:inputType="time"
             android:textAlignment="center"
             android:textSize="20sp" />
@@ -64,6 +67,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:enabled="false"
             android:id="@+id/editName"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="수행한 운동 루틴이 입력됩니다 !"

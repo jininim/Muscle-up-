@@ -14,6 +14,7 @@ import androidx.core.content.PackageManagerCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.teamproject_hometrainingassistant_app.R
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityMyRoutineDetailBinding
 import com.example.teamproject_hometrainingassistant_app.ui.home.exercisestart.ExerciseStartActivity
 import kotlinx.coroutines.*
@@ -80,6 +81,7 @@ class MyRoutineDetailActivity : AppCompatActivity() {
         binding.myRoutineStartButton.isClickable = true
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
