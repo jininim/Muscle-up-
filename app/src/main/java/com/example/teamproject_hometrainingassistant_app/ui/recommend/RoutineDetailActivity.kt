@@ -5,11 +5,11 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityRoutineDetailsBinding
-import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.ui.PlayerView
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
-import com.google.android.exoplayer2.util.Util
+//import com.google.android.exoplayer2.SimpleExoPlayer
+//import com.google.android.exoplayer2.source.ProgressiveMediaSource
+//import com.google.android.exoplayer2.ui.PlayerView
+//import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
+//import com.google.android.exoplayer2.util.Util
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityRoutineDetailsBinding

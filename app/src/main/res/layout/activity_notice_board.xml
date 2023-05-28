@@ -13,34 +13,36 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/exerciseBackButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:src="@drawable/ic_arrow_back"
-            android:contentDescription="TODO" />
+            android:background="?colorPrimary"
+            android:contentDescription="TODO"
+            android:src="@drawable/ic_arrow_back" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="자유게시판"
-            android:textSize="19sp"
-            android:textStyle="bold"
-            android:layout_gravity="center"/>
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/createNoticeBoardButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:src="@drawable/ic_create"
             android:layout_gravity="end"
             android:layout_marginEnd="13dp"
-            android:contentDescription="TODO" />
+            android:background="?attr/colorPrimary"
+            android:contentDescription="TODO"
+            android:src="@drawable/ic_create" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -52,7 +54,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

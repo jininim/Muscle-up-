@@ -30,7 +30,8 @@
             android:text="2023년 1월 11일"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            />
 
     </androidx.appcompat.widget.Toolbar>
 
