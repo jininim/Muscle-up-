@@ -36,7 +36,7 @@ class NoticeBoardAdapter(val onItemClicked: (NoticeBoardData) -> Unit) :
                     .into(binding.image)
             }
 
-            binding.root.setOnClickListener {
+            binding.title.setOnClickListener {
                 onItemClicked(item)
             }
         }
