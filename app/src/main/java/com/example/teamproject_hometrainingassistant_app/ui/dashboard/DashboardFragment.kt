@@ -17,7 +17,6 @@ import java.util.*
 
 class DashboardFragment : Fragment() {
 
-    private lateinit var dashboardAdapter: DashboardAdapter
     private var _binding: FragmentDashboardBinding? = null
 
 

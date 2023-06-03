@@ -52,12 +52,10 @@ class MainActivity : AppCompatActivity() {
         // toolbar에 표시되는 제목의 표시 유무 False로 해야 툴바의 이름 화면에 표시
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        binding.MainBackButton.setOnClickListener {
-            val intent = Intent(this,LoginActivity::class.java)
+        binding.BackButton.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            finish()
         }
-
 
         navView.setOnItemSelectedListener {
             when (it.itemId) {
@@ -93,18 +91,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-//        if (itemList !=null){
-//            val dashboardFragment = DashboardFragment()
-//            val bundle = Bundle().apply {
-//                putStringArrayList("ITEM_LIST", itemList)
-//            }
-//            dashboardFragment.arguments = bundle
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.nav_host_fragment_activity_main, dashboardFragment)
-//                .commit()
-//            navView.selectedItemId = R.id.navigation_dashboard
-//        }
-
 
         if (savedInstanceState == null) {
             // 앱을 처음 실행하는 경우 HomeFragment를 보여준다.

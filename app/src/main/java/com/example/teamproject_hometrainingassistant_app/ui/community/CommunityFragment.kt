@@ -45,7 +45,6 @@ class CommunityFragment : Fragment() {
 
             noticeBoardList.add(noticeBoardModel) // noticeBoardModel에 저장된 값을 리스트에 추가.
             noticeBoardAdapter.submitList(noticeBoardList) // 아이템 업데이트
-
         }
 
         override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {} // 리스트의 아이템의 변화가 있을때 수신합니다.

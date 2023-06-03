@@ -20,8 +20,6 @@ class ExerciseInformation : AppCompatActivity(){
         val exerciseUrl = intent.getStringExtra("exerciseUrl")
         val guide = intent.getStringExtra("guide")
         val youtubeUrl = intent.getStringExtra("youtubeUrl")
-        val type = intent.getStringExtra("type")
-
 
         binding.name.text = name
         binding.url.apply {

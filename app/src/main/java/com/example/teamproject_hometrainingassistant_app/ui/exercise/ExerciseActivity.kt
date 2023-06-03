@@ -5,18 +5,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teamproject_hometrainingassistant_app.MainActivity
-import com.example.teamproject_hometrainingassistant_app.R
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityExerciseBinding
-import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.HorizontalItemDecorator
-import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.VerticalItemDecorator
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.DTO.ExerciseDTO
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.Service.ExerciseService
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.adapter.ExerciseSearchAdapter
 
-import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseSearchData
 import com.example.teamproject_hometrainingassistant_app.ui.home.HomeFragment
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,7 +25,6 @@ class ExerciseActivity : AppCompatActivity() {
 
     private lateinit var exerciseSearchAdapter: ExerciseSearchAdapter
 
-    val searchDatas = mutableListOf<ExerciseSearchData>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityExerciseBinding.inflate(layoutInflater)
