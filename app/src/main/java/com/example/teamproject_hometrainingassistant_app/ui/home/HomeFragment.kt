@@ -8,17 +8,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.example.teamproject_hometrainingassistant_app.R
 import com.example.teamproject_hometrainingassistant_app.databinding.FragmentHomeBinding
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.ExerciseActivity
-import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.VerticalItemDecorator
+import com.example.teamproject_hometrainingassistant_app.ui.calendar.Decorator.VerticalItemDecorator
 import com.example.teamproject_hometrainingassistant_app.ui.home.db.Routine
 import com.example.teamproject_hometrainingassistant_app.ui.home.db.RoutineViewModel
-import com.example.teamproject_hometrainingassistant_app.ui.home.myroutine.MyRoutineDetailActivity
 import com.example.teamproject_hometrainingassistant_app.ui.recommend.RecommendActivity
 
 
@@ -119,6 +116,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //카카오 로그인 정보 받아오기
         if (savedInstanceState != null) {
             val username = savedInstanceState.getString("username")
             val userimage = savedInstanceState.getString("userimage")

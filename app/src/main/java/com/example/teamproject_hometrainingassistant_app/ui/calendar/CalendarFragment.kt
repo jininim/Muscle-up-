@@ -1,23 +1,17 @@
-package com.example.teamproject_hometrainingassistant_app.ui.dashboard
+package com.example.teamproject_hometrainingassistant_app.ui.calendar
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.teamproject_hometrainingassistant_app.R
-import com.example.teamproject_hometrainingassistant_app.databinding.FragmentDashboardBinding
-import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.VerticalItemDecorator
-import java.text.SimpleDateFormat
+import com.example.teamproject_hometrainingassistant_app.databinding.FragmentCalendarBinding
 import java.util.*
 
-class DashboardFragment : Fragment() {
+class CalendarFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentCalendarBinding? = null
 
 
     // This property is only valid between onCreateView and
@@ -29,7 +23,7 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentCalendarBinding.inflate(inflater, container, false)
         return binding.root
     }
 

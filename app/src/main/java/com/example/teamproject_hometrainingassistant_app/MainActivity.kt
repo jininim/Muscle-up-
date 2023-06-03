@@ -1,20 +1,14 @@
 package com.example.teamproject_hometrainingassistant_app
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityMainBinding
 import com.example.teamproject_hometrainingassistant_app.ui.community.CommunityFragment
-import com.example.teamproject_hometrainingassistant_app.ui.dashboard.DashboardFragment
+import com.example.teamproject_hometrainingassistant_app.ui.calendar.CalendarFragment
 import com.example.teamproject_hometrainingassistant_app.ui.home.HomeFragment
-import com.google.android.material.navigation.NavigationBarView
-import com.kakao.sdk.common.util.Utility
 
 class MainActivity : AppCompatActivity() {
 
@@ -52,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         // toolbar에 표시되는 제목의 표시 유무 False로 해야 툴바의 이름 화면에 표시
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        binding.BackButton.setOnClickListener {
+        binding.MainBackButton.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
@@ -73,13 +67,13 @@ class MainActivity : AppCompatActivity() {
                     nameList = null
                 }
                 R.id.navigation_dashboard -> {
-                    val dashboardFragment = DashboardFragment()
+                    val calendarFragment = CalendarFragment()
                     val bundle = Bundle().apply {
                         putStringArrayList("ITEM_LIST", itemList)
                     }
-                    dashboardFragment.arguments = bundle
+                    calendarFragment.arguments = bundle
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.nav_host_fragment_activity_main, dashboardFragment)
+                        .replace(R.id.nav_host_fragment_activity_main, calendarFragment)
                         .commit()
                 }
                 else -> {

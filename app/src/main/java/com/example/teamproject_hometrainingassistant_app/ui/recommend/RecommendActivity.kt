@@ -5,16 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityRecommendBinding
-import com.example.teamproject_hometrainingassistant_app.ui.dashboard.Decorator.VerticalItemDecorator
+import com.example.teamproject_hometrainingassistant_app.ui.calendar.Decorator.VerticalItemDecorator
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityRecommendBinding
 class RecommendActivity : AppCompatActivity() {
 
     lateinit var recommendAdapter: RecommendAdapter
-    val recommendDatas = mutableListOf<RecommendData>()
 
-    private val videoList : ArrayList<String> = ArrayList()
     private val videoTitleList : ArrayList<String> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
