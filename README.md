@@ -22,10 +22,9 @@
 ![image](https://github.com/jininim/Muscle-up-/assets/91578450/eb5bb84d-1ea2-4273-8e07-62c4788161c8)
 
 ## 시연 영상
-<img width="50%" src="https://user-images.githubusercontent.com/91578450/243169812-4d2b322d-e85a-4420-9ad4-e4e614ff8caf.gif"/>
+<img width="80%" src="https://user-images.githubusercontent.com/91578450/243170068-f88346d2-1a02-446e-ab20-6408a4100570.gif"/>
+<img width="80%" src="https://user-images.githubusercontent.com/91578450/243170046-ac6b861c-611a-45d0-a15c-cbe499e607d3.gif"/>
 
-
-![이후](https://github.com/jininim/Muscle-up-/assets/91578450/12b29a0d-67e3-41c8-ada8-f020d86dd86c)
 
 
 
