@@ -22,7 +22,7 @@
 ![image](https://github.com/jininim/Muscle-up-/assets/91578450/eb5bb84d-1ea2-4273-8e07-62c4788161c8)
 
 ## 시연 영상
-![루틴 완료까지](https://github.com/jininim/Muscle-up-/assets/91578450/ca843df6-05dc-441e-a901-8a7bb8bba4aa)![image](https://github.com/jininim/Muscle-up-/assets/91578450/bf2d0e8b-8c37-43c8-8fdc-cfc6afc770d4)
+<img width="50%" src="https://user-images.githubusercontent.com/91578450/243169812-4d2b322d-e85a-4420-9ad4-e4e614ff8caf.gif"/>
 
 
 ![이후](https://github.com/jininim/Muscle-up-/assets/91578450/12b29a0d-67e3-41c8-ada8-f020d86dd86c)
