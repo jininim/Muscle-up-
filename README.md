@@ -21,7 +21,7 @@
 ## 주요 기능 
 ![image](https://github.com/jininim/Muscle-up-/assets/91578450/eb5bb84d-1ea2-4273-8e07-62c4788161c8)
 
-## 시연 영상
+## 프로젝트 결과
 <img width="70%" src="https://user-images.githubusercontent.com/91578450/243170068-f88346d2-1a02-446e-ab20-6408a4100570.gif"/>![image](https://github.com/jininim/Muscle-up-/assets/91578450/758a3bf5-b8ec-44c7-bb4b-7c64c73546c3)
 
 <img width="70%" src="https://user-images.githubusercontent.com/91578450/243170046-ac6b861c-611a-45d0-a15c-cbe499e607d3.gif"/>![image](https://github.com/jininim/Muscle-up-/assets/91578450/d58db614-f454-4ecb-b851-6e984b8e8f75)
