@@ -70,6 +70,8 @@ class CommunityFragment : Fragment() {
             startActivity(intent)
         })
 
+        noticeBoardDB.addChildEventListener(listener) // 실시간으로 변경 사항을 감지
+
         binding.createNoticeBoardButton.setOnClickListener { // 게시글 만들기 버튼
             val intent = Intent(context, CreateNoticeBoardActivity::class.java)
             intent.run { startActivity(this) }
@@ -77,8 +79,6 @@ class CommunityFragment : Fragment() {
 
         binding.titleRecyclerView.layoutManager = LinearLayoutManager(context) // 리사이클러뷰 어댑터 연결
         binding.titleRecyclerView.adapter = noticeBoardAdapter
-
-        noticeBoardDB.addChildEventListener(listener) // 실시간으로 변경 사항을 감지
 
         return view
     }

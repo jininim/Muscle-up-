@@ -14,6 +14,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.PackageManagerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityExerciseStartBinding
 import com.example.teamproject_hometrainingassistant_app.ui.home.exerciseend.ExerciseEndActivity
 import com.example.teamproject_hometrainingassistant_app.ui.home.myroutine.MyRoutineAdapter
@@ -48,6 +49,8 @@ class ExerciseStartActivity : AppCompatActivity() {
 
     private var currentExerciseIndex = 0
     private val exerciseList = ArrayList<String>()
+    private val timeList = ArrayList<String>()
+    private val urlList = ArrayList<String>()
 
     private var time = 0 // 타이머 시간 초기화
     private var timeTask: Timer? = null // 타이머 초기화
@@ -58,7 +61,9 @@ class ExerciseStartActivity : AppCompatActivity() {
     private val period = if (hour >= 12) "오후" else "오전"
     private val formattedTime = String.format("%s %d:%02d", period, hour % 12, minute)
 
-
+    private val exerciseSetList: ArrayList<String> = ArrayList() // 세트 수 예) [5,5,3]
+    private val exerciseTimeList : ArrayList<String> = ArrayList() // 운동 횟수 예) [10,12,10]
+    private lateinit var exerciseAdapter: ExerciseStartAdapter
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,6 +80,8 @@ class ExerciseStartActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         exerciseList.addAll(intent.getStringArrayListExtra("itemList")!!)
+        timeList.addAll(intent.getStringArrayListExtra("timeList")!!)
+        urlList.addAll(intent.getStringArrayListExtra("urlList")!!)
 
         //데시벨 받아오기
         val decibel = intent.getStringExtra("decibel")
@@ -92,35 +99,40 @@ class ExerciseStartActivity : AppCompatActivity() {
                 stopRecording()
                 job?.cancel()
             }
+        }
+        // timeList 예) ["10회 5세트", "12회 5세트", "10회 3세트"]
+        for (timeItem in timeList) { // 운동 갯수만큼
+            val setInfo = timeItem.split(" ") // 중간에 가르고
+            val countText = setInfo[0].replace("회", "") // 10회에 '10'
+            val setCount = setInfo[1].replace("세트", "") // 5세트에 '5'
 
+            exerciseSetList.add(setCount) // 세트 리스트에 세트 숫자 추가
+            exerciseTimeList.add(countText) // 운동 횟수 리스트에 운동 횟수 숫자 추가
         }
-        val setCount = 3
-        val items: MutableList<String> = mutableListOf()
-        for (i in 1..setCount) {
-            items.add("$i 세트")
-        }
+
         val recyclerView = binding.exerciseStartRecyclerView
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        val adapter = ExerciseStartAdapter(items as ArrayList<String>, binding)
-        recyclerView.adapter = adapter
+        exerciseAdapter = ExerciseStartAdapter()
+        recyclerView.adapter = exerciseAdapter
 
         binding.addbutton.setOnClickListener {
-            val lastSetNumber = items.last().split(" ")[0].toInt()
-            val newItem = "${lastSetNumber + 1} 세트"
-            items.add(newItem)
-            adapter.notifyDataSetChanged()
+            exerciseAdapter.addExerciseSet()
+            var exerciseTotalSet = exerciseSetList[currentExerciseIndex].toInt()
+            exerciseTotalSet += 1
+            exerciseSetList[currentExerciseIndex] = exerciseTotalSet.toString()
         }
 
         binding.setSubButton.setOnClickListener {
-            adapter.removeLastItem()
+            exerciseAdapter.removeLastExerciseSet()
+            var exerciseTotalSet = exerciseSetList[currentExerciseIndex].toInt()
+            exerciseTotalSet -= 1
+            exerciseSetList[currentExerciseIndex] = exerciseTotalSet.toString()
         }
 
         binding.exerciseBackButton.setOnClickListener {
             finish()
         }
-
-        setExerciseName(exerciseList[currentExerciseIndex])
 
         binding.forwardButton.setOnClickListener {
             moveToNextExercise()
@@ -134,6 +146,7 @@ class ExerciseStartActivity : AppCompatActivity() {
             finishExercise()
         }
 
+        initExercise()
     }
 
     private fun startTimer() { // 타이머 작동 함수
@@ -153,22 +166,33 @@ class ExerciseStartActivity : AppCompatActivity() {
         timeTask?.cancel()
     }
 
+    private fun initExercise(){
+        setExerciseData(0)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     private fun moveToNextExercise() { // 다음 화살표 누를 시 다음 운동으로
         if (currentExerciseIndex < exerciseList.size - 1) {
             currentExerciseIndex++
-            setExerciseName(exerciseList[currentExerciseIndex])
+            setExerciseData(currentExerciseIndex)
             binding.exerciseStartRecyclerView.adapter?.notifyDataSetChanged()
             updateArrowVisibility()
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun moveToPreviousExercise() { // 이전 화살표 누를 시 이전 운동으로
         if (currentExerciseIndex > 0) {
             currentExerciseIndex--
-            setExerciseName(exerciseList[currentExerciseIndex])
+            setExerciseData(currentExerciseIndex)
             binding.exerciseStartRecyclerView.adapter?.notifyDataSetChanged()
             updateArrowVisibility()
         }
+    }
+
+    private fun updateItemData(exericseSet: String, exerciseTime: String){
+        val adapter = binding.exerciseStartRecyclerView.adapter as ExerciseStartAdapter
+        adapter.setExerciseData(exericseSet, exerciseTime)
     }
 
     private fun finishExercise() { // 운동 종료 시 다음 운동으로, 마지막일 시 운동 종료 화면으로 이동
@@ -181,23 +205,30 @@ class ExerciseStartActivity : AppCompatActivity() {
             intent.putExtra("currentTimer", currentTimer)
             intent.putExtra("startTime", formattedTime)
             intent.putStringArrayListExtra("exerciseNames", exerciseList)
+            intent.putStringArrayListExtra("exerciseSet", exerciseSetList)
+            intent.putStringArrayListExtra("exerciseTime", exerciseTimeList)
             startActivity(intent)
             finish()
         }
     }
 
-    private fun setExerciseName(name: String) { // 현재 운동 이름 띄우기
-        binding.exerciseStartName.text = name
+    private fun setExerciseData(index: Int) { // 현재 운동 이름 띄우기
+        val exerciseName = exerciseList[index]
+        binding.exerciseStartName.text = exerciseName
+        val exerciseSet = exerciseSetList[index]
+        val exerciseTime = exerciseTimeList[index]
+        val exerciseUrl = urlList[index]
+        binding.exerciseStartImageView.apply {
+            Glide.with(binding.exerciseStartImageView)
+                .load(exerciseUrl)
+                .into(binding.exerciseStartImageView)
+        }
+        updateItemData(exerciseSet, exerciseTime)
     }
 
     private fun updateArrowVisibility() { // 처음과 마지막운동일 시 각각 이전, 다음 화살표 비활성화
         binding.backButton.isEnabled = currentExerciseIndex != 0
         binding.forwardButton.isEnabled = currentExerciseIndex != exerciseList.size - 1
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private fun setRecyclerView() { // 시간을 못가져와서 임시로 넣어 놓은 리사이클러뷰..
-
     }
 
     override fun onStart() {
@@ -277,7 +308,5 @@ class ExerciseStartActivity : AppCompatActivity() {
 
 
     }
-
-
 }
 

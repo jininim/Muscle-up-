@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var userimage: String
     private var itemList : ArrayList<String>? = null
     private var nameList: ArrayList<String>? = null
+    private var timeList: ArrayList<String>? = null
+    private var urlList: ArrayList<String>? = null
     override fun onRestart() {
         super.onRestart()
 
@@ -35,6 +37,8 @@ class MainActivity : AppCompatActivity() {
 
         // 선택한 운동 정보 가져오기
         nameList = intent.getStringArrayListExtra("NAME_LIST")
+        timeList = intent.getStringArrayListExtra("TIME_LIST")
+        urlList = intent.getStringArrayListExtra("URL_LIST")
 
         //운동 종료시 사용할 운동 정보 리스트
         itemList = intent.getStringArrayListExtra("ITEM_LIST")
@@ -46,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         // toolbar에 표시되는 제목의 표시 유무 False로 해야 툴바의 이름 화면에 표시
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        binding.MainBackButton.setOnClickListener {
+        binding.BackButton.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
@@ -59,12 +63,16 @@ class MainActivity : AppCompatActivity() {
                         putString("USER_NAME", username)
                         putString("USER_IMAGE", userimage)
                         putStringArrayList("NAME_LIST", nameList)
+                        putStringArrayList("TIME_LIST", timeList)
+                        putStringArrayList("URL_LIST", urlList)
                     }
                     fragment.arguments = bundle
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.nav_host_fragment_activity_main, fragment)
                         .commit()
                     nameList = null
+                    timeList = null
+                    urlList = null
                 }
                 R.id.navigation_dashboard -> {
                     val calendarFragment = CalendarFragment()

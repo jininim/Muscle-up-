@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.teamproject_hometrainingassistant_app.R
 import com.example.teamproject_hometrainingassistant_app.databinding.ItemExerciseEndBinding
 
-class MyRoutineAdapter(private val itemList: ArrayList<String>):
+class MyRoutineAdapter(private val itemList: ArrayList<String>, private val timeList: ArrayList<String>):
     RecyclerView.Adapter<MyRoutineAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textView: TextView = itemView.findViewById(R.id.exerciseText)
+        val timeTextView: TextView = itemView.findViewById(R.id.time)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -22,6 +23,7 @@ class MyRoutineAdapter(private val itemList: ArrayList<String>):
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.textView.text = itemList[position]
+        holder.timeTextView.text = timeList[position]
     }
 
     override fun getItemCount(): Int {

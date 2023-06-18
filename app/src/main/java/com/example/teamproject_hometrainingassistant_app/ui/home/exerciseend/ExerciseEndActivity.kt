@@ -25,7 +25,7 @@ class ExerciseEndActivity: AppCompatActivity() {
     private lateinit var binding: ActivityExerciseEndBinding
     private lateinit var sharedPreferences: SharedPreferences
 
-    @SuppressLint("MutatingSharedPrefs")
+    @SuppressLint("MutatingSharedPrefs", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,8 +39,11 @@ class ExerciseEndActivity: AppCompatActivity() {
         val savedDate = sharedPreferences.getString("CurrentDate", null) // 최근 날짜 저장
 
         val itemList = intent.getStringArrayListExtra("exerciseNames") // 운동 이름 리스트
+        val exerciseSet = intent.getStringArrayListExtra("exerciseSet") // 운동 별 세트 수
+        val exerciseTime = intent.getStringArrayListExtra("exerciseTime") // 운동 별 횟수
         val currentTimer = intent.getStringExtra("currentTimer") // 운동한 총 시간
         val startTime = intent.getStringExtra("startTime") // 운동 시작 시간
+
         val timeM = currentTimer?.split(":")?.get(0)?.toDouble()
         val timeS =  currentTimer?.split(":")?.get(1)?.toDouble()
         val calorie : Double? = (timeM?.times(60)?.times(0.14))?.plus((timeS?.times(0.14)!!))
@@ -66,15 +69,15 @@ class ExerciseEndActivity: AppCompatActivity() {
         }
         // 일 수를 화면에 표시
         binding.routineTotalDate.text = "${dayCount}일차"
-        binding.routineTotalTime.text = "${currentTimer}"
-        binding.startTime.text = "${startTime}"
-        binding.endTime.text = "${formattedTime}"
-        binding.dateTextView.text = "${currentDate}"
+        binding.routineTotalTime.text = "$currentTimer"
+        binding.startTime.text = "$startTime"
+        binding.endTime.text = formattedTime
+        binding.dateTextView.text = currentDate
 
         val recyclerView: RecyclerView = binding.routineEndRecyclerView
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        val adapter = ExerciseEndAdapter(itemList!!)
+        val adapter = ExerciseEndAdapter(itemList!!,exerciseSet!!, exerciseTime!!)
         recyclerView.adapter = adapter
 
 

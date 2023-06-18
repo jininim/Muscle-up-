@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.ImageView
 
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +18,11 @@ import com.example.teamproject_hometrainingassistant_app.R
 import com.example.teamproject_hometrainingassistant_app.ui.home.db.Routine
 import com.example.teamproject_hometrainingassistant_app.ui.home.myroutine.MyRoutineDetailActivity
 
-class HomeAdapter(val onClickUpdate: (routine: Routine) -> Unit) :
+class HomeAdapter(
+    val onClickUpdate: (routine: Routine) -> Unit,
+    val onItemClicked: (routine: Routine) -> Unit,
+    val onShareEvent: (routine: Routine) -> Unit
+) :
     RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
     private var itemList = emptyList<Routine>()
@@ -25,16 +30,19 @@ class HomeAdapter(val onClickUpdate: (routine: Routine) -> Unit) :
     inner class HomeViewHolder(itemView: View) : ViewHolder(itemView) {
         val routineList: TextView = itemView.findViewById(R.id.routine)
         val checkBox: CheckBox = itemView.findViewById(R.id.checkBox)
+        val shareButton: ImageView = itemView.findViewById(R.id.shareButton)
 
         init{
             routineList.setOnClickListener {
-                val text = routineList.text.toString()
-                Log.d("text", text)
-                val intent = Intent(itemView.context, MyRoutineDetailActivity::class.java)
-                intent.putExtra("text", text)
-                itemView.context.startActivity(intent)
+                val clickedRoutine = itemList[adapterPosition]
+                onItemClicked.invoke(clickedRoutine)
+            }
+            shareButton.setOnClickListener {
+                val clickedRoutine = itemList[adapterPosition]
+                onShareEvent.invoke(clickedRoutine)
             }
         }
+
     }
     @SuppressLint("NotifyDataSetChanged")
     fun setData(routine: List<Routine>) {
@@ -62,6 +70,5 @@ class HomeAdapter(val onClickUpdate: (routine: Routine) -> Unit) :
                 onClickUpdate.invoke(current)
             }
         }
-
     }
 }

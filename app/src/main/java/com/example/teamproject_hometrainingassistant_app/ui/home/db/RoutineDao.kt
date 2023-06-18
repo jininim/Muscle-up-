@@ -9,7 +9,6 @@ interface RoutineDao {
     @Query("SELECT * FROM routine_table ORDER BY id ASC")
     fun getProduct(): LiveData<List<Routine>>
 
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(routine: Routine)
 

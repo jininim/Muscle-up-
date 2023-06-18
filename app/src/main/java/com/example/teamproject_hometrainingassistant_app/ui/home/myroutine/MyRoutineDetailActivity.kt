@@ -95,17 +95,25 @@ class MyRoutineDetailActivity : AppCompatActivity() {
         )
         setContentView(binding.root)
 
-
         // 이전 액티비티에서 가져온 데이터
-        val data = intent.getStringExtra("text")
-        val trimmedString = data!!.replace("[", "").replace("]", "")
-        val itemList: ArrayList<String> = ArrayList(trimmedString.split(", "))
+        val routineName = intent.getStringExtra("ROUTINE_NAME")
+        val routineTime = intent.getStringExtra("ROUTINE_TIME")
+        val routineUrl = intent.getStringExtra("ROUTINE_URL")
+
+        val trimmedName = routineName!!.replace("[", "").replace("]", "")
+        val itemList: ArrayList<String> = ArrayList(trimmedName.split(", "))
+
+        val trimmedTime = routineTime!!.replace("[","").replace("]","")
+        val timeList: ArrayList<String> = ArrayList(trimmedTime.split(", "))
+
+        val trimmedUrl = routineUrl!!.replace("[","").replace("]","")
+        val urlList: ArrayList<String> = ArrayList(trimmedUrl.split(", "))
 
         // RecyclerView 설정
         val recyclerView: RecyclerView = binding.routineDetailRecyclerView
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        val adapter = MyRoutineAdapter(itemList)
+        val adapter = MyRoutineAdapter(itemList, timeList)
         recyclerView.adapter = adapter
 
         var check = false
@@ -128,6 +136,8 @@ class MyRoutineDetailActivity : AppCompatActivity() {
         binding.myRoutineStartButton.setOnClickListener {
             val intent = Intent(this, ExerciseStartActivity::class.java)
             intent.putExtra("itemList", itemList)
+            intent.putExtra("timeList", timeList)
+            intent.putExtra("urlList", urlList)
             intent.putExtra("decibel", binding.dbText.text)
             intent.run { startActivity(intent) }
         }

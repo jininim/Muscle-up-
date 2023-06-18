@@ -1,26 +1,32 @@
 package com.example.teamproject_hometrainingassistant_app.ui.home.exerciseend
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teamproject_hometrainingassistant_app.R
+import com.example.teamproject_hometrainingassistant_app.databinding.ItemExerciseEndBinding
+import com.example.teamproject_hometrainingassistant_app.databinding.ItemExerciseStartBinding
+import org.w3c.dom.Text
 
-class ExerciseEndAdapter(private val itemList: ArrayList<String>):
+class ExerciseEndAdapter(private val itemList: ArrayList<String>, private val setList: ArrayList<String> , private val timeList: ArrayList<String>):
     RecyclerView.Adapter<ExerciseEndAdapter.ViewHolder>(){
 
-        inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-            private val exerciseTextView : TextView = itemView.findViewById(R.id.exerciseText)
+        inner class ViewHolder(private val binding: ItemExerciseEndBinding) : RecyclerView.ViewHolder(binding.root){
 
-            fun bind(itemList: String){
-                exerciseTextView.text = itemList
+            @SuppressLint("SetTextI18n")
+            fun bind(itemList: String, setItem: String, timeItem: String){
+                binding.exerciseText.text = itemList
+                binding.time.text = "${setItem}세트 ${timeItem}회"
             }
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_exercise_end,parent,false)
-        return ViewHolder(itemView)
+        val view = LayoutInflater.from(parent.context)
+        val binding = ItemExerciseEndBinding.inflate(view, parent, false)
+        return ViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -29,6 +35,8 @@ class ExerciseEndAdapter(private val itemList: ArrayList<String>):
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val itemList = itemList[position]
-        holder.bind(itemList)
+        val setItem = setList[position]
+        val timeItem = timeList[position]
+        holder.bind(itemList, setItem, timeItem)
     }
 }

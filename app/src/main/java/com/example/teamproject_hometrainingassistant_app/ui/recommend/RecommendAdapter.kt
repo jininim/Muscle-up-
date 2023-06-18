@@ -28,18 +28,17 @@ class RecommendAdapter(private val context: Context, private val videoTitleList:
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val videoTitle = videoTitleList[position]
         holder.bind(videoTitle)
-
-        holder.itemView.setOnClickListener {
-            val intent = Intent(context, RoutineDetailActivity::class.java)
-            intent.putExtra("videoTitle", videoTitle)
-            context.startActivity(intent)
-        }
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private val videoTitleText: TextView = itemView.findViewById(R.id.recommendButton)
         fun bind(videoTitle : String){
             videoTitleText.text = videoTitle
+            videoTitleText.setOnClickListener {
+                val intent = Intent(context, RoutineDetailActivity::class.java)
+                intent.putExtra("videoTitle", videoTitle)
+                context.startActivity(intent)
+            }
         }
     }
 }

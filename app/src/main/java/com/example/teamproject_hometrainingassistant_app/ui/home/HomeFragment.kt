@@ -16,6 +16,7 @@ import com.example.teamproject_hometrainingassistant_app.ui.exercise.ExerciseAct
 import com.example.teamproject_hometrainingassistant_app.ui.calendar.Decorator.VerticalItemDecorator
 import com.example.teamproject_hometrainingassistant_app.ui.home.db.Routine
 import com.example.teamproject_hometrainingassistant_app.ui.home.db.RoutineViewModel
+import com.example.teamproject_hometrainingassistant_app.ui.home.myroutine.MyRoutineDetailActivity
 import com.example.teamproject_hometrainingassistant_app.ui.recommend.RecommendActivity
 
 
@@ -55,15 +56,31 @@ class HomeFragment : Fragment() {
 
         //사용자가 선택한 운동정보 가져오기
         val nameList: java.util.ArrayList<String>? = bundle?.getStringArrayList("NAME_LIST")
-        val timeList = arguments?.getStringArrayList("time")
-        Log.d("times", timeList.toString())
+        val timeList: java.util.ArrayList<String>? = bundle?.getStringArrayList("TIME_LIST")
+        val urlList: java.util.ArrayList<String>? = bundle?.getStringArrayList("URL_LIST")
+
 //nameList가 null이 아닌경우에만 운동 정보를 저장.
-        if (nameList != null) {
-            routineViewModel.addProduct(Routine(0, nameList.toString(), false))
+        if (nameList != null && timeList != null && urlList != null) {
+            routineViewModel.addProduct(Routine(0, nameList.toString(), timeList.toString(), urlList.toString(),false))
         }
             adapter = HomeAdapter(
                 onClickUpdate = {
                     routineViewModel.updateProduct(it)
+                },
+                onItemClicked = { routine ->
+                    val intent = Intent(context, MyRoutineDetailActivity::class.java).apply {
+                        putExtra("ROUTINE_NAME", routine.routine)
+                        putExtra("ROUTINE_TIME", routine.time)
+                        putExtra("ROUTINE_URL", routine.url)
+                        Log.d("routine", routine.routine)
+                    }
+                    startActivity(intent)
+                },
+                onShareEvent = {
+                    val shareIntent = Intent(Intent.ACTION_SEND)
+                    val routineList = it.routine
+                    shareIntent.type = "text/plain"
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, it.routine)
                 }
             )
             binding.recyclerView.adapter = adapter

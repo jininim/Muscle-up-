@@ -14,10 +14,11 @@ import com.example.teamproject_hometrainingassistant_app.ui.community.noticeBoar
 import com.example.teamproject_hometrainingassistant_app.ui.community.noticeBoard.NoticeBoardDetail.NoticeBoardDetailAdapter.Companion.diffUtil
 import com.example.teamproject_hometrainingassistant_app.ui.exercise.model.ExerciseModel
 
-class ExerciseSearchAdapter(val onItemClicked: (ExerciseModel) -> Unit,val oncheckBoxClick: (ArrayList<String>, ArrayList<String>) -> Unit) :
+class ExerciseSearchAdapter(val onItemClicked: (ExerciseModel) -> Unit,val onCheckBoxClick: (ArrayList<String>, ArrayList<String>, ArrayList<String>) -> Unit) :
     ListAdapter<ExerciseModel, ExerciseSearchAdapter.ViewHolder>(diffUtil) {
     val nameList : ArrayList<String> = ArrayList()
     val timeList : ArrayList<String> = ArrayList()
+    val urlList : ArrayList<String> = ArrayList()
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): ViewHolder {
@@ -44,7 +45,8 @@ class ExerciseSearchAdapter(val onItemClicked: (ExerciseModel) -> Unit,val onche
                     //체크된 항목의 item.name을 nameList에 저장
                     nameList.add(item.name)
                     timeList.add(item.times)
-                    oncheckBoxClick(nameList, timeList)
+                    urlList.add(item.exersiceUrl)
+                    onCheckBoxClick(nameList, timeList, urlList)
                 }
             }
         }

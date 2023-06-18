@@ -30,6 +30,8 @@ class ExerciseActivity : AppCompatActivity() {
         binding = ActivityExerciseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val fragmentHome = HomeFragment()
+
         //리사이클러뷰 어답터 운동리스트
         exerciseSearchAdapter = ExerciseSearchAdapter(onItemClicked = {exerciseModel ->
             val intent = Intent(this, ExerciseInformation::class.java)
@@ -39,25 +41,19 @@ class ExerciseActivity : AppCompatActivity() {
             intent.putExtra("youtubeUrl", exerciseModel.youtubeUrl)
             intent.putExtra("type", exerciseModel.type)
             intent.run { startActivity(intent) }
-        }, oncheckBoxClick = { name, time ->
+        }, onCheckBoxClick = { name, time, url ->
             var nameList: ArrayList<String> = name
-            val timeList: ArrayList<String> = time
+            var timeList: ArrayList<String> = time
+            var urlList: ArrayList<String> = url
 
-            val bundle = Bundle()
-            bundle.putStringArrayList("time", timeList)
-
-            val homeFragment = HomeFragment()
-            homeFragment.arguments = bundle
-
-            Log.d("time", timeList.toString())
             binding.fabadd.setOnClickListener {
                 val intent = Intent(this,MainActivity::class.java)
                 intent.putExtra("NAME_LIST",nameList)
+                intent.putExtra("TIME_LIST", timeList)
+                intent.putExtra("URL_LIST", urlList)
                 startActivity(intent)
                 finish()
-
             }
-
         })
         binding.exerciseSearchRecyclerView.apply {
             adapter = exerciseSearchAdapter
