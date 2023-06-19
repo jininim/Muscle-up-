@@ -42,7 +42,6 @@ class HomeAdapter(
                 onShareEvent.invoke(clickedRoutine)
             }
         }
-
     }
     @SuppressLint("NotifyDataSetChanged")
     fun setData(routine: List<Routine>) {

@@ -31,6 +31,8 @@ class HomeFragment : Fragment() {
         ViewModelProvider(this)[RoutineViewModel::class.java]
     }
 
+    private var routineList: ArrayList<String> = ArrayList()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -78,9 +80,21 @@ class HomeFragment : Fragment() {
                 },
                 onShareEvent = {
                     val shareIntent = Intent(Intent.ACTION_SEND)
-                    val routineList = it.routine
+
+                    val routine = it.routine
+                    val trimmedName = routine.replace("[", "").replace("]", "")
+                    val itemList: ArrayList<String> = ArrayList(trimmedName.split(", "))
+
+                    val routineMessage = itemList.joinToString("\n")
+                    val message = "아직도 집에서 자빠져 계시진 않으신가요?\n머슬없?! 에서 당신을 도와드립니다!\n${routineMessage}\n집에서 해보세요"
+
                     shareIntent.type = "text/plain"
-                    shareIntent.putExtra(Intent.EXTRA_TEXT, it.routine)
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, message)
+
+                    val chooseIntent = Intent.createChooser(shareIntent, "Share List")
+                    if(shareIntent.resolveActivity(requireContext().packageManager) != null){
+                        startActivity(chooseIntent)
+                    }
                 }
             )
             binding.recyclerView.adapter = adapter

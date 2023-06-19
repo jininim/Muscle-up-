@@ -17,7 +17,7 @@ class MyRoutineAdapter(private val itemList: ArrayList<String>, private val time
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_exercise_end, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_myroutine_detail, parent, false)
         return ViewHolder(view)
     }
 
