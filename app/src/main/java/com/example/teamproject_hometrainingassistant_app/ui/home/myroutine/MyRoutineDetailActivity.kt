@@ -8,6 +8,7 @@ import android.media.MediaRecorder
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.PackageManagerCompat
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teamproject_hometrainingassistant_app.R
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityMyRoutineDetailBinding
+import com.example.teamproject_hometrainingassistant_app.databinding.ItemMyroutineDetailBinding
 import com.example.teamproject_hometrainingassistant_app.ui.home.exercisestart.ExerciseStartActivity
 import kotlinx.coroutines.*
 import java.io.IOException
@@ -24,7 +26,7 @@ import java.io.IOException
 private lateinit var binding: ActivityMyRoutineDetailBinding
 private const val REQUEST_RECORD_AUDIO_PERMISSION = 200
 
-class MyRoutineDetailActivity : AppCompatActivity() {
+class MyRoutineDetailActivity : AppCompatActivity(), MyRoutineDialog.OnDialogResultListener {
 
     private var fileName: String = ""
 
@@ -32,10 +34,13 @@ class MyRoutineDetailActivity : AppCompatActivity() {
     private var isRecording = false
     private var job: Job? = null
 
+    private var editPosition: Int = 0
 
     // Requesting permission to RECORD_AUDIO
     private var permissionToRecordAccepted = false
     private var permissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO)
+
+    private var editCountTime: ArrayList<String> = arrayListOf()
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -105,6 +110,7 @@ class MyRoutineDetailActivity : AppCompatActivity() {
 
         val trimmedTime = routineTime!!.replace("[","").replace("]","")
         val timeList: ArrayList<String> = ArrayList(trimmedTime.split(", "))
+        editCountTime = timeList
 
         val trimmedUrl = routineUrl!!.replace("[","").replace("]","")
         val urlList: ArrayList<String> = ArrayList(trimmedUrl.split(", "))
@@ -113,7 +119,17 @@ class MyRoutineDetailActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = binding.routineDetailRecyclerView
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        val adapter = MyRoutineAdapter(itemList, timeList)
+        val adapter = MyRoutineAdapter(
+            itemList,
+            timeList,
+            onItemClick = { timeText, position ->
+                editPosition = position
+                val countSet = timeText.split(" ")
+                val count = countSet[0].replace("회", "")
+                val set = countSet[1].replace("세트", "")
+                showTimeDialog(count, set)
+            }
+        )
         recyclerView.adapter = adapter
 
         var check = false
@@ -130,7 +146,6 @@ class MyRoutineDetailActivity : AppCompatActivity() {
                 binding.myRoutineStartButton.isClickable = true
                 binding.decibelStartButton.text = "사용자 소음 측정"
             }
-
         }
 
         binding.myRoutineStartButton.setOnClickListener {
@@ -141,10 +156,23 @@ class MyRoutineDetailActivity : AppCompatActivity() {
             intent.putExtra("decibel", binding.dbText.text)
             intent.run { startActivity(intent) }
         }
-
         binding.exerciseBackButton.setOnClickListener {
             finish()
         }
+    }
+
+    private fun showTimeDialog(count: String, set: String){
+        val fragmentManager = supportFragmentManager
+        val dialogFragment = MyRoutineDialog.newInstance(count, set)
+        dialogFragment.setOnDialogResultListener(this)
+        dialogFragment.show(fragmentManager, "count_set_dialog")
+    }
+
+    override fun onTimeEdited(count: String, set: String) { // 운동 횟수 수정 후 로직
+        val editText = "${count}회 ${set}세트"
+        val adapter = binding.routineDetailRecyclerView.adapter as MyRoutineAdapter
+        editCountTime[editPosition] = editText
+        adapter.setCountUpdate(editText, editPosition)
     }
 
     override fun onStop() {
@@ -168,10 +196,9 @@ class MyRoutineDetailActivity : AppCompatActivity() {
                             (20 * kotlin.math.log10(amplitude.toDouble())).toInt().toString()
                     }
                 }
-
             }
         }
-
-
     }
+
+
 }

@@ -7,6 +7,7 @@ import kotlin.math.ceil
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -83,6 +84,7 @@ class ExerciseEndActivity: AppCompatActivity() {
 
         //운동 종료 버튼 클릭 시
         binding.routineEndSaveButton.setOnClickListener {
+            Toast.makeText(this, "저장 성공!", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("ITEM_LIST",itemList)
             startActivity(intent)

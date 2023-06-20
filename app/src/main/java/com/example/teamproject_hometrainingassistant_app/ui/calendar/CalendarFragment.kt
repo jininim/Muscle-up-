@@ -13,7 +13,6 @@ class CalendarFragment : Fragment() {
 
     private var _binding: FragmentCalendarBinding? = null
 
-
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -30,7 +29,6 @@ class CalendarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         //현재 날짜 가져오기
         val today = Calendar.getInstance()
         val month = today.get(Calendar.MONTH)
@@ -38,8 +36,6 @@ class CalendarFragment : Fragment() {
         //현재 시간 가져오기
         val time = getCurrentKoreaTime()
         binding.editTime.setText(time)
-
-
 
         //수행한 운동정보 가져오기
         val bundle = arguments
@@ -65,8 +61,6 @@ class CalendarFragment : Fragment() {
             editor.apply()
         }
 
-
-
         //현재 날짜 표기
         binding.calendarDate.text = "${month + 1}월 ${day}일"
 
@@ -82,8 +76,6 @@ class CalendarFragment : Fragment() {
             val timeData = sharedPreferences.getString(selectedDate2, null)
             binding.editName.setText(data)
             binding.editTime.setText(timeData)
-
-
         }
     }
     private fun getCurrentKoreaTime(): String {
@@ -99,7 +91,5 @@ class CalendarFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }
 

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teamproject_hometrainingassistant_app.DBKey
 import com.example.teamproject_hometrainingassistant_app.databinding.FragmentNoticeBoardBinding
+import com.example.teamproject_hometrainingassistant_app.ui.calendar.Decorator.VerticalItemDecorator
 import com.example.teamproject_hometrainingassistant_app.ui.community.noticeBoard.CreateNoticeBoardActivity
 import com.example.teamproject_hometrainingassistant_app.ui.community.noticeBoard.NoticeBoardAdapter
 import com.example.teamproject_hometrainingassistant_app.ui.community.noticeBoard.NoticeBoardData
@@ -79,6 +80,7 @@ class CommunityFragment : Fragment() {
 
         binding.titleRecyclerView.layoutManager = LinearLayoutManager(context) // 리사이클러뷰 어댑터 연결
         binding.titleRecyclerView.adapter = noticeBoardAdapter
+        binding.titleRecyclerView.addItemDecoration(VerticalItemDecorator(10))
 
         return view
     }
