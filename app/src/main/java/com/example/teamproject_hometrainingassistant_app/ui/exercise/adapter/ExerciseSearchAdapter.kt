@@ -19,6 +19,8 @@ class ExerciseSearchAdapter(val onItemClicked: (ExerciseModel) -> Unit,val onChe
     val nameList : ArrayList<String> = ArrayList()
     val timeList : ArrayList<String> = ArrayList()
     val urlList : ArrayList<String> = ArrayList()
+
+    private var currentList: List<ExerciseModel> = emptyList()
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): ViewHolder {
@@ -50,6 +52,10 @@ class ExerciseSearchAdapter(val onItemClicked: (ExerciseModel) -> Unit,val onChe
                 }
             }
         }
+    }
+    override fun submitList(list: List<ExerciseModel>?) {
+        currentList = list ?: emptyList() // Update the current list
+        super.submitList(list)
     }
 
     companion object{
