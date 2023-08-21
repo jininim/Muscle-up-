@@ -38,21 +38,24 @@ class ExerciseActivity : AppCompatActivity() {
         val fragmentHome = HomeFragment()
 
         binding.optionButton1.setOnClickListener {
-            applyTypeFilter("팔")
+            exerciseSearchAdapter.submitList(currentFilteredExerciseList)
         }
         binding.optionButton2.setOnClickListener {
-            applyTypeFilter("가슴")
+            applyTypeFilter("팔")
         }
         binding.optionButton3.setOnClickListener {
-            applyTypeFilter("어깨")
+            applyTypeFilter("가슴")
         }
         binding.optionButton4.setOnClickListener {
-            applyTypeFilter("등")
+            applyTypeFilter("어깨")
         }
         binding.optionButton5.setOnClickListener {
-            applyTypeFilter("복부")
+            applyTypeFilter("등")
         }
         binding.optionButton6.setOnClickListener {
+            applyTypeFilter("복부")
+        }
+        binding.optionButton7.setOnClickListener {
             applyTypeFilter("하체")
         }
 

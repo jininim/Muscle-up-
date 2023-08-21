@@ -67,7 +67,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginStart="10dp"
-                android:text="팔"
+                android:text="전체"
                 android:background="@drawable/border_black" />
 
             <Button
@@ -77,7 +77,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginStart="10dp"
-                android:text="가슴"
+                android:text="팔"
                 android:background="@drawable/border_black" />
 
             <Button
@@ -87,11 +87,21 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginStart="10dp"
-                android:text="어깨"
+                android:text="가슴"
                 android:background="@drawable/border_black" />
 
             <Button
                 android:id="@+id/optionButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="10dp"
+                android:text="어깨"
+                android:background="@drawable/border_black" />
+
+            <Button
+                android:id="@+id/optionButton5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -101,7 +111,7 @@
                 android:text="등" />
 
             <Button
-                android:id="@+id/optionButton5"
+                android:id="@+id/optionButton6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -111,7 +121,7 @@
                 android:background="@drawable/border_black" />
 
             <Button
-                android:id="@+id/optionButton6"
+                android:id="@+id/optionButton7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
