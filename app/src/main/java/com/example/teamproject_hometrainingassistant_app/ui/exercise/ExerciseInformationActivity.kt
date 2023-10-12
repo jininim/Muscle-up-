@@ -1,8 +1,13 @@
 package com.example.teamproject_hometrainingassistant_app.ui.exercise
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.webkit.WebChromeClient
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityExerciseInformationBinding
@@ -10,6 +15,7 @@ import com.example.teamproject_hometrainingassistant_app.databinding.ActivityExe
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityExerciseInformationBinding
 class ExerciseInformation : AppCompatActivity(){
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -28,7 +34,6 @@ class ExerciseInformation : AppCompatActivity(){
                 .into(binding.url)
         }
         binding.guide.text = guide
-        binding.youtube.text = youtubeUrl
 
         //뒤로가기 버튼 클릭 시
         binding.exerciseBackButton.setOnClickListener {
