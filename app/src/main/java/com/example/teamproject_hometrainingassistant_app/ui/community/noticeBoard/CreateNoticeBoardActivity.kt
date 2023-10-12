@@ -23,6 +23,7 @@ import com.google.firebase.storage.ktx.storage
 class CreateNoticeBoardActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCreateNoticeBoardBinding
+    private lateinit var username: String
     private var selectedUri: Uri? = null // 선택된 사진
     private val storage: FirebaseStorage by lazy { // firebase 스토리지
         Firebase.storage
@@ -37,6 +38,8 @@ class CreateNoticeBoardActivity : AppCompatActivity() {
 
         binding = ActivityCreateNoticeBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        username = intent.getStringExtra("name").toString()
 
         binding.imageAddButton.setOnClickListener {
             when {
@@ -71,7 +74,7 @@ class CreateNoticeBoardActivity : AppCompatActivity() {
                 val photoUri = selectedUri ?: return@setOnClickListener // 선택한 사진을 photoUri에 삽입 만약 null이면 return
                 uploadPhoto(photoUri,  // 사진을 스토리지에 업로드 성공 시
                     successHandler = { uri ->
-                        uploadNoticeBoard(title, content, uri, key) // 게시글 업로드 실행
+                        uploadNoticeBoard(title, content, uri, key, username) // 게시글 업로드 실행
                     },
                     errorHandler = { // 업로드 실패 시
                         Toast.makeText(this, "사진 업로드에 실패했습니다.", Toast.LENGTH_SHORT).show()
@@ -79,7 +82,7 @@ class CreateNoticeBoardActivity : AppCompatActivity() {
                     }
                 )
             } else {
-                uploadNoticeBoard(title, content, "", key) // 선택한 사진이 없다면 uri를 null로 전달하며 게시글 업로드 실행
+                uploadNoticeBoard(title, content, "", key, username) // 선택한 사진이 없다면 uri를 null로 전달하며 게시글 업로드 실행
             }
         }
 
@@ -115,9 +118,10 @@ class CreateNoticeBoardActivity : AppCompatActivity() {
         title: String,      // 제목
         content: String,    // 내용
         imageUri: String,   // 사진 uri
-        key: Long           // 게시글 고유 키값
+        key: Long,           // 게시글 고유 키값
+        name: String
     ) { // 게시글 업로드
-        val model = NoticeBoardData(title, content, imageUri, key) // 게시글 데이터 형식으로 받아온 값들을 model에 저장
+        val model = NoticeBoardData(title, content, imageUri, key, name) // 게시글 데이터 형식으로 받아온 값들을 model에 저장
         articleDB.push().setValue(model) // 최종적으로 DB에 푸쉬
 
         hideProgress() // 로딩창 숨기기

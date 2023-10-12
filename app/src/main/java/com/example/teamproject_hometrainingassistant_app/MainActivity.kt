@@ -86,6 +86,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> {
                     val comFragment = CommunityFragment()
+                    val bundle = Bundle().apply {
+                        putString("USER_NAME", username)
+                    }
+                    comFragment.arguments = bundle
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.nav_host_fragment_activity_main, comFragment)
                         .commit()

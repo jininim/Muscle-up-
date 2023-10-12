@@ -29,14 +29,10 @@ class NoticeBoardAdapter(val onItemClicked: (NoticeBoardData) -> Unit) :
 
         fun bind(item: NoticeBoardData){
             binding.title.text = item.text
+            binding.communityContent.text = item.content
+            binding.communityUser.text = item.name
 
-            if(item.uri.isNotEmpty()){
-                Glide.with(binding.image)
-                    .load(item.uri)
-                    .into(binding.image)
-            }
-
-            binding.title.setOnClickListener {
+            binding.root.setOnClickListener {
                 onItemClicked(item)
             }
         }

@@ -27,6 +27,7 @@ class CommunityFragment : Fragment() {
     private lateinit var noticeBoardAdapter: NoticeBoardAdapter // 리사이클러뷰 어댑터
     private lateinit var noticeBoardDB: DatabaseReference       // firebase realTimeDB
     private var _binding: FragmentNoticeBoardBinding? = null
+    private lateinit var username: String
 
     private val noticeBoardList = mutableListOf<NoticeBoardData>() // firebase에서 가져온 값들을 저장하는 리스트
 
@@ -61,6 +62,9 @@ class CommunityFragment : Fragment() {
         _binding = FragmentNoticeBoardBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        val bundle = arguments
+        username = bundle?.getString("USER_NAME").orEmpty()
+
         noticeBoardList.clear()
         noticeBoardDB = Firebase.database.reference.child(DBKey.DB_NOTICE_BOARD) // firebase에 저장되는 경로.
         noticeBoardAdapter = NoticeBoardAdapter(onItemClicked = { noticeBoardData -> // noticeBoardData = 게시글 데이터 형식.
@@ -68,6 +72,8 @@ class CommunityFragment : Fragment() {
             intent.putExtra("chatKey", noticeBoardData.key)                    // 게시글 화면으로 전달.
             intent.putExtra("title", noticeBoardData.text)
             intent.putExtra("content", noticeBoardData.content)
+            intent.putExtra("name", noticeBoardData.name)
+            intent.putExtra("uri", noticeBoardData.uri)
             startActivity(intent)
         })
 
@@ -75,6 +81,7 @@ class CommunityFragment : Fragment() {
 
         binding.createNoticeBoardButton.setOnClickListener { // 게시글 만들기 버튼
             val intent = Intent(context, CreateNoticeBoardActivity::class.java)
+            intent.putExtra("name", username)
             intent.run { startActivity(this) }
         }
 

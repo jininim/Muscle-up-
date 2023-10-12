@@ -7,13 +7,20 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teamproject_hometrainingassistant_app.databinding.ItemChatBinding
+import java.text.SimpleDateFormat
 
 class NoticeBoardDetailAdapter : ListAdapter<NoticeBoardDetailData, NoticeBoardDetailAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(private val binding: ItemChatBinding): RecyclerView.ViewHolder(binding.root){
         @SuppressLint("SimpleDateFormat")
         fun bind(chatItem: NoticeBoardDetailData){
-            binding.chat.text = chatItem.message
+            val postDate = SimpleDateFormat("MM/dd")
+            val postTime = SimpleDateFormat("hh:mm")
+
+            binding.chatName.text = chatItem.name
+            binding.chatContent.text = chatItem.message
+            binding.chatDate.text = postDate.format(chatItem.time)
+            binding.chatTime.text = postTime.format(chatItem.time)
         }
     }
 

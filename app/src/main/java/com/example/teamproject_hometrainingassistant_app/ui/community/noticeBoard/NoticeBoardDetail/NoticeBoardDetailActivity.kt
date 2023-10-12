@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.teamproject_hometrainingassistant_app.DBKey.Companion.DB_CHAT
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityNoticeBoardDetailBinding
 import com.google.firebase.database.ChildEventListener
@@ -21,6 +22,7 @@ class NoticeBoardDetailActivity : AppCompatActivity() { // 게시글 내부 액�
     private val chatList = mutableListOf<NoticeBoardDetailData>() // 채팅들을 저장하는 리스트
     private val adapter = NoticeBoardDetailAdapter() // 리사이클러뷰 어댑터
     private var chatDB: DatabaseReference? = null    // firebase에 채팅을 저장하는 경로
+    lateinit var name: String
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +34,8 @@ class NoticeBoardDetailActivity : AppCompatActivity() { // 게시글 내부 액�
         val chatKey = intent.getLongExtra("chatKey", -1) // 게시글 고유 키
         val title = intent.getStringExtra("title") // 게시글 제목
         val content = intent.getStringExtra("content") // 게시글 내용
+        name = intent.getStringExtra("name").toString()
+        val uri = intent.getStringExtra("uri")
 
         val time : Long = chatKey
         val postDate = SimpleDateFormat("MM-dd") // 게시 날짜
@@ -39,6 +43,9 @@ class NoticeBoardDetailActivity : AppCompatActivity() { // 게시글 내부 액�
 
         binding.noticeBoardTitle.text = title.toString()    // 받아온 값들로 게시글 화면 텍스트 수정.
         binding.content.text = content.toString()
+        Glide.with(binding.image)
+            .load(uri)
+            .into(binding.image)
 
         binding.postTimeDate.text = postDate.format(time)
         binding.postTimeDetail.text = postTime.format(time)
@@ -70,8 +77,11 @@ class NoticeBoardDetailActivity : AppCompatActivity() { // 게시글 내부 액�
         binding.chatRecyclerview.adapter = adapter
 
         binding.sendButton.setOnClickListener { // 채팅 보내기 버튼 클릭 시
+            val chatTime = System.currentTimeMillis()
             val chatItem = NoticeBoardDetailData(
-                message = binding.chatEditText.text.toString() // 작성한 문장을 chatItem에 삽입
+                message = binding.chatEditText.text.toString(), // 작성한 문장을 chatItem에 삽입
+                name = name,
+                time = chatTime
             )
             binding.chatEditText.text = null // 작성한 에딧텍스트는 초기화
 

@@ -4,7 +4,8 @@ data class NoticeBoardData(
     val text : String,
     val content : String,
     val uri : String,
-    val key : Long
+    val key : Long,
+    val name : String
 ) {
-    constructor() : this("", "", "", 0)
+    constructor() : this("", "", "", 0, "")
 }

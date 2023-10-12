@@ -5,25 +5,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/border">
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginStart="10dp"
-        android:src="@drawable/ic_menu" />
-
-    <Button
+    <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/image"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="15dp"
-        android:background="#00ff0000"
-        android:textColor="@color/black"
-        android:text="글 제목"/>
+        android:text="게시글 제목"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/communityContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="15dp"
+        android:text="게시글 내용"
+        android:textStyle="bold"
+        android:textSize="13dp"
+        android:maxLines="1"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/communityUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/communityContent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="15dp"
+        android:text="게시자 이름"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:textColor="@color/black"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

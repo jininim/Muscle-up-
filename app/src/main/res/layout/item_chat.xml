@@ -2,15 +2,66 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingLeft="15dp"
+    android:paddingTop="15dp"
+    android:paddingRight="15dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageView
+        android:id="@+id/chatImage"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/user"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:id="@+id/chat"
+        android:id="@+id/chatName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:layout_marginStart="15dp"
+        android:text="댓글 이름"
         android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/chatImage"
+        app:layout_constraintStart_toEndOf="@id/chatImage"
+        app:layout_constraintTop_toTopOf="@id/chatImage" />
+
+    <TextView
+        android:id="@+id/chatContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="댓글 내용"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf="@id/chatImage"
+        app:layout_constraintTop_toBottomOf="@id/chatImage" />
+
+    <TextView
+        android:id="@+id/chatDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="월/일"
+        app:layout_constraintStart_toStartOf="@id/chatImage"
+        app:layout_constraintTop_toBottomOf="@id/chatContent"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/chatTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="시/분"
+        app:layout_constraintStart_toEndOf="@id/chatDate"
+        app:layout_constraintTop_toBottomOf="@id/chatContent"
+        android:layout_marginTop="15dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/chatTime"
+        android:layout_marginTop="10dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
