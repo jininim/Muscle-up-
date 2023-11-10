@@ -5,6 +5,6 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface ExerciseService {
-    @GET("/v3/d5dd8382-c50b-43e2-a27e-798ab20ddf1f")
+    @GET("/v3/3376c207-404e-48ca-a92c-cbe54e6958e9")
     fun listExercises(): Call<ExerciseDTO>
 }

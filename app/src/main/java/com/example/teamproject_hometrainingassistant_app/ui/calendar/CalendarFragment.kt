@@ -2,16 +2,29 @@ package com.example.teamproject_hometrainingassistant_app.ui.calendar
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.teamproject_hometrainingassistant_app.DBKey.Companion.DB_USER
 import com.example.teamproject_hometrainingassistant_app.databinding.FragmentCalendarBinding
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.util.*
+import kotlin.collections.ArrayList
 
 class CalendarFragment : Fragment() {
 
     private var _binding: FragmentCalendarBinding? = null
+    private lateinit var userName: String
+    private lateinit var userImage: String
+    private lateinit var userDB: DatabaseReference
+    private var routineList: MutableList<List<String>>? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -37,6 +50,26 @@ class CalendarFragment : Fragment() {
         val time = getCurrentKoreaTime()
         binding.editTime.setText(time)
 
+        val sharedPreferences = requireActivity().getSharedPreferences("kakao", AppCompatActivity.MODE_PRIVATE)
+
+        userName = sharedPreferences.getString("USER_NAME", "") ?: ""
+        userImage = sharedPreferences.getString("USER_IMAGE", "") ?: ""
+
+        userDB = FirebaseDatabase.getInstance().reference.child(DB_USER).child("${month+1}").child("$day")
+
+        userDB.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val routineList = mutableListOf<List<String>>()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+
+
+
         //수행한 운동정보 가져오기
         val bundle = arguments
         val itemList: ArrayList<String>? = bundle?.getStringArrayList("ITEM_LIST")
@@ -46,10 +79,10 @@ class CalendarFragment : Fragment() {
             val time = getCurrentKoreaTime()
             binding.editTime.setText(time)
             // SharedPreferences 객체 생성
-            val sharedPreferences =
+            val sharedPreferences2 =
                 requireContext().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
             // 에디터 객체 생성
-            val editor = sharedPreferences.edit()
+            val editor = sharedPreferences2.edit()
             //작성한 내용 저장
             val memo = binding.editName.text.toString()
             val memoTime = binding.editTime.text.toString()
@@ -70,10 +103,10 @@ class CalendarFragment : Fragment() {
             val selectedDate = "${month+1}${dayOfMonth}"
             val selectedDate2 = "${month}${dayOfMonth}"
             // SharedPreferences 객체 생성
-            val sharedPreferences = requireContext().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+            val sharedPreferences3 = requireContext().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
             // 선택된 날짜로부터 데이터 가져오기
-            val data = sharedPreferences.getString(selectedDate, null)
-            val timeData = sharedPreferences.getString(selectedDate2, null)
+            val data = sharedPreferences3.getString(selectedDate, null)
+            val timeData = sharedPreferences3.getString(selectedDate2, null)
             binding.editName.setText(data)
             binding.editTime.setText(timeData)
         }

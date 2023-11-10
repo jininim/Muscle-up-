@@ -181,7 +181,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="40dp"
-                android:text="0개"
+                android:text="0회"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"

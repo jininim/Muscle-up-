@@ -5,27 +5,34 @@ import android.content.Context
 import android.content.Intent
 import kotlin.math.ceil
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.edit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.teamproject_hometrainingassistant_app.DBKey
 import com.example.teamproject_hometrainingassistant_app.MainActivity
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityExerciseEndBinding
-import com.example.teamproject_hometrainingassistant_app.ui.home.exercisestart.ExerciseStartAdapter
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-import kotlin.math.roundToInt
 
 class ExerciseEndActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivityExerciseEndBinding
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var userDB: DatabaseReference
+    private lateinit var userName: String
+    private lateinit var userImage: String
+    private var count: Int = 0
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("MutatingSharedPrefs", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +41,12 @@ class ExerciseEndActivity: AppCompatActivity() {
         setContentView(binding.root)
 
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
+        userDB = FirebaseDatabase.getInstance().reference.child(DBKey.DB_USER)
+
+        val sharedPreferencesUser = getSharedPreferences("kakao", MODE_PRIVATE)
+
+        userName = sharedPreferencesUser.getString("USER_NAME", "") ?: ""
+        userImage = sharedPreferencesUser.getString("USER_IMAGE", "") ?: ""
 
         val currentDate = getCurrentDate() // 현재 시간 가져오기
         var dayCount = sharedPreferences.getInt("DayCount", 0) // 몇일차인지 카운트
@@ -49,10 +62,24 @@ class ExerciseEndActivity: AppCompatActivity() {
         val timeS =  currentTimer?.split(":")?.get(1)?.toDouble()
         val calorie : Double? = (timeM?.times(60)?.times(0.14))?.plus((timeS?.times(0.14)!!))
         val currentTime = Calendar.getInstance()
+        val month = currentTime.get(Calendar.MONTH)
+        val day = currentTime.get(Calendar.DAY_OF_MONTH)
         val hour = currentTime.get(Calendar.HOUR_OF_DAY)
         val minute = currentTime.get(Calendar.MINUTE)
         val period = if (hour >= 12) "오후" else "오전"
         val formattedTime = String.format("%s %d:%02d", period, hour % 12, minute) // 운동 종료 시간
+
+        val sharedPref = getSharedPreferences("count", MODE_PRIVATE)
+        count = sharedPref.getInt("activityCount1", 0)
+
+        count++
+
+        with(sharedPref.edit()) {
+            putInt("activityCount", count)
+            apply()
+        }
+
+        uploadCalendarRoutine(month, day, itemList!!)
 
         // 현재 날짜와 저장된 날짜 비교
         if (savedDate != currentDate) {
@@ -63,6 +90,9 @@ class ExerciseEndActivity: AppCompatActivity() {
                 .putInt("DayCount", dayCount)
                 .apply()
         }
+
+        Log.d("time", (month+1).toString())
+        Log.d("time", day.toString())
 
         //칼로리 표기
         if (calorie != null) {
@@ -78,7 +108,7 @@ class ExerciseEndActivity: AppCompatActivity() {
         val recyclerView: RecyclerView = binding.routineEndRecyclerView
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        val adapter = ExerciseEndAdapter(itemList!!,exerciseSet!!, exerciseTime!!)
+        val adapter = ExerciseEndAdapter(itemList,exerciseSet!!, exerciseTime!!)
         recyclerView.adapter = adapter
 
 
@@ -99,6 +129,20 @@ class ExerciseEndActivity: AppCompatActivity() {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val currentDate = Date()
         return dateFormat.format(currentDate)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun uploadCalendarRoutine(month: Int, day: Int, itemList:List<String>) {
+        val user = userDB.child(userName)
+        var i = 1
+        Log.d("list", itemList.toString())
+//        for (i in itemList){
+//            user.child("${month+1}").child("$day").child("${count}").setValue(i)
+//        }
+        itemList.forEach { item->
+            user.child("${month+1}").child("$day").child("${count}").child("$i").setValue(item)
+            i++
+        }
     }
 
 }

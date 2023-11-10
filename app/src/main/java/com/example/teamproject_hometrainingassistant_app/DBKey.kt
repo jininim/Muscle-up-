@@ -4,5 +4,6 @@ class DBKey {
     companion object{
         const val DB_NOTICE_BOARD = "NoticeBoard"
         const val DB_CHAT = "chat"
+        const val DB_USER = "User"
     }
 }

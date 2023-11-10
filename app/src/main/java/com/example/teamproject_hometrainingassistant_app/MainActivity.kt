@@ -13,8 +13,8 @@ import com.example.teamproject_hometrainingassistant_app.ui.home.HomeFragment
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var username: String
-    private lateinit var userimage: String
+    private lateinit var userName: String
+    private lateinit var userImage: String
     private var itemList : ArrayList<String>? = null
     private var nameList: ArrayList<String>? = null
     private var timeList: ArrayList<String>? = null
@@ -32,8 +32,10 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
 
         // 카카오 로그인정보 받아오기
-        username = intent.getStringExtra("USER_NAME") ?: ""
-        userimage = intent.getStringExtra("USER_IMAGE") ?: ""
+        val sharedPreferences = getSharedPreferences("kakao", MODE_PRIVATE)
+
+        userName = sharedPreferences.getString("USER_NAME", "") ?: ""
+        userImage = sharedPreferences.getString("USER_IMAGE", "") ?: ""
 
         // 선택한 운동 정보 가져오기
         nameList = intent.getStringArrayListExtra("NAME_LIST")
@@ -60,8 +62,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home -> {
                     val fragment = HomeFragment()
                     val bundle = Bundle().apply {
-                        putString("USER_NAME", username)
-                        putString("USER_IMAGE", userimage)
+                        putString("USER_NAME", userName)
+                        putString("USER_IMAGE", userImage)
                         putStringArrayList("NAME_LIST", nameList)
                         putStringArrayList("TIME_LIST", timeList)
                         putStringArrayList("URL_LIST", urlList)
@@ -87,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                 else -> {
                     val comFragment = CommunityFragment()
                     val bundle = Bundle().apply {
-                        putString("USER_NAME", username)
+                        putString("USER_NAME", userName)
                     }
                     comFragment.arguments = bundle
                     supportFragmentManager.beginTransaction()
@@ -103,8 +105,8 @@ class MainActivity : AppCompatActivity() {
             navView.selectedItemId = R.id.navigation_home
         } else {
             // 앱이 이전에 실행되었던 경우에는 저장된 상태를 복원한다.
-            username = savedInstanceState.getString("USER_NAME").orEmpty()
-            userimage = savedInstanceState.getString("USER_IMAGE").orEmpty()
+            userName = savedInstanceState.getString("USER_NAME").orEmpty()
+            userImage = savedInstanceState.getString("USER_IMAGE").orEmpty()
             nameList = savedInstanceState.getStringArrayList("NAME_LIST")
 
             // 현재 보여지는 fragment를 찾아서 화면에 다시 그려준다.
@@ -119,8 +121,8 @@ class MainActivity : AppCompatActivity() {
         val fragmentArgs = currentFragment?.arguments ?: Bundle()
 
         outState.run {
-            putString("USER_NAME", username)
-            putString("USER_IMAGE", userimage)
+            putString("USER_NAME", userName)
+            putString("USER_IMAGE", userImage)
             putStringArrayList("NAME_LIST", nameList)
             putBundle("FRAGMENT_ARGS", fragmentArgs)
         }

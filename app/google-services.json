@@ -1,14 +1,14 @@
 {
   "project_info": {
-    "project_number": "671910962326",
-    "firebase_url": "https://musclenew-52497-default-rtdb.firebaseio.com",
-    "project_id": "musclenew-52497",
-    "storage_bucket": "musclenew-52497.appspot.com"
+    "project_number": "514621731512",
+    "firebase_url": "https://joljakfinal-default-rtdb.firebaseio.com",
+    "project_id": "joljakfinal",
+    "storage_bucket": "joljakfinal.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:671910962326:android:ee345b1db9983c254b8eb7",
+        "mobilesdk_app_id": "1:514621731512:android:d3bc2c21f5dae347ed7a4d",
         "android_client_info": {
           "package_name": "com.example.teamproject_hometrainingassistant_app"
         }
@@ -16,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDDFD5bYeULnXPVaSvK0w62yD2WcJ776g4"
+          "current_key": "AIzaSyAZSLaz5S4PUIqvLqhcLlVE6NksAv-tZgQ"
         }
       ],
       "services": {

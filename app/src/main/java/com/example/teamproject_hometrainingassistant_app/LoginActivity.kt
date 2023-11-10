@@ -3,11 +3,15 @@ package com.example.teamproject_hometrainingassistant_app
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.teamproject_hometrainingassistant_app.DBKey.Companion.DB_USER
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityLoginBinding
 import com.example.teamproject_hometrainingassistant_app.ui.home.HomeFragment
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
@@ -19,11 +23,14 @@ import com.kakao.sdk.user.UserApiClient
 class LoginActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityLoginBinding
+    private lateinit var userDB: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         KakaoSdk.init(this, "ef4cb117e81f2446c42e26f897b523c9")
+
+        userDB = FirebaseDatabase.getInstance().reference.child(DB_USER)
 
         // 1. 카카오 로그인 API를 사용하여 로그인 토큰을 받습니다.
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
@@ -68,10 +75,17 @@ class LoginActivity : AppCompatActivity() {
                                         "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
                                 val username = user.kakaoAccount?.profile?.nickname
                                 val userImage = user.kakaoAccount?.profile?.thumbnailImageUrl
-                                val intent = Intent(applicationContext, MainActivity::class.java).apply {
-                                    putExtra("USER_NAME",username)
-                                    putExtra("USER_IMAGE",userImage)
-                                }
+
+                                val intent = Intent(this, MainActivity::class.java)
+
+                                val sharedPreferences = getSharedPreferences("kakao", MODE_PRIVATE)
+                                val editor : SharedPreferences.Editor =  sharedPreferences.edit()
+
+                                editor.putString("USER_NAME", username)
+                                editor.putString("USER_IMAGE", userImage)
+                                editor.commit()
+
+
                                 startActivity(intent) //인트로 실행 후 바로 MainActivity로 넘어감.
                                 finish()
                             }
@@ -91,10 +105,13 @@ class LoginActivity : AppCompatActivity() {
                                 "\n프로필사진11: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
                         val username = user.kakaoAccount?.profile?.nickname
                         val userImage = user.kakaoAccount?.profile?.thumbnailImageUrl
-                        val intent = Intent(applicationContext, MainActivity::class.java).apply {
-                            putExtra("USER_NAME",username)
-                            putExtra("USER_IMAGE",userImage)
-                        }
+                        val intent = Intent(this, MainActivity::class.java)
+                        val sharedPreferences = getSharedPreferences("kakao", MODE_PRIVATE)
+                        val editor : SharedPreferences.Editor =  sharedPreferences.edit()
+
+                        editor.putString("USER_NAME", username)
+                        editor.putString("USER_IMAGE", userImage)
+                        editor.commit()
                         startActivity(intent) //인트로 실행 후 바로 MainActivity로 넘어감.
                         finish()
                     }

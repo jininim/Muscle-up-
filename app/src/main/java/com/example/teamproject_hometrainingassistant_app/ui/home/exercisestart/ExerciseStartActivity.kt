@@ -4,10 +4,13 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
+import android.widget.CheckBox
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -15,6 +18,7 @@ import androidx.core.content.PackageManagerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.teamproject_hometrainingassistant_app.R
 import com.example.teamproject_hometrainingassistant_app.databinding.ActivityExerciseStartBinding
 import com.example.teamproject_hometrainingassistant_app.ui.home.exerciseend.ExerciseEndActivity
 import com.example.teamproject_hometrainingassistant_app.ui.home.myroutine.MyRoutineAdapter
@@ -40,10 +44,10 @@ class ExerciseStartActivity : AppCompatActivity() {
     private var isRecording = false
     private var job: Job? = null
 
-
     // Requesting permission to RECORD_AUDIO
     private var permissionToRecordAccepted = false
     private var permissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO)
+    private lateinit var recyclerView: RecyclerView
 
     private lateinit var binding: ActivityExerciseStartBinding
 
@@ -87,6 +91,14 @@ class ExerciseStartActivity : AppCompatActivity() {
         val decibel = intent.getStringExtra("decibel")
         var check = false
 
+        for (timeItem in timeList) { // 운동 갯수만큼
+            val setInfo = timeItem.split(" ") // 중간에 가르고
+            val countText = setInfo[0].replace("회", "") // 10회에 '10'
+            val setCount = setInfo[1].replace("세트", "") // 5세트에 '5'
+
+            exerciseSetList.add(setCount) // 세트 리스트에 세트 숫자 추가
+            exerciseTimeList.add(countText) // 운동 횟수 리스트에 운동 횟수 숫자 추가
+        }
 
         binding.decibelOnOffButton.setOnClickListener {
             check = !check
@@ -101,16 +113,11 @@ class ExerciseStartActivity : AppCompatActivity() {
             }
         }
         // timeList 예) ["10회 5세트", "12회 5세트", "10회 3세트"]
-        for (timeItem in timeList) { // 운동 갯수만큼
-            val setInfo = timeItem.split(" ") // 중간에 가르고
-            val countText = setInfo[0].replace("회", "") // 10회에 '10'
-            val setCount = setInfo[1].replace("세트", "") // 5세트에 '5'
 
-            exerciseSetList.add(setCount) // 세트 리스트에 세트 숫자 추가
-            exerciseTimeList.add(countText) // 운동 횟수 리스트에 운동 횟수 숫자 추가
-        }
+        Log.d("time1111", exerciseTimeList.toString())
+        Log.d("time1111", exerciseTimeList[0].toString())
 
-        val recyclerView = binding.exerciseStartRecyclerView
+        recyclerView = binding.exerciseStartRecyclerView
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         exerciseAdapter = ExerciseStartAdapter()
@@ -172,6 +179,7 @@ class ExerciseStartActivity : AppCompatActivity() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun moveToNextExercise() { // 다음 화살표 누를 시 다음 운동으로
+        Toast.makeText(this, "${exerciseList[currentExerciseIndex]}종료!", Toast.LENGTH_SHORT).show()
         if (currentExerciseIndex < exerciseList.size - 1) {
             currentExerciseIndex++
             setExerciseData(currentExerciseIndex)
@@ -192,7 +200,7 @@ class ExerciseStartActivity : AppCompatActivity() {
 
     private fun updateItemData(exericseSet: String, exerciseTime: String){
         val adapter = binding.exerciseStartRecyclerView.adapter as ExerciseStartAdapter
-        adapter.setExerciseData(exericseSet, exerciseTime)
+        adapter.setExerciseData(exericseSet, exerciseTime, false)
     }
 
     private fun finishExercise() { // 운동 종료 시 다음 운동으로, 마지막일 시 운동 종료 화면으로 이동
@@ -284,29 +292,57 @@ class ExerciseStartActivity : AppCompatActivity() {
         recorder = null
     }
     @SuppressLint("SetTextI18n")
-    private fun getDb(decibel : Int){
+    private fun getDb(decibel : Int) {
         var count1 = 0
+        var set = 0
+        val mediaPlayer = MediaPlayer.create(this, R.raw.sound)
+        val mediaPlayer2 = MediaPlayer.create(this, R.raw.sound2)
         recorder?.let {
             isRecording = true
             // 녹음이 중지될 때까지 작업 실행
             job = CoroutineScope(Dispatchers.Main).launch {
                 var currentDecibel = decibel
-                    while (isRecording) {
-                        delay(1000L) // 1초마다 데시벨 측정
-                        val amplitude = it.maxAmplitude
-                            val userDecibel = (20 * log10(amplitude.toDouble())).toInt()
-                        if (currentDecibel.plus(20) < userDecibel ){
-                            Log.d("userDecibel",userDecibel.toString())
-                            Log.d("currentDecibel",currentDecibel.toString())
-                            count1 += 1
-                            binding.countText.text = count1.toString()+"개"
+                while (isRecording) {
+                    delay(700L) // 1초마다 데시벨 측정
+                    val amplitude = it.maxAmplitude
+                    val userDecibel = (20 * log10(amplitude.toDouble())).toInt()
+                    if (currentDecibel.plus(20) < userDecibel) {
+                        Log.d("userDecibel", userDecibel.toString())
+                        Log.d("currentDecibel", currentDecibel.toString())
+                        count1 += 1
+                        binding.countText.text = count1.toString() + "회"
+                        if (binding.countText.text == "${exerciseTimeList[currentExerciseIndex]}회") {
+                            if (set < exerciseSetList[currentExerciseIndex].toInt()-1){
+                                exerciseAdapter.setCheck(set, true)
+                                mediaPlayer2.start()
+                                set++
+                            }else{
+                                if (currentExerciseIndex < exerciseList.size - 1) {
+                                    set = 0
+                                    mediaPlayer.start()
+                                    exerciseAdapter.setCheck(-1, false)
+                                    moveToNextExercise()
+                                }else{
+                                    mediaPlayer.start()
+                                    finishExercise()
+                                    stopRecording()
+                                }
+                            }
+                            count1 = 0
+                            binding.countText.text = count1.toString() + "회"
                         }
                     }
-
+                }
             }
         }
+    }
 
+    @Deprecated("Deprecated in Java",
+        ReplaceWith("super.onBackPressed()", "androidx.appcompat.app.AppCompatActivity")
+    )
+    override fun onBackPressed() {
 
+        super.onBackPressed()
     }
 }
 

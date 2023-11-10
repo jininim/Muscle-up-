@@ -61,6 +61,8 @@ class HomeFragment : Fragment() {
         val timeList: java.util.ArrayList<String>? = bundle?.getStringArrayList("TIME_LIST")
         val urlList: java.util.ArrayList<String>? = bundle?.getStringArrayList("URL_LIST")
 
+        Log.d("time", timeList.toString())
+
 //nameList가 null이 아닌경우에만 운동 정보를 저장.
         if (nameList != null && timeList != null && urlList != null) {
             routineViewModel.addProduct(Routine(0, nameList.toString(), timeList.toString(), urlList.toString(),false))
@@ -82,11 +84,20 @@ class HomeFragment : Fragment() {
                     val shareIntent = Intent(Intent.ACTION_SEND)
 
                     val routine = it.routine
+                    val time = it.time
                     val trimmedName = routine.replace("[", "").replace("]", "")
+                    val trimmedTime = time.replace("[", "").replace("]", "")
                     val itemList: ArrayList<String> = ArrayList(trimmedName.split(", "))
+                    val routineTimeList: ArrayList<String> = ArrayList(trimmedTime.split(", "))
+                    val combinedList = mutableListOf<String>()
 
-                    val routineMessage = itemList.joinToString("\n")
-                    val message = "아직도 집에서 자빠져 계시진 않으신가요?\n머슬없?! 에서 당신을 도와드립니다!\n${routineMessage}\n집에서 해보세요"
+                    for (i in itemList.indices){
+                        val exerciseInfo ="${itemList[i]} -> ${routineTimeList[i]}"
+                        combinedList.add(exerciseInfo)
+                    }
+
+                    val routineMessage = combinedList.joinToString("\n")
+                    val message = "운동 초보자라구요?\n헬스장은 멀어서 못가시겠다구요?\n머슬없?! 에서 당신을 도와드립니다!\n${routineMessage}\n머슬없 앱을 켜고 당신을 가꾸세요!"
 
                     shareIntent.type = "text/plain"
                     shareIntent.putExtra(Intent.EXTRA_TEXT, message)

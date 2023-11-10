@@ -15,13 +15,18 @@ class ExerciseStartAdapter: RecyclerView.Adapter<ExerciseStartAdapter.ViewHolder
 
     private var exerciseSetCount = ""
     private var exerciseTimeText = ""
+    private var check = -1
+    private var what = true
 
-    inner class ViewHolder(private val binding: ItemExerciseStartBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(val binding: ItemExerciseStartBinding) : RecyclerView.ViewHolder(binding.root){
         @SuppressLint("SetTextI18n")
-        fun bind(exerciseTime: String, exerciseSet: String){
+        fun bind(exerciseTime: String, exerciseSet: String, position: Int, check1: Boolean){
             binding.exerciseSet.text = "${exerciseSet}세트"
             binding.exerciseTime.text = "${exerciseTime}회"
-            binding.check.isChecked = false
+            binding.check1.isChecked = check1
+            if (what){
+                binding.check1.isChecked = position <= check
+            }
         }
     }
 
@@ -37,15 +42,17 @@ class ExerciseStartAdapter: RecyclerView.Adapter<ExerciseStartAdapter.ViewHolder
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val exerciseSet = (position + 1).toString()
-        holder.bind(exerciseTimeText, exerciseSet)
+        holder.bind(exerciseTimeText, exerciseSet, position, what)
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setExerciseData(exerciseSet: String, exerciseTime: String){
+    fun setExerciseData(exerciseSet: String, exerciseTime: String, check: Boolean){
         exerciseSetCount = exerciseSet
         exerciseTimeText = exerciseTime
+        what = check
         notifyDataSetChanged()
     }
+
 
     fun addExerciseSet() {
         val newSetCount = exerciseSetCount.toInt() + 1
@@ -59,5 +66,16 @@ class ExerciseStartAdapter: RecyclerView.Adapter<ExerciseStartAdapter.ViewHolder
             exerciseSetCount = newSetCount.toString()
             notifyItemRemoved(newSetCount)
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setCheck(i: Int, w: Boolean) {
+        if (i in 0 until itemCount) {
+            // i 값이 유효한 범위 내에 있을 때만 check 변수 설정
+            check = i
+            notifyDataSetChanged()
+        }
+        what = w
+        notifyDataSetChanged()
     }
 }

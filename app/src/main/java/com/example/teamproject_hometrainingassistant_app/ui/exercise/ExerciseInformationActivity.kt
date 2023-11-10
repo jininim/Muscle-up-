@@ -39,6 +39,11 @@ class ExerciseInformation : AppCompatActivity(){
         binding.exerciseBackButton.setOnClickListener {
             finish()
         }
+        binding.youtube.setOnClickListener {
+            val intent = Intent(this,WebViewActivity::class.java)
+            intent.putExtra("url", youtubeUrl)
+            startActivity(intent)
+        }
     }
 
 }

@@ -88,6 +88,7 @@
         <activity android:name=".ui.community.noticeBoard.CreateNoticeBoardActivity"/>
         <activity android:name=".ui.home.exercisestart.ExerciseStartActivity"/>
         <activity android:name=".ui.home.exerciseend.ExerciseEndActivity"/>
+        <activity android:name=".ui.exercise.WebViewActivity"/>
     </application>
 
 </manifest>
